@@ -5,12 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>考研数学复习资料库</title>
 <link rel="stylesheet" href="assets/style.css">
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$','$'],['\\(','\\)']],
+    displayMath: [['$$','$$'],['\\[','\\]']],
+    macros: {
+      oiint: ['\\mathop{\\unicode{x222F}}\\nolimits', 1],
+      oiiint: ['\\mathop{\\unicode{x2230}}\\nolimits', 1]
+    }
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
 </head>
 <body>
 
 <header>
   <h1>考研数学 · 复习资料库</h1>
-  <div class="subtitle">高等数学 · 线性代数 · 概率论与数理统计 | 考前系统复习专用</div>
+  <div class="subtitle">高等数学 · 线性代数 · 概率论与数理统计 — 考前系统复习专用</div>
 </header>
 
 <nav class="topnav">

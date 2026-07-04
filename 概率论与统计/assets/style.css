@@ -1,64 +1,63 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;600;700&display=swap');
 
-/* ========== Design tokens ========== */
 :root {
-  --bg: #FAFAFA;
-  --card-bg: #FFFFFF;
+  --bg: #f8f9fb;
+  --card-bg: #ffffff;
   --text: #1a1a2e;
-  --text-secondary: #555;
-  --text-tertiary: #767676;
-  --border: #e0e0e0;
-  --border-light: #f0f0f0;
-  --primary: #2c3e6b;
-  --primary-light: #e8edf5;
-  --primary-soft: #f5f7fa;
+  --text-secondary: #4a5568;
+  --text-tertiary: #718096;
+  --border: #e2e8f0;
+  --border-light: #edf2f7;
+  --primary: #2b4c7e;
+  --primary-light: #dbeafe;
+  --primary-soft: #eff6fb;
   --accent: #c0392b;
-  --accent-light: #fdf2f2;
+  --accent-light: #fef2f2;
   --accent-soft: #fce8e6;
-  --success: #27ae60;
-  --success-light: #eaf7ef;
-  --success-soft: #e8f5ed;
-  --warning: #d68910;
-  --warning-light: #fef5e7;
+  --success: #22663a;
+  --success-light: #e6f4ea;
+  --success-soft: #e3f2e8;
+  --warning: #946300;
+  --warning-light: #fef6e7;
   --warning-soft: #fdf3e3;
-  --code-bg: #f5f5f5;
-  --shadow: 0 1px 3px rgba(0,0,0,0.06);
-  --shadow-md: 0 2px 8px rgba(0,0,0,0.08);
-  --shadow-lg: 0 4px 16px rgba(0,0,0,0.10);
+  --code-bg: #f1f5f9;
+  --shadow: 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 2px 8px rgba(0,0,0,0.06);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,0.08);
+  --radius: 10px;
+  --radius-sm: 6px;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #1a1a2e;
-    --card-bg: #16213e;
-    --text: #e0e0e0;
-    --text-secondary: #a0a0a0;
-    --text-tertiary: #707080;
-    --border: #2a2a4a;
-    --border-light: #222240;
-    --primary: #6c8edb;
-    --primary-light: #1e2845;
-    --primary-soft: #1a2238;
-    --accent: #e74c3c;
+    --bg: #0f172a;
+    --card-bg: #1e293b;
+    --text: #e2e8f0;
+    --text-secondary: #94a3b8;
+    --text-tertiary: #64748b;
+    --border: #334155;
+    --border-light: #283548;
+    --primary: #7ba4d9;
+    --primary-light: #1e2a40;
+    --primary-soft: #1a2538;
+    --accent: #f08080;
     --accent-light: #2a1a1a;
-    --accent-soft: #2e1c1a;
-    --success: #2ecc71;
-    --success-light: #1a2a1a;
-    --success-soft: #182818;
-    --warning: #f1c40f;
-    --warning-light: #2a2618;
+    --accent-soft: #2a1c1c;
+    --success: #5cb874;
+    --success-light: #1a2a1e;
+    --success-soft: #182518;
+    --warning: #e0b350;
+    --warning-light: #2a2418;
     --warning-soft: #26221a;
-    --code-bg: #0d1117;
-    --shadow: 0 1px 3px rgba(0,0,0,0.2);
+    --code-bg: #0c1220;
+    --shadow: 0 1px 2px rgba(0,0,0,0.2);
     --shadow-md: 0 2px 8px rgba(0,0,0,0.25);
-    --shadow-lg: 0 4px 16px rgba(0,0,0,0.3);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.3);
   }
 }
 
-/* ========== Reset ========== */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* ========== Base ========== */
 html { scroll-behavior: smooth; }
 
 body {
@@ -72,7 +71,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ========== Typography ========== */
 h1, h2, h3 {
   font-family: "Noto Serif SC", "Source Han Serif SC", "STSong", serif;
   font-weight: 600;
@@ -93,7 +91,7 @@ strong { font-weight: 500; }
 code {
   background: var(--code-bg);
   padding: 2px 6px;
-  border-radius: 3px;
+  border-radius: var(--radius-sm);
   font-size: 13px;
   font-family: "JetBrains Mono", "Fira Code", "SF Mono", monospace;
   color: var(--text);
@@ -102,35 +100,33 @@ code {
 ul, ol { margin: 8px 0 8px 22px; }
 li { margin: 4px 0; }
 
-/* ========== Layout ========== */
 .container {
-  max-width: 900px;
+  max-width: 860px;
   margin: 0 auto;
-  padding: 24px 28px 60px;
+  padding: 28px 28px 60px;
 }
 
-/* ========== Header ========== */
 header {
   background: var(--card-bg);
-  border-bottom: 2px solid var(--primary);
-  padding: 32px 28px 24px;
+  border-bottom: 3px solid var(--primary);
+  padding: 36px 28px 28px;
 }
 header h1 {
   color: var(--primary);
   font-size: 26px;
   font-weight: 700;
   margin-bottom: 6px;
+  letter-spacing: 0.3px;
 }
 header .subtitle {
   color: var(--text-secondary);
   font-size: 14px;
 }
 
-/* ========== Navigation ========== */
 .topnav {
   background: var(--card-bg);
   border-bottom: 1px solid var(--border);
-  padding: 10px 28px;
+  padding: 0 28px;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -138,46 +134,51 @@ header .subtitle {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 4px 18px;
+  gap: 0;
 }
 .topnav a {
   color: var(--text-secondary);
   font-size: 14px;
   white-space: nowrap;
-  padding: 4px 0;
+  padding: 12px 0;
+  margin-right: 20px;
   transition: color 0.15s;
+  border-bottom: 2px solid transparent;
 }
-.topnav a:hover { color: var(--primary); }
+.topnav a:hover {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+}
 .topnav a:last-child {
   margin-left: auto;
+  margin-right: 0;
   color: var(--text-tertiary);
   font-size: 13px;
 }
 
-/* ========== Section headers ========== */
 h2 {
   color: var(--primary);
   font-size: 20px;
   font-weight: 600;
-  margin-top: 36px;
-  margin-bottom: 14px;
-  padding-bottom: 6px;
-  border-bottom: 2px solid var(--border);
+  margin-top: 40px;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 h2 .num {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 26px;
-  height: 26px;
-  min-width: 26px;
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
   background: var(--primary);
   color: #fff;
   font-family: "JetBrains Mono", "SF Mono", monospace;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   border-radius: 50%;
 }
@@ -186,18 +187,17 @@ h3 {
   color: var(--text);
   font-size: 16px;
   font-weight: 600;
-  margin-top: 22px;
+  margin-top: 24px;
   margin-bottom: 8px;
 }
-h3:first-of-type { margin-top: 14px; }
+h3:first-of-type { margin-top: 16px; }
 
-/* ========== Formula blocks ========== */
 .formula {
   background: var(--card-bg);
   border-left: 3px solid var(--primary);
-  padding: 12px 18px;
-  margin: 10px 0;
-  border-radius: 0 6px 6px 0;
+  padding: 14px 20px;
+  margin: 12px 0;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
   box-shadow: var(--shadow);
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
@@ -206,14 +206,13 @@ h3:first-of-type { margin-top: 14px; }
 .formula.success { border-left-color: var(--success); }
 .formula.warning { border-left-color: var(--warning); }
 
-/* ========== Tip boxes ========== */
 .tip {
   background: var(--primary-soft);
-  border: 1px solid var(--primary-light);
+  border: 1px solid var(--border-light);
   border-left: 3px solid var(--primary);
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   padding: 12px 16px;
-  margin: 12px 0;
+  margin: 14px 0;
   font-size: 14px;
 }
 .tip.accent {
@@ -237,28 +236,29 @@ h3:first-of-type { margin-top: 14px; }
 }
 .tip ul { margin-top: 4px; }
 
-/* ========== Tables ========== */
 table {
   display: block;
   width: 100%;
   max-width: 100%;
   overflow-x: auto;
   border-collapse: collapse;
-  margin: 12px 0;
+  margin: 14px 0;
   font-size: 14px;
   -webkit-overflow-scrolling: touch;
-  border-radius: 6px;
-  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
 }
 th, td {
   border: 1px solid var(--border);
-  padding: 8px 12px;
+  padding: 9px 14px;
   text-align: center;
 }
 th {
   background: var(--primary-soft);
   color: var(--primary);
   font-weight: 600;
+  border-bottom: 2px solid var(--primary-light);
 }
 tbody tr:nth-child(even) {
   background: var(--primary-soft);
@@ -268,30 +268,29 @@ tbody tr:nth-child(even) {
   tbody tr:nth-child(even) { background: var(--primary-light); }
 }
 
-/* ========== Card grid ========== */
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 16px;
-  margin: 20px 0;
+  margin: 22px 0;
 }
 .card {
   background: var(--card-bg);
   border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 18px;
+  border-radius: var(--radius);
+  padding: 20px;
   text-decoration: none;
   color: var(--text);
-  transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
   box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
 .card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
   box-shadow: var(--shadow-lg);
-  border-color: var(--primary);
+  border-color: var(--primary-light);
 }
 .card h3 {
   color: var(--primary);
@@ -308,26 +307,26 @@ tbody tr:nth-child(even) {
 .card .tag {
   display: inline-block;
   font-size: 12px;
-  padding: 2px 8px;
-  border-radius: 10px;
+  padding: 2px 10px;
+  border-radius: 12px;
   background: var(--primary-soft);
   color: var(--primary);
   margin-right: 4px;
+  border: 1px solid var(--border-light);
 }
 
-/* ========== Footer ========== */
 footer {
   text-align: center;
-  padding: 24px;
+  padding: 28px 24px;
   color: var(--text-tertiary);
   font-size: 13px;
   border-top: 1px solid var(--border);
-  margin-top: 40px;
+  margin-top: 50px;
+  background: var(--card-bg);
 }
 footer a { color: var(--text-secondary); }
 footer a:hover { color: var(--primary); }
 
-/* ========== Back to top ========== */
 .back-top {
   position: fixed;
   bottom: 30px;
@@ -341,7 +340,7 @@ footer a:hover { color: var(--primary); }
   cursor: pointer;
   font-size: 20px;
   box-shadow: var(--shadow-md);
-  opacity: 0.7;
+  opacity: 0.6;
   transition: opacity 0.2s, transform 0.15s;
   z-index: 999;
   display: flex;
@@ -353,36 +352,33 @@ footer a:hover { color: var(--primary); }
   transform: translateY(-2px);
 }
 
-/* ========== Focus styles ========== */
 a:focus-visible,
 button:focus-visible {
   outline: 2px solid var(--primary);
   outline-offset: 2px;
-  border-radius: 3px;
+  border-radius: var(--radius-sm);
 }
 .back-top:focus-visible {
   outline: 2px solid var(--primary);
   outline-offset: 3px;
 }
 
-/* ========== Responsive ========== */
 @media (max-width: 640px) {
   body { font-size: 14px; }
-  .container { padding: 18px 16px 50px; }
-  header { padding: 24px 16px 20px; }
+  .container { padding: 20px 16px 50px; }
+  header { padding: 28px 16px 22px; }
   header h1 { font-size: 22px; }
   header .subtitle { font-size: 13px; }
-  .topnav { padding: 8px 16px; gap: 4px 14px; }
-  .topnav a { font-size: 13px; }
-  h2 { font-size: 18px; margin-top: 30px; }
+  .topnav { padding: 0 16px; }
+  .topnav a { font-size: 13px; margin-right: 14px; padding: 10px 0; }
+  h2 { font-size: 18px; margin-top: 32px; }
   h2 .num { width: 24px; height: 24px; min-width: 24px; font-size: 12px; }
   h3 { font-size: 15px; }
-  .formula { padding: 10px 14px; font-size: 13px; }
+  .formula { padding: 12px 14px; font-size: 13px; }
   .card-grid { grid-template-columns: 1fr; gap: 14px; }
   .back-top { bottom: 20px; right: 16px; width: 40px; height: 40px; }
 }
 
-/* ========== Reduced motion ========== */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {

@@ -6,7 +6,7 @@
   --card-bg: #FFFFFF;
   --text: #1a1a2e;
   --text-secondary: #555;
-  --text-tertiary: #999;
+  --text-tertiary: #767676;
   --border: #e0e0e0;
   --border-light: #f0f0f0;
   --primary: #2c3e6b;
@@ -307,7 +307,7 @@ tbody tr:nth-child(even) {
 }
 .card .tag {
   display: inline-block;
-  font-size: 11px;
+  font-size: 12px;
   padding: 2px 8px;
   border-radius: 10px;
   background: var(--primary-soft);
@@ -351,6 +351,18 @@ footer a:hover { color: var(--primary); }
 .back-top:hover {
   opacity: 1;
   transform: translateY(-2px);
+}
+
+/* ========== Focus styles ========== */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+.back-top:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
 }
 
 /* ========== Responsive ========== */

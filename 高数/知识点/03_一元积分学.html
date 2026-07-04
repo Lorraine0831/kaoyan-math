@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第三章 一元积分学 - 高数知识点</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+
+<header>
+  <h1>第三章 · 一元积分学</h1>
+  <div class="subtitle">不定积分 · 定积分 · 微积分基本定理 · 反常积分 · 定积分应用</div>
+</header>
+
+<nav class="topnav">
+  <a href="#sec1">3.1 不定积分</a>
+  <a href="#sec2">3.2 换元法</a>
+  <a href="#sec3">3.3 分部积分</a>
+  <a href="#sec4">3.4 定积分</a>
+  <a href="#sec5">3.5 变限积分</a>
+  <a href="#sec6">3.6 反常积分</a>
+  <a href="#sec7">3.7 几何应用</a>
+  <a href="#sec8">3.8 物理应用</a>
+  <a href="../index.html">← 首页</a>
+</nav>
+
+<div class="container">
+
+<h2 id="sec1"><span class="num">1</span>不定积分</h2>
+
+<h3>1.1 原函数与不定积分</h3>
+<p>若 $F'(x) = f(x)$，则 $F(x)$ 是 $f(x)$ 的一个原函数。$f(x)$ 的全体原函数记为</p>
+<div class="formula">
+$$\int f(x)\,dx = F(x) + C$$
+</div>
+<p>其中 $C$ 为任意常数。原函数存在定理：连续函数必有原函数。</p>
+
+<h3>1.2 不定积分的性质</h3>
+<div class="formula">
+$$\frac{d}{dx}\int f(x)\,dx = f(x) \qquad \int F'(x)\,dx = F(x)+C$$
+$$\int [k_1 f(x) + k_2 g(x)]\,dx = k_1\!\int f(x)\,dx + k_2\!\int g(x)\,dx$$
+$$\int f'(x)\,dx = f(x) + C$$
+</div>
+
+<h3>1.3 基本积分表</h3>
+<table>
+<tr><th>积分</th><th>结果</th><th>积分</th><th>结果</th></tr>
+<tr><td>$\int x^\mu\,dx$</td><td>$\frac{x^{\mu+1}}{\mu+1}+C$</td><td>$\int \frac{1}{x}\,dx$</td><td>$\ln|x|+C$</td></tr>
+<tr><td>$\int e^x\,dx$</td><td>$e^x+C$</td><td>$\int a^x\,dx$</td><td>$\frac{a^x}{\ln a}+C$</td></tr>
+<tr><td>$\int \sin x\,dx$</td><td>$-\cos x+C$</td><td>$\int \cos x\,dx$</td><td>$\sin x+C$</td></tr>
+<tr><td>$\int \sec^2 x\,dx$</td><td>$\tan x+C$</td><td>$\int \csc^2 x\,dx$</td><td>$-\cot x+C$</td></tr>
+<tr><td>$\int \frac{dx}{1+x^2}$</td><td>$\arctan x+C$</td><td>$\int \frac{dx}{\sqrt{1-x^2}}$</td><td>$\arcsin x+C$</td></tr>
+<tr><td>$\int \frac{dx}{a^2+x^2}$</td><td>$\frac{1}{a}\arctan\frac{x}{a}+C$</td><td>$\int \frac{dx}{\sqrt{a^2-x^2}}$</td><td>$\arcsin\frac{x}{a}+C$</td></tr>
+<tr><td>$\int \frac{dx}{a^2-x^2}$</td><td>$\frac{1}{2a}\ln\left|\frac{a+x}{a-x}\right|+C$</td><td>$\int \frac{dx}{x^2-a^2}$</td><td>$\frac{1}{2a}\ln\left|\frac{x-a}{x+a}\right|+C$</td></tr>
+<tr><td>$\int \frac{dx}{\sqrt{x^2\pm a^2}}$</td><td>$\ln\left|x+\sqrt{x^2\pm a^2}\right|+C$</td><td>$\int \tan x\,dx$</td><td>$-\ln|\cos x|+C$</td></tr>
+<tr><td>$\int \sec x\,dx$</td><td>$\ln|\sec x+\tan x|+C$</td><td>$\int \csc x\,dx$</td><td>$\ln|\csc x-\cot x|+C$</td></tr>
+</table>
+
+<h2 id="sec2"><span class="num">2</span>换元积分法</h2>
+
+<h3>2.1 第一换元法（凑微分）</h3>
+<div class="formula">
+$$\int f[\varphi(x)]\varphi'(x)\,dx = \int f(u)\,du\Big|_{u=\varphi(x)} = F[\varphi(x)] + C$$
+</div>
+<div class="tip success"><span class="label">关键：</span>识别 $\varphi'(x)\,dx = d[\varphi(x)]$ 的结构。常见凑微分如 $\frac{f'}{f}dx = d\ln|f|$，$f f' dx = \frac{1}{2}d(f^2)$。</div>
+
+<h3>2.2 第二换元法</h3>
+<table>
+<tr><th>被积函数特征</th><th>代换</th><th>回代</th></tr>
+<tr><td>含 $\sqrt{a^2-x^2}$</td><td>$x = a\sin t$</td><td>$t = \arcsin\frac{x}{a}$</td></tr>
+<tr><td>含 $\sqrt{a^2+x^2}$</td><td>$x = a\tan t$</td><td>$t = \arctan\frac{x}{a}$</td></tr>
+<tr><td>含 $\sqrt{x^2-a^2}$</td><td>$x = a\sec t$</td><td>$t = \text{arcsec}\,\frac{x}{a}$</td></tr>
+<tr><td>含 $\sqrt[n]{ax+b}$</td><td>$t = \sqrt[n]{ax+b}$</td><td>—</td></tr>
+<tr><td>分母含 $x$ 的高次幂</td><td>$x = 1/t$（倒代换）</td><td>—</td></tr>
+</table>
+
+<h3>2.3 三角代换的辅助三角形</h3>
+<div class="tip"><span class="label">技巧：</span>做三角代换后回代时，画一个直角三角形，标出边的关系，便可轻松读出 $\sin t$、$\cos t$、$\tan t$ 的值。</div>
+
+<h2 id="sec3"><span class="num">3</span>分部积分法</h2>
+
+<h3>3.1 公式</h3>
+<div class="formula accent">
+$$\int u\,dv = uv - \int v\,du$$
+</div>
+
+<h3>3.2 选 $u$ 的优先顺序："反对幂三指"</h3>
+<table>
+<tr><th>优先级</th><th>函数类型</th><th>取 $u$</th><th>$dv$ 取</th></tr>
+<tr><td>1</td><td>反三角函数</td><td>$\arctan x$</td><td>其余</td></tr>
+<tr><td>2</td><td>对数函数</td><td>$\ln x$</td><td>其余</td></tr>
+<tr><td>3</td><td>幂函数</td><td>$x^n$</td><td>其余</td></tr>
+<tr><td>4</td><td>三角函数</td><td>$\sin x$</td><td>其余</td></tr>
+<tr><td>5</td><td>指数函数</td><td>—（取 $dv = e^x dx$）</td><td>$e^x dx$</td></tr>
+</table>
+<div class="tip"><span class="label">口诀：</span>"反对幂三指"——排在前面的是 $u$，排在后面的进 $dv$。</div>
+
+<h3>3.3 递推型分部积分</h3>
+<div class="formula">
+$$I_n = \int \sin^n x\,dx = -\frac{\sin^{n-1}x\cos x}{n} + \frac{n-1}{n}I_{n-2} \quad (n \geq 2)$$
+$$I_n = \int \frac{dx}{(x^2+a^2)^n} = \frac{x}{2a^2(n-1)(x^2+a^2)^{n-1}} + \frac{2n-3}{2a^2(n-1)}I_{n-1} \quad (n \geq 2)$$
+</div>
+
+<h3>3.4 "回归型"分部积分</h3>
+<p>形如 $\int e^{ax}\sin bx\,dx$ 或 $\int e^{ax}\cos bx\,dx$，分部两次后出现原式，解方程：</p>
+<div class="formula accent">
+$$\int e^x \sin x\,dx = \frac{e^x(\sin x - \cos x)}{2} + C \qquad \int e^x \cos x\,dx = \frac{e^x(\sin x + \cos x)}{2} + C$$
+</div>
+
+<h3>3.5 有理函数积分</h3>
+<p>将有理分式 $\frac{P(x)}{Q(x)}$ 分解为部分分式后逐项积分：</p>
+<div class="formula">
+$$\frac{1}{(x-a)(x-b)} = \frac{1}{b-a}\left(\frac{1}{x-a}-\frac{1}{x-b}\right) \quad (a \neq b)$$
+$$\frac{1}{(x-a)^2+b^2} \;\to\; \text{令 } x-a = b\tan t$$
+</div>
+
+<h2 id="sec4"><span class="num">4</span>定积分</h2>
+
+<h3>4.1 定积分定义</h3>
+<div class="formula">
+$$\int_a^b f(x)\,dx = \lim_{\lambda \to 0} \sum_{i=1}^n f(\xi_i)\Delta x_i$$
+</div>
+<p>当 $f \in C[a,b]$ 时，该极限存在（即可积），且与分割方式及 $\xi_i$ 取法无关。</p>
+
+<h3>4.2 可积条件</h3>
+<ul>
+  <li>$f \in C[a,b] \Rightarrow$ 可积</li>
+  <li>$f$ 在 $[a,b]$ 上有界且只有有限个间断点 $\Rightarrow$ 可积</li>
+  <li>$f$ 在 $[a,b]$ 上单调 $\Rightarrow$ 可积</li>
+</ul>
+
+<h3>4.3 牛顿—莱布尼茨公式</h3>
+<div class="formula accent">
+$$\int_a^b f(x)\,dx = F(b) - F(a) = \Big[F(x)\Big]_a^b, \quad F'(x) = f(x)$$
+</div>
+<div class="tip"><span class="label">意义：</span>将定积分（极限求和）与原函数（反导数）联系起来，是微积分学最核心的定理。</div>
+
+<h3>4.4 定积分的性质</h3>
+<div class="formula">
+$$\int_a^a f\,dx = 0 \qquad \int_a^b f\,dx = -\int_b^a f\,dx$$
+$$\int_a^b [k_1 f + k_2 g]\,dx = k_1\!\int_a^b f\,dx + k_2\!\int_a^b g\,dx$$
+$$\int_a^b f\,dx = \int_a^c f\,dx + \int_c^b f\,dx$$
+$$f \leq g \;\Rightarrow\; \int_a^b f\,dx \leq \int_a^b g\,dx$$
+$$\left|\int_a^b f\,dx\right| \leq \int_a^b |f|\,dx$$
+</div>
+
+<h3>4.5 积分中值定理</h3>
+<div class="formula">
+$$f \in C[a,b] \;\Rightarrow\; \exists\, \xi \in [a,b], \;\; \int_a^b f(x)\,dx = f(\xi)(b-a)$$
+</div>
+<p>推广（加权积分中值定理）：若 $g(x)$ 不变号，则 $\exists\,\xi \in[a,b]$，使 $\int_a^b f\cdot g\,dx = f(\xi)\int_a^b g\,dx$。</p>
+
+<h3>4.6 定积分的对称性</h3>
+<div class="formula accent">
+$$\int_{-a}^a f(x)\,dx = \begin{cases} 0, & f \text{ 为奇函数} \\ 2\int_0^a f(x)\,dx, & f \text{ 为偶函数} \end{cases}$$
+$$f(x+T)=f(x) \;\Rightarrow\; \int_a^{a+T} f\,dx = \int_0^T f\,dx \quad (\forall a)$$
+</div>
+
+<h3>4.7 有用的定积分结果</h3>
+<div class="formula accent">
+$$\int_0^{\pi/2} \sin^n x\,dx = \int_0^{\pi/2} \cos^n x\,dx = \frac{(n-1)!!}{n!!}\times\begin{cases}\pi/2 & n\text{ 偶}\\ 1 & n\text{ 奇}\end{cases}$$
+$$\int_0^\pi x\,f(\sin x)\,dx = \frac{\pi}{2}\int_0^\pi f(\sin x)\,dx$$
+$$\int_0^{\pi/2} f(\sin x)\,dx = \int_0^{\pi/2} f(\cos x)\,dx$$
+</div>
+
+<h2 id="sec5"><span class="num">5</span>变限积分与微积分基本定理</h2>
+
+<h3>5.1 变上限积分求导</h3>
+<div class="formula accent">
+$$\frac{d}{dx}\int_a^x f(t)\,dt = f(x) \quad (f \text{ 连续})$$
+$$\frac{d}{dx}\int_{\varphi(x)}^{\psi(x)} f(t)\,dt = f(\psi(x))\,\psi'(x) - f(\varphi(x))\,\varphi'(x)$$
+</div>
+<div class="tip warning"><span class="label">注意：</span>若被积函数含积分变量 $x$，需先分离或换元。例如 $\int_a^x xf(t)\,dt = x\int_a^x f(t)\,dt$，用乘法求导法则。</div>
+
+<h3>5.2 原函数存在定理</h3>
+<p>若 $f \in C[a,b]$，则 $\Phi(x) = \int_a^x f(t)\,dt$ 是 $f(x)$ 的一个原函数。</p>
+
+<h2 id="sec6"><span class="num">6</span>反常积分</h2>
+
+<h3>6.1 无穷限反常积分</h3>
+<div class="formula">
+$$\int_a^{+\infty} f\,dx = \lim_{b \to +\infty}\int_a^b f\,dx \qquad \int_{-\infty}^b f\,dx = \lim_{a \to -\infty}\int_a^b f\,dx$$
+$$\int_{-\infty}^{+\infty} f\,dx = \int_{-\infty}^c f\,dx + \int_c^{+\infty} f\,dx$$
+</div>
+
+<h3>6.2 无界函数的反常积分（瑕积分）</h3>
+<p>若 $f$ 在 $x_0$ 附近无界（$x_0$ 为瑕点）：</p>
+<div class="formula">
+$$\int_a^{x_0} f\,dx = \lim_{\varepsilon \to 0^+}\int_a^{x_0-\varepsilon} f\,dx$$
+</div>
+
+<h3>6.3 敛散性判据（$p$-积分）</h3>
+<div class="formula accent">
+$$\int_a^{+\infty} \frac{dx}{x^p} \;\text{收敛} \Leftrightarrow p > 1 \quad (a > 0)$$
+$$\int_0^a \frac{dx}{x^p} \;\text{收敛} \Leftrightarrow p < 1 \quad (a > 0, \text{瑕点 } x=0)$$
+</div>
+
+<h3>6.4 比较判敛法</h3>
+<p>设 $f(x) \geq g(x) \geq 0$：</p>
+<ul>
+  <li>若 $\int f$ 收敛 $\Rightarrow$ $\int g$ 收敛</li>
+  <li>若 $\int g$ 发散 $\Rightarrow$ $\int f$ 发散</li>
+  <li><strong>比较极限</strong>：$\lim \frac{f}{g} = c$，$c>0 \Rightarrow$ 同敛散；$c=0$ 且 $\int g$ 收敛 $\Rightarrow$ $\int f$ 收敛</li>
+</ul>
+
+<h2 id="sec7"><span class="num">7</span>定积分的几何应用</h2>
+
+<h3>7.1 平面图形面积</h3>
+<table>
+<tr><th>坐标系</th><th>面积公式</th></tr>
+<tr><td>直角坐标（$x$ 型区域）</td><td>$A = \int_a^b |f(x)-g(x)|\,dx$</td></tr>
+<tr><td>直角坐标（$y$ 型区域）</td><td>$A = \int_c^d |x_2(y)-x_1(y)|\,dy$</td></tr>
+<tr><td>极坐标</td><td>$A = \frac{1}{2}\int_\alpha^\beta [r_2(\theta)^2 - r_1(\theta)^2]\,d\theta$</td></tr>
+</table>
+
+<h3>7.2 旋转体体积</h3>
+<table>
+<tr><th>方法</th><th>公式</th><th>适用场景</th></tr>
+<tr><td>圆盘法（绕 $x$ 轴）</td><td>$V = \pi\int_a^b [f(x)]^2\,dx$</td><td>$y=f(x)$ 绕 $x$ 轴</td></tr>
+<tr><td>圆盘法（绕 $y$ 轴）</td><td>$V = \pi\int_c^d [\varphi(y)]^2\,dy$</td><td>$x=\varphi(y)$ 绕 $y$ 轴</td></tr>
+<tr><td>柱壳法（绕 $y$ 轴）</td><td>$V = 2\pi\int_a^b x\,|f(x)|\,dx$</td><td>$y=f(x)$ 绕 $y$ 轴</td></tr>
+<tr><td> washer 法</td><td>$V = \pi\int_a^b [f(x)^2 - g(x)^2]\,dx$</td><td>两曲线之间绕 $x$ 轴</td></tr>
+</table>
+
+<h3>7.3 平行截面面积已知的立体体积</h3>
+<div class="formula">
+$$V = \int_a^b A(x)\,dx$$
+</div>
+<p>其中 $A(x)$ 为在 $x$ 处的截面面积。</p>
+
+<h3>7.4 弧长</h3>
+<table>
+<tr><th>曲线方程形式</th><th>弧长公式</th></tr>
+<tr><td>$y = f(x), \; a \leq x \leq b$</td><td>$s = \int_a^b \sqrt{1+[f'(x)]^2}\,dx$</td></tr>
+<tr><td>参数方程 $x=\varphi(t), y=\psi(t)$</td><td>$s = \int_\alpha^\beta \sqrt{[\varphi'(t)]^2+[\psi'(t)]^2}\,dt$</td></tr>
+<tr><td>极坐标 $r = r(\theta)$</td><td>$s = \int_\alpha^\beta \sqrt{r^2+[r'(\theta)]^2}\,d\theta$</td></tr>
+</table>
+
+<h3>7.5 旋转面的面积</h3>
+<div class="formula">
+$$S = 2\pi\int_a^b |y|\sqrt{1+y'^2}\,dx \quad (\text{绕 } x \text{ 轴})$$
+$$S = 2\pi\int_\alpha^\beta r(\theta)\sin\theta\sqrt{r^2+r'^2}\,d\theta \quad (\text{极坐标，绕极轴})$$
+</div>
+
+<h2 id="sec8"><span class="num">8</span>定积分的物理应用</h2>
+
+<table>
+<tr><th>物理量</th><th>公式</th></tr>
+<tr><td>变力做功</td><td>$W = \int_a^b F(x)\,dx$</td></tr>
+<tr><td>液体静压力</td><td>$P = \rho g \int_a^b x\,f(x)\,dx$（$x$ 为深度）</td></tr>
+<tr><td>细棒引力/电场</td><td>用微元法 $dF = k\frac{dm}{r^2}$</td></tr>
+<tr><td>质心坐标（$x$ 轴）</td><td>$\bar{x} = \frac{\int_a^b x\,f(x)\,dx}{\int_a^b f(x)\,dx}$</td></tr>
+<tr><td>函数平均值</td><td>$\bar{f} = \frac{1}{b-a}\int_a^b f(x)\,dx$</td></tr>
+</table>
+
+<h3>8.1 微元法（元素法）核心步骤</h3>
+<ol>
+  <li>选取积分变量 $x$，确定范围 $[a,b]$</li>
+  <li>取微元 $[x, x+dx]$，求出局部量 $dU = f(x)\,dx$</li>
+  <li>积分 $U = \int_a^b f(x)\,dx$</li>
+</ol>
+<div class="tip success"><span class="label">关键：</span>微元 $dU$ 必须是 $dx$ 的线性主部，即 $dU = f(x)dx + o(dx)$。</div>
+
+</div>
+
+<button class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<footer>
+  <p>第三章 · 一元积分学 | <a href="02_一元微分学.html">← 上一章</a> · <a href="04_多元微分学.html">下一章：多元微分学 →</a></p>
+</footer>
+
+</body>
+</html>

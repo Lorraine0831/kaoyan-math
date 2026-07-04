@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第二章 二维随机变量与数字特征 - 概率论知识点</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+
+<header>
+  <h1>第二章 · 二维随机变量与数字特征</h1>
+  <div class="subtitle">联合分布 · 边际分布 · 条件分布 · 独立性 · 期望方差协方差</div>
+</header>
+
+<nav class="topnav">
+  <a href="#sec1">2.1 联合分布</a>
+  <a href="#sec2">2.2 边际与条件</a>
+  <a href="#sec3">2.3 独立性</a>
+  <a href="#sec4">2.4 函数分布</a>
+  <a href="#sec5">2.5 期望</a>
+  <a href="#sec6">2.6 方差</a>
+  <a href="#sec7">2.7 协方差</a>
+  <a href="../index.html">← 首页</a>
+</nav>
+
+<div class="container">
+
+<h2 id="sec1"><span class="num">1</span>二维随机变量</h2>
+
+<h3>1.1 联合分布函数</h3>
+<div class="formula accent">
+$$F(x,y) = P(X \leq x, \; Y \leq y)$$
+$$\text{性质：} \;\; F(-\infty, y) = F(x, -\infty) = 0, \;\; F(+\infty, +\infty) = 1$$
+$$F \text{ 关于 } x, y \text{ 分别单调不减、右连续}$$
+</div>
+
+<h3>1.2 离散型联合分布律</h3>
+<div class="formula">
+$$p_{ij} = P(X = x_i, \; Y = y_j) \geq 0, \quad \sum_i \sum_j p_{ij} = 1$$
+$$F(x,y) = \sum_{x_i \leq x} \sum_{y_j \leq y} p_{ij}$$
+</div>
+
+<h3>1.3 连续型联合密度</h3>
+<div class="formula accent">
+$$f(x,y) \geq 0, \;\; \iint f(x,y)\,dxdy = 1$$
+$$F(x,y) = \int_{-\infty}^y \int_{-\infty}^x f(u,v)\,dudv$$
+$$f(x,y) = \frac{\partial^2 F}{\partial x \partial y} \qquad P((X,Y) \in D) = \iint_D f(x,y)\,dxdy$$
+</div>
+
+<h2 id="sec2"><span class="num">2</span>边际分布与条件分布</h2>
+
+<h3>2.1 边际分布</h3>
+<div class="formula accent">
+$$\text{离散：} \;\; p_{i\cdot} = \sum_j p_{ij}, \quad p_{\cdot j} = \sum_i p_{ij}$$
+$$\text{连续：} \;\; f_X(x) = \int_{-\infty}^{+\infty} f(x,y)\,dy, \quad f_Y(y) = \int_{-\infty}^{+\infty} f(x,y)\,dx$$
+</div>
+<div class="tip"><span class="label">注意：</span>边际分布由联合分布唯一确定，但<strong>反过来不成立</strong>——不同的联合分布可以有相同的边际分布。</div>
+
+<h3>2.2 条件分布</h3>
+<div class="formula accent">
+$$\text{离散：} \;\; P(X = x_i \;|\; Y = y_j) = \frac{p_{ij}}{p_{\cdot j}} \quad (p_{\cdot j} > 0)$$
+$$\text{连续：} \;\; f_{X|Y}(x|y) = \frac{f(x,y)}{f_Y(y)} \quad (f_Y(y) > 0)$$
+</div>
+
+<h3>2.3 二维正态分布</h3>
+<div class="formula accent">
+$$(X,Y) \sim N(\mu_1, \mu_2, \sigma_1^2, \sigma_2^2, \rho)$$
+$$X \sim N(\mu_1, \sigma_1^2), \;\; Y \sim N(\mu_2, \sigma_2^2)$$
+$$\text{Cov}(X,Y) = \rho \sigma_1 \sigma_2 \qquad \rho_{XY} = \rho$$
+$$X, Y \text{ 独立} \;\Leftrightarrow\; \rho = 0$$
+</div>
+<div class="tip warning"><span class="label">特别注意：</span>对于二维正态分布，不相关 $\Leftrightarrow$ 独立。这<strong>仅对正态分布成立</strong>，一般分布不成立。</div>
+
+<h2 id="sec3"><span class="num">3</span>随机变量的独立性</h2>
+
+<h3>3.1 定义</h3>
+<div class="formula accent">
+$$X, Y \text{ 独立} \;\Leftrightarrow\; F(x,y) = F_X(x) \cdot F_Y(y)$$
+$$\Leftrightarrow\; p_{ij} = p_{i\cdot} \cdot p_{\cdot j} \;\text{（离散）}$$
+$$\Leftrightarrow\; f(x,y) = f_X(x) \cdot f_Y(y) \;\text{（连续，几乎处处）}$$
+$$\Leftrightarrow\; f_{X|Y}(x|y) = f_X(x) \;\text{（条件 = 无条件）}$$
+</div>
+
+<h3>3.2 独立的推论</h3>
+<ul>
+  <li>$X, Y$ 独立 $\Rightarrow$ $g(X), h(Y)$ 独立（任意可测函数）</li>
+  <li>$X, Y$ 独立 $\Rightarrow$ $E(XY) = E(X)E(Y)$</li>
+  <li>$X, Y$ 独立 $\Rightarrow$ $D(X \pm Y) = D(X) + D(Y)$</li>
+  <li>二维正态：独立 $\Leftrightarrow$ $\rho = 0$</li>
+</ul>
+
+<h2 id="sec4"><span class="num">4</span>二维随机变量函数的分布</h2>
+
+<h3>4.1 $Z = X + Y$ 的分布（卷积公式）</h3>
+<div class="formula accent">
+$$f_Z(z) = \int_{-\infty}^{+\infty} f(x, z - x)\,dx$$
+$$\text{若独立：} \;\; f_Z(z) = \int_{-\infty}^{+\infty} f_X(x) f_Y(z-x)\,dx$$
+</div>
+<div class="tip warning"><span class="label">积分限：</span>由 $f_X(x)$ 和 $f_Y(z-x)$ 的非零区域确定。例如均匀分布 $[0,1]$：需 $0 \leq x \leq 1$ 且 $0 \leq z-x \leq 1$。</div>
+
+<h3>4.2 $M = \max(X,Y)$ 和 $N = \min(X,Y)$</h3>
+<p>设 $X, Y$ 独立：</p>
+<div class="formula accent">
+$$F_M(z) = F_X(z) \cdot F_Y(z) \quad \text{（都}\leq z\text{）}$$
+$$F_N(z) = 1 - [1 - F_X(z)][1 - F_Y(z)] \quad \text{（至少一个}\leq z\text{）}$$
+</div>
+<p>推广到 $n$ 个独立同分布变量：</p>
+<div class="formula">
+$$F_{\max}(z) = [F(z)]^n \qquad F_{\min}(z) = 1 - [1 - F(z)]^n$$
+</div>
+
+<h3>4.3 正态分布的可加性</h3>
+<div class="formula accent">
+$$X \sim N(\mu_1, \sigma_1^2), \; Y \sim N(\mu_2, \sigma_2^2), \; \text{独立} \;\Rightarrow\; X + Y \sim N(\mu_1 + \mu_2, \; \sigma_1^2 + \sigma_2^2)$$
+$$aX + bY \sim N(a\mu_1 + b\mu_2, \; a^2\sigma_1^2 + b^2\sigma_2^2)$$
+</div>
+
+<h2 id="sec5"><span class="num">5</span>数学期望</h2>
+
+<h3>5.1 定义</h3>
+<div class="formula accent">
+$$\text{离散：} \;\; E(X) = \sum_i x_i p_i \qquad \text{连续：} \;\; E(X) = \int_{-\infty}^{+\infty} x\,f(x)\,dx$$
+</div>
+
+<h3>5.2 随机变量函数的期望</h3>
+<div class="formula">
+$$E(g(X)) = \sum_i g(x_i) p_i \quad\text{或}\quad E(g(X)) = \int g(x) f(x)\,dx$$
+$$E(g(X,Y)) = \iint g(x,y) f(x,y)\,dxdy$$
+</div>
+<div class="tip success"><span class="label">关键：</span>求 $E(g(X))$ <strong>不需要</strong>先求 $g(X)$ 的分布，直接用 $X$ 的分布对 $g(x)$ 积分即可。</div>
+
+<h3>5.3 期望的性质</h3>
+<div class="formula">
+$$E(C) = C \qquad E(CX) = CE(X) \qquad E(X + C) = E(X) + C$$
+$$E(X \pm Y) = E(X) \pm E(Y) \qquad E\!\left(\sum a_i X_i\right) = \sum a_i E(X_i)$$
+$$X, Y \text{ 独立} \;\Rightarrow\; E(XY) = E(X)E(Y)$$
+</div>
+
+<h2 id="sec6"><span class="num">6</span>方差</h2>
+
+<h3>6.1 定义与计算公式</h3>
+<div class="formula accent">
+$$D(X) = E[(X - E(X))^2] = E(X^2) - [E(X)]^2$$
+$$\sigma(X) = \sqrt{D(X)} \;\text{（标准差）}$$
+</div>
+
+<h3>6.2 性质</h3>
+<div class="formula">
+$$D(C) = 0 \qquad D(CX) = C^2 D(X) \qquad D(X + C) = D(X)$$
+$$D(X \pm Y) = D(X) + D(Y) \pm 2\,\text{Cov}(X,Y)$$
+$$X, Y \text{ 独立} \;\Rightarrow\; D(X \pm Y) = D(X) + D(Y)$$
+</div>
+
+<h2 id="sec7"><span class="num">7</span>协方差与相关系数</h2>
+
+<h3>7.1 协方差</h3>
+<div class="formula accent">
+$$\text{Cov}(X,Y) = E[(X - EX)(Y - EY)] = E(XY) - E(X)E(Y)$$
+$$\text{Cov}(X,X) = D(X) \qquad \text{Cov}(aX+b, cY+d) = ac\,\text{Cov}(X,Y)$$
+$$\text{Cov}(X+Y, Z) = \text{Cov}(X,Z) + \text{Cov}(Y,Z)$$
+$$D(X \pm Y) = D(X) + D(Y) \pm 2\,\text{Cov}(X,Y)$$
+</div>
+
+<h3>7.2 相关系数</h3>
+<div class="formula accent">
+$$\rho_{XY} = \frac{\text{Cov}(X,Y)}{\sqrt{D(X)} \sqrt{D(Y)}} \in [-1, 1]$$
+$$|\rho| = 1 \;\Leftrightarrow\; P(Y = aX + b) = 1 \;\text{（线性关系）}$$
+$$\rho = 0 \;\Leftrightarrow\; \text{不相关} \;\Leftrightarrow\; \text{Cov}(X,Y) = 0 \;\Leftrightarrow\; E(XY) = E(X)E(Y)$$
+</div>
+
+<h3>7.3 独立与不相关的关系</h3>
+<div class="formula accent">
+$$\text{独立} \;\Rightarrow\; \text{不相关} \quad (\text{但反之一般不成立})$$
+$$\text{二维正态：独立} \;\Leftrightarrow\; \text{不相关} \;\Leftrightarrow\; \rho = 0$$
+</div>
+<div class="tip warning"><span class="label">关键区分：</span>独立比不相关更强。独立要求<strong>所有</strong>关系都不存在，不相关只要求<strong>线性</strong>关系不存在。仅对正态分布，两者等价。</div>
+
+</div>
+
+<button class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<footer>
+  <p>第二章 · 二维随机变量与数字特征 | <a href="01_概率与一维随机变量.html">← 上一章</a> · <a href="03_大数定律与数理统计.html">下一章 →</a></p>
+</footer>
+
+</body>
+</html>

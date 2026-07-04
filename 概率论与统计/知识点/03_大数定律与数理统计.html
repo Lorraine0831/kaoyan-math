@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第三章 大数定律与数理统计 - 概率论知识点</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+
+<header>
+  <h1>第三章 · 大数定律与数理统计</h1>
+  <div class="subtitle">大数定律 · 中心极限定理 · 抽样分布 · 参数估计 · 假设检验</div>
+</header>
+
+<nav class="topnav">
+  <a href="#sec1">3.1 切比雪夫</a>
+  <a href="#sec2">3.2 大数定律</a>
+  <a href="#sec3">3.3 中心极限</a>
+  <a href="#sec4">3.4 抽样分布</a>
+  <a href="#sec5">3.5 参数估计</a>
+  <a href="#sec6">3.6 假设检验</a>
+  <a href="../index.html">← 首页</a>
+</nav>
+
+<div class="container">
+
+<h2 id="sec1"><span class="num">1</span>切比雪夫不等式</h2>
+
+<div class="formula accent">
+$$P(|X - E(X)| \geq \varepsilon) \leq \frac{D(X)}{\varepsilon^2}$$
+</div>
+<div class="tip"><span class="label">意义：</span>不论 $X$ 服从什么分布，只要知道期望和方差，就能给出偏离期望的概率上界。</div>
+<div class="tip success"><span class="label">应用：</span>用于证明大数定律，以及在不完全知道分布时给出概率估计。取 $\varepsilon = k\sigma$ 得 $P(|X-\mu| \geq k\sigma) \leq \frac{1}{k^2}$。</div>
+
+<h2 id="sec2"><span class="num">2</span>大数定律</h2>
+
+<h3>2.1 切比雪夫大数定律</h3>
+<p>设 $X_1, X_2, \ldots$ 相互独立，$E(X_i) = \mu_i$，$D(X_i) \leq C$（一致有界），则</p>
+<div class="formula">
+$$\frac{1}{n}\sum_{i=1}^n X_i \xrightarrow{P} \frac{1}{n}\sum_{i=1}^n \mu_i$$
+</div>
+
+<h3>2.2 辛钦大数定律</h3>
+<p>设 $X_1, \ldots, X_n$ 独立同分布，$E(X_i) = \mu$，则</p>
+<div class="formula accent">
+$$\frac{1}{n}\sum_{i=1}^n X_i \xrightarrow{P} \mu$$
+</div>
+<div class="tip"><span class="label">意义：</span>样本均值依概率收敛于总体均值。这是<strong>矩估计</strong>的理论依据。</div>
+
+<h3>2.3 伯努利大数定律</h3>
+<p>设 $n_A$ 为 $n$ 次独立试验中事件 $A$ 发生的次数，$P(A) = p$，则</p>
+<div class="formula accent">
+$$\frac{n_A}{n} \xrightarrow{P} p$$
+</div>
+<div class="tip"><span class="label">意义：</span>频率依概率收敛于概率。这是"频率代替概率"的理论依据。</div>
+
+<h2 id="sec3"><span class="num">3</span>中心极限定理</h2>
+
+<h3>3.1 林德伯格-列维定理</h3>
+<p>设 $X_1, \ldots, X_n$ 独立同分布，$E(X_i) = \mu$，$D(X_i) = \sigma^2 > 0$，则</p>
+<div class="formula accent">
+$$\frac{\sum_{i=1}^n X_i - n\mu}{\sigma\sqrt{n}} \xrightarrow{d} N(0,1)$$
+$$\text{即} \;\; \sum_{i=1}^n X_i \;\dot{\sim}\; N(n\mu, \; n\sigma^2), \qquad \bar{X} \;\dot{\sim}\; N\!\left(\mu, \;\frac{\sigma^2}{n}\right)$$
+</div>
+<div class="tip"><span class="label">意义：</span>无论原始分布是什么，大量独立同分布变量之和近似服从正态分布。</div>
+
+<h3>3.2 棣莫弗-拉普拉斯定理</h3>
+<p>设 $X \sim B(n, p)$，则</p>
+<div class="formula accent">
+$$\frac{X - np}{\sqrt{np(1-p)}} \;\dot{\sim}\; N(0,1)$$
+</div>
+<p>这是林德伯格-列维定理对二项分布的特例（$X = \sum X_i$，$X_i \sim B(1,p)$）。</p>
+
+<h3>3.3 应用：近似计算</h3>
+<div class="formula">
+$$P(a \leq \bar{X} \leq b) \approx \Phi\!\left(\frac{b - \mu}{\sigma/\sqrt{n}}\right) - \Phi\!\left(\frac{a - \mu}{\sigma/\sqrt{n}}\right)$$
+</div>
+
+<h2 id="sec4"><span class="num">4</span>数理统计基本概念</h2>
+
+<h3>4.1 基本概念</h3>
+<ul>
+  <li><strong>总体</strong>：研究对象的全体（一个随机变量 $X$）</li>
+  <li><strong>样本</strong>：从总体中抽取的 $n$ 个独立同分布变量 $X_1, \ldots, X_n$</li>
+  <li><strong>统计量</strong>：样本的不含未知参数的函数 $g(X_1, \ldots, X_n)$</li>
+  <li><strong>样本均值</strong>：$\bar{X} = \frac{1}{n}\sum X_i$</li>
+  <li><strong>样本方差</strong>：$S^2 = \frac{1}{n-1}\sum(X_i - \bar{X})^2$（注意分母是 $n-1$）</li>
+  <li><strong>样本标准差</strong>：$S = \sqrt{S^2}$</li>
+</ul>
+
+<h3>4.2 三大抽样分布</h3>
+
+<p><strong>$\chi^2$ 分布</strong></p>
+<div class="formula accent">
+$$Z_1, \ldots, Z_n \sim N(0,1) \text{ 独立} \;\Rightarrow\; \chi^2 = \sum Z_i^2 \sim \chi^2(n)$$
+$$E(\chi^2(n)) = n, \quad D(\chi^2(n)) = 2n$$
+$$\chi_1^2 \sim \chi^2(n_1), \;\chi_2^2 \sim \chi^2(n_2), \;\text{独立} \;\Rightarrow\; \chi_1^2 + \chi_2^2 \sim \chi^2(n_1 + n_2) \;\text{（可加性）}$$
+</div>
+
+<p><strong>$t$ 分布</strong></p>
+<div class="formula accent">
+$$Z \sim N(0,1), \;\; V \sim \chi^2(n), \;\; Z, V \text{ 独立} \;\Rightarrow\; T = \frac{Z}{\sqrt{V/n}} \sim t(n)$$
+$$E(T) = 0 \;(n > 1), \quad D(T) = \frac{n}{n-2} \;(n > 2)$$
+$$t(n) \xrightarrow{n \to \infty} N(0,1) \qquad \text{密度关于 } 0 \text{ 对称}$$
+</div>
+
+<p><strong>$F$ 分布</strong></p>
+<div class="formula accent">
+$$U \sim \chi^2(m), \;\; V \sim \chi^2(n), \;\; U, V \text{ 独立} \;\Rightarrow\; F = \frac{U/m}{V/n} \sim F(m, n)$$
+$$\frac{1}{F} \sim F(n, m) \qquad E(F) = \frac{n}{n-2} \;(n > 2)$$
+</div>
+
+<h3>4.3 正态总体的抽样分布</h3>
+<p>设 $X_1, \ldots, X_n \sim N(\mu, \sigma^2)$ 独立，$\bar{X}$ 为样本均值，$S^2$ 为样本方差：</p>
+<div class="formula accent">
+$$\bar{X} \sim N\!\left(\mu, \;\frac{\sigma^2}{n}\right) \;\;\Rightarrow\;\; \frac{\bar{X} - \mu}{\sigma/\sqrt{n}} \sim N(0,1)$$
+$$\frac{(n-1)S^2}{\sigma^2} \sim \chi^2(n-1)$$
+$$\frac{\bar{X} - \mu}{S/\sqrt{n}} \sim t(n-1)$$
+$$\bar{X} \text{ 与 } S^2 \text{ 独立}$$
+</div>
+<p>两个独立正态总体 $N(\mu_1, \sigma_1^2)$ 和 $N(\mu_2, \sigma_2^2)$：</p>
+<div class="formula">
+$$\frac{S_1^2/\sigma_1^2}{S_2^2/\sigma_2^2} \sim F(n_1 - 1, \; n_2 - 1) \;\;(\sigma_1^2 = \sigma_2^2 \text{ 时})$$
+$$\frac{(\bar{X}_1 - \bar{X}_2) - (\mu_1 - \mu_2)}{S_w\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}} \sim t(n_1+n_2-2), \;\; S_w^2 = \frac{(n_1-1)S_1^2 + (n_2-1)S_2^2}{n_1+n_2-2}$$
+</div>
+
+<h2 id="sec5"><span class="num">5</span>参数估计</h2>
+
+<h3>5.1 矩估计法</h3>
+<p>用样本矩替代总体矩，解出参数估计。</p>
+<div class="formula accent">
+$$\text{令 } E(X) = \bar{X} = \frac{1}{n}\sum X_i \;\text{（一阶矩）}$$
+$$\text{令 } E(X^2) = \frac{1}{n}\sum X_i^2 \;\text{（二阶矩）}$$
+$$\text{解方程组得 } \hat{\theta}_1, \hat{\theta}_2$$
+</div>
+
+<h3>5.2 最大似然估计</h3>
+<p>构造似然函数（样本取到当前值的"似然度"），取使其最大的参数值。</p>
+<div class="formula accent">
+$$L(\theta) = \prod_{i=1}^n f(x_i; \theta) \quad \text{（连续型）或} \quad L(\theta) = \prod P(X = x_i; \theta) \quad \text{（离散型）}$$
+$$\ln L(\theta) = \sum_{i=1}^n \ln f(x_i; \theta)$$
+$$\frac{\partial \ln L}{\partial \theta} = 0 \;\Rightarrow\; \hat{\theta}_{MLE}$$
+</div>
+<div class="tip"><span class="label">步骤：</span>构造 $L$ → 取对数 $\ln L$ → 求导令其为零 → 解出 $\hat{\theta}$。若导数无法为零，则看单调性取边界。</div>
+
+<h3>5.3 估计量的评价标准</h3>
+<table>
+<tr><th>标准</th><th>定义</th><th>说明</th></tr>
+<tr><td>无偏性</td><td>$E(\hat{\theta}) = \theta$</td><td>估计量的期望等于真值</td></tr>
+<tr><td>有效性</td><td>$D(\hat{\theta}_1) < D(\hat{\theta}_2)$</td><td>在无偏估计中，方差越小越有效</td></tr>
+<tr><td>一致性（相合性）</td><td>$\hat{\theta}_n \xrightarrow{P} \theta$</td><td>样本量增大时估计值收敛于真值</td></tr>
+</table>
+<div class="tip warning"><span class="label">重要结论：</span>$S^2 = \frac{1}{n-1}\sum(X_i - \bar{X})^2$ 是 $\sigma^2$ 的<strong>无偏估计</strong>，而 $\frac{1}{n}\sum(X_i-\bar{X})^2$ 是<strong>有偏</strong>的。这就是样本方差分母为 $n-1$ 的原因。</div>
+
+<h3>5.4 区间估计</h3>
+<p>构造统计量，利用抽样分布给出包含参数的置信区间：</p>
+<table>
+<tr><th>参数</th><th>条件</th><th>置信区间（置信度 $1-\alpha$）</th></tr>
+<tr><td>$\mu$</td><td>$\sigma^2$ 已知</td><td>$\bar{X} \pm z_{\alpha/2}\frac{\sigma}{\sqrt{n}}$</td></tr>
+<tr><td>$\mu$</td><td>$\sigma^2$ 未知</td><td>$\bar{X} \pm t_{\alpha/2}(n-1)\frac{S}{\sqrt{n}}$</td></tr>
+<tr><td>$\sigma^2$</td><td>$\mu$ 未知</td><td>$\left(\frac{(n-1)S^2}{\chi^2_{\alpha/2}(n-1)}, \;\frac{(n-1)S^2}{\chi^2_{1-\alpha/2}(n-1)}\right)$</td></tr>
+</table>
+
+<h2 id="sec6"><span class="num">6</span>假设检验</h2>
+
+<h3>6.1 基本概念</h3>
+<ul>
+  <li><strong>原假设</strong> $H_0$ 与<strong>备择假设</strong> $H_1$</li>
+  <li><strong>检验统计量</strong>：在 $H_0$ 成立时分布已知的统计量</li>
+  <li><strong>拒绝域</strong> $W$：使 $H_0$ 被拒绝的统计量取值范围</li>
+  <li><strong>显著性水平</strong> $\alpha$：$P(\text{拒绝}H_0 | H_0 \text{ 真}) = \alpha$</li>
+</ul>
+
+<h3>6.2 两类错误</h3>
+<table>
+<tr><th>错误类型</th><th>含义</th><th>概率</th></tr>
+<tr><td>第一类（弃真）</td><td>$H_0$ 真但拒绝 $H_0$</td><td>$\alpha$</td></tr>
+<tr><td>第二类（取伪）</td><td>$H_0$ 假但接受 $H_0$</td><td>$\beta$</td></tr>
+</table>
+<p>在样本量固定时，减小 $\alpha$ 会增大 $\beta$，反之亦然。通常先控制 $\alpha$。</p>
+
+<h3>6.3 正态总体参数检验</h3>
+<table>
+<tr><th>检验</th><th>$H_0$</th><th>统计量（$\sigma^2$已知）</th><th>统计量（$\sigma^2$未知）</th></tr>
+<tr><td>单样本均值</td><td>$\mu = \mu_0$</td><td>$Z = \frac{\bar{X}-\mu_0}{\sigma/\sqrt{n}}$</td><td>$T = \frac{\bar{X}-\mu_0}{S/\sqrt{n}}$</td></tr>
+<tr><td>单样本方差</td><td>$\sigma^2 = \sigma_0^2$</td><td colspan="2">$\chi^2 = \frac{(n-1)S^2}{\sigma_0^2}$</td></tr>
+</table>
+<div class="formula">
+$$\text{拒绝域（双侧，}\sigma^2\text{未知）：} \;\; |T| > t_{\alpha/2}(n-1)$$
+$$\text{拒绝域（单侧）：} \;\; T > t_\alpha(n-1) \;\;\text{或}\;\; T < -t_\alpha(n-1)$$
+</div>
+
+</div>
+
+<button class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<footer>
+  <p>第三章 · 大数定律与数理统计 | <a href="02_二维随机变量与数字特征.html">← 上一章</a> · <a href="../index.html">返回首页 →</a></p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>概率论与数理统计复习资料 - 首页</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header>
+  <h1>概率论与数理统计 · 复习资料库</h1>
+  <div class="subtitle">知识点 · 必背公式 · 做题提速技巧 | 考前系统复习专用</div>
+</header>
+
+<nav class="topnav">
+  <a href="#knowledge">知识点</a>
+  <a href="#formulas">公式速查</a>
+  <a href="#tips">备考建议</a>
+</nav>
+
+<div class="container">
+
+<h2 id="knowledge"><span class="num">一</span>知识点（3 章）</h2>
+
+<div class="card-grid">
+  <a class="card" href="知识点/01_概率与一维随机变量.html">
+    <h3>第一章 · 概率与一维随机变量</h3>
+    <p>概率公理、条件概率、全概率与贝叶斯公式、离散/连续分布、常见分布</p>
+    <span class="tag">概率</span>
+    <span class="tag">分布</span>
+  </a>
+  <a class="card" href="知识点/02_二维随机变量与数字特征.html">
+    <h3>第二章 · 二维随机变量与数字特征</h3>
+    <p>联合/边际/条件分布、独立性、期望方差协方差、相关系数</p>
+    <span class="tag">二维</span>
+    <span class="tag">数字特征</span>
+  </a>
+  <a class="card" href="知识点/03_大数定律与数理统计.html">
+    <h3>第三章 · 大数定律与数理统计</h3>
+    <p>大数定律、中心极限定理、抽样分布、参数估计、假设检验</p>
+    <span class="tag">极限定理</span>
+    <span class="tag">统计</span>
+  </a>
+</div>
+
+<h2 id="formulas"><span class="num">二</span>公式速查</h2>
+
+<div class="card-grid">
+  <a class="card" href="公式速查/必背公式.html">
+    <h3>必背公式 · 完整速查表</h3>
+    <p>概率公式、常见分布、期望方差、协方差、极限定理、抽样分布、参数估计</p>
+    <span class="tag">全章节</span>
+  </a>
+  <a class="card" href="公式速查/做题提速常用技巧.html">
+    <h3>做题提速常用技巧</h3>
+    <p>分布速查、标准化、对称性利用、期望方差速推、抽样分布速记</p>
+    <span class="tag">提速</span>
+    <span class="tag">技巧</span>
+  </a>
+</div>
+
+<h2 id="tips"><span class="num">三</span>备考建议</h2>
+
+<h3>高频考点</h3>
+<table>
+<tr><th>章节</th><th>高频考点</th></tr>
+<tr><td>概率</td><td>全概率/贝叶斯公式、独立性判定、伯努利概型</td></tr>
+<tr><td>一维</td><td>常见分布的密度与分布函数、正态标准化、函数分布</td></tr>
+<tr><td>二维</td><td>联合密度求边际/条件、独立性、$Z=X+Y$ 卷积、最值分布</td></tr>
+<tr><td>数字特征</td><td>$D(X)=E(X^2)-(EX)^2$、协方差计算、独立与不相关</td></tr>
+<tr><td>极限定理</td><td>切比雪夫不等式、中心极限定理近似计算</td></tr>
+<tr><td>统计</td><td>三大抽样分布构造、正态总体四大统计量、矩估计/MLE</td></tr>
+</table>
+
+<h3>易错点提醒</h3>
+<div class="tip warning">
+<span class="label">考前必看：</span>
+<ul style="margin-top:4px;">
+  <li>独立 $\Rightarrow$ 不相关，但<strong>不相关 $\nRightarrow$ 独立</strong>（除非正态分布）</li>
+  <li>样本方差分母是 <strong>$n-1$</strong> 不是 $n$（无偏性的要求）</li>
+  <li>$D(X \pm Y) = D(X) + D(Y) \pm 2\text{Cov}(X,Y)$，独立时交叉项为0</li>
+  <li>卷积公式<strong>仅限独立</strong>时使用</li>
+  <li>$F$ 分布：<strong>$1/F \sim F(n,m)$</strong>（自由度互换）</li>
+  <li>$\bar{X}$ 与 $S^2$ <strong>独立</strong>（正态总体重要结论）</li>
+  <li>$t$ 分布自由度是 <strong>$n-1$</strong>，不是 $n$（因为 $\bar{X}$ 消耗了1个自由度）</li>
+  <li>$\chi^2$ 分布的期望是 <strong>$n$</strong>，方差是 <strong>$2n$</strong></li>
+</ul>
+</div>
+
+</div>
+
+<footer>
+  <p>概率论与数理统计复习资料库 · 考前系统复习专用</p>
+</footer>
+
+</body>
+</html>

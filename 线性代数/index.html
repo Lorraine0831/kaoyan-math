@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>线性代数复习资料 - 首页</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header>
+  <h1>线性代数 · 复习资料库</h1>
+  <div class="subtitle">知识点 · 必背公式 · 做题提速技巧 | 考前系统复习专用</div>
+</header>
+
+<nav class="topnav">
+  <a href="#knowledge">知识点</a>
+  <a href="#formulas">公式速查</a>
+  <a href="#tips">备考建议</a>
+</nav>
+
+<div class="container">
+
+<h2 id="knowledge"><span class="num">一</span>知识点（4 章）</h2>
+
+<div class="card-grid">
+  <a class="card" href="知识点/01_行列式.html">
+    <h3>第一章 · 行列式</h3>
+    <p>定义、性质、展开定理、特殊行列式、克莱姆法则</p>
+    <span class="tag">行列式</span>
+    <span class="tag">克莱姆</span>
+  </a>
+  <a class="card" href="知识点/02_矩阵.html">
+    <h3>第二章 · 矩阵</h3>
+    <p>运算、逆矩阵、伴随矩阵、初等变换、秩、分块矩阵</p>
+    <span class="tag">矩阵</span>
+    <span class="tag">秩</span>
+  </a>
+  <a class="card" href="知识点/03_向量与方程组.html">
+    <h3>第三章 · 向量与方程组</h3>
+    <p>线性相关性、极大无关组、正交化、方程组解的结构</p>
+    <span class="tag">向量</span>
+    <span class="tag">方程组</span>
+  </a>
+  <a class="card" href="知识点/04_特征值与二次型.html">
+    <h3>第四章 · 特征值与二次型</h3>
+    <p>特征值、相似对角化、实对称矩阵、二次型标准形、正定性</p>
+    <span class="tag">特征值</span>
+    <span class="tag">二次型</span>
+  </a>
+</div>
+
+<h2 id="formulas"><span class="num">二</span>公式速查</h2>
+
+<div class="card-grid">
+  <a class="card" href="公式速查/必背公式.html">
+    <h3>必背公式 · 完整速查表</h3>
+    <p>行列式、矩阵、伴随矩阵、秩、向量、方程组、特征值、二次型</p>
+    <span class="tag">全章节</span>
+  </a>
+  <a class="card" href="公式速查/做题提速常用技巧.html">
+    <h3>做题提速常用技巧</h3>
+    <p>行列式速算、矩阵幂、伴随矩阵技巧、秩结论、特征值反推、配方法</p>
+    <span class="tag">提速</span>
+    <span class="tag">技巧</span>
+  </a>
+</div>
+
+<h2 id="tips"><span class="num">三</span>备考建议</h2>
+
+<h3>高频考点</h3>
+<table>
+<tr><th>章节</th><th>高频考点</th></tr>
+<tr><td>行列式</td><td>展开定理计算、性质化简、特殊行列式（范德蒙德、分块）</td></tr>
+<tr><td>矩阵</td><td>伴随矩阵性质、求逆、秩的结论、初等变换</td></tr>
+<tr><td>向量</td><td>线性相关判定、极大无关组、施密特正交化</td></tr>
+<tr><td>方程组</td><td>解的判据、基础解系、解的结构（通解=特解+齐次通解）</td></tr>
+<tr><td>特征值</td><td>特征值性质连锁反应、对角化条件、正交对角化</td></tr>
+<tr><td>二次型</td><td>标准形（正交变换法/配方法）、正定性判定、惯性定理</td></tr>
+</table>
+
+<h3>易错点提醒</h3>
+<div class="tip warning">
+<span class="label">考前必看：</span>
+<ul style="margin-top:4px;">
+  <li>矩阵乘法<strong>不交换、不消去</strong>，$AB \neq BA$，$AB=AC$ 不能推出 $B=C$</li>
+  <li>$r(A^*)$ 的三种情况：<strong>$n$、$n-1$、$0$</strong>，对应 $r(A)=n$、$n-1$、$\leq n-2$</li>
+  <li>不同特征值对应的特征向量线性无关；实对称矩阵不同特征值的特征向量<strong>正交</strong></li>
+  <li>能对角化 $\Leftrightarrow$ 每个重根的<strong>几何重数=代数重数</strong></li>
+  <li>正定 $\Leftrightarrow$ 各阶<strong>顺序</strong>主子式全正，不是任意主子式</li>
+  <li>正交相似=相似+合同；实对称矩阵的相似即合同</li>
+  <li>$AB=O \Rightarrow r(A)+r(B) \leq n$</li>
+</ul>
+</div>
+
+</div>
+
+<footer>
+  <p>线性代数复习资料库 · 考前系统复习专用</p>
+</footer>
+
+</body>
+</html>

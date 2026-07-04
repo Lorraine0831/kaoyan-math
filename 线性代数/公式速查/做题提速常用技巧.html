@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>线代做题提速常用技巧 - 考试利器</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+
+<header>
+  <h1>线代做题提速常用技巧 · 考试利器</h1>
+  <div class="subtitle">伴随矩阵速算 · 秩1矩阵幂 · 分块技巧 · 特征值反推 · 配方法秒杀</div>
+</header>
+
+<nav class="topnav">
+  <a href="#sec1">一、行列式速算</a>
+  <a href="#sec2">二、矩阵幂速算</a>
+  <a href="#sec3">三、伴随矩阵技巧</a>
+  <a href="#sec4">四、秩的结论</a>
+  <a href="#sec5">五、特征值反推</a>
+  <a href="#sec6">六、二次型配方法</a>
+  <a href="#sec7">七、特殊结论</a>
+  <a href="../index.html">← 首页</a>
+</nav>
+
+<div class="container">
+
+<!-- ============== 一、行列式速算 ============== -->
+<h2 id="sec1"><span class="num">1</span>行列式速算技巧</h2>
+
+<h3>1.1 "行列成比例"消零法</h3>
+<div class="tip success"><span class="label">技巧：</span>观察行列式中是否有两行（列）在某倍数关系上接近。把某行的若干倍加到另一行，制造大量零，再展开。</div>
+
+<h3>1.2 箭形行列式</h3>
+<p>形如 $\begin{vmatrix} a_0 & a_1 & a_2 & \cdots & a_n \\ b_1 & c_1 & 0 & \cdots & 0 \\ b_2 & 0 & c_2 & \cdots & 0 \\ \vdots & & & \ddots & \\ b_n & 0 & 0 & \cdots & c_n \end{vmatrix}$（箭形/爪形）</p>
+<div class="formula accent">
+$$\text{从第 } 2 \text{ 列起，每列乘 } -b_i/c_i \text{ 加到第1列，消去 } b_i$$
+$$\Rightarrow D = \left(a_0 - \sum_{i=1}^n \frac{a_i b_i}{c_i}\right)\prod_{i=1}^n c_i$$
+</div>
+
+<h3>1.3 递推法</h3>
+<p>对 $n$ 阶三对角行列式 $D_n$，按第一行展开得递推关系：</p>
+<div class="formula">
+$$D_n = a\,D_{n-1} - bc\,D_{n-2}$$
+$$\text{解特征方程 } t^2 - at + bc = 0 \;\Rightarrow\; D_n = C_1 t_1^n + C_2 t_2^n \;\text{（不等根）}$$
+</div>
+
+<h3>1.4 加边法（升阶法）</h3>
+<div class="tip"><span class="label">适用：</span>各行（列）元素有"同一规律求和"时，加一行一列构造 $\begin{vmatrix}1 & * \\ * & A\end{vmatrix}$，利用第一行消零再展开。</div>
+
+<h3>1.5 范德蒙德行列式直接套用</h3>
+<div class="formula accent">
+$$V_n = \begin{vmatrix} 1 & 1 & \cdots & 1 \\ x_1 & x_2 & \cdots & x_n \\ x_1^2 & x_2^2 & \cdots & x_n^2 \\ \vdots & & & \vdots \\ x_1^{n-1} & x_2^{n-1} & \cdots & x_n^{n-1} \end{vmatrix} = \prod_{1\leq j < i \leq n}(x_i - x_j)$$
+</div>
+
+<!-- ============== 二、矩阵幂速算 ============== -->
+<h2 id="sec2"><span class="num">2</span>矩阵高次幂速算</h2>
+
+<h3>2.1 秩1矩阵法</h3>
+<div class="formula accent">
+$$\text{若 } A = \vec{\alpha}\vec{\beta}^T \text{（秩1矩阵）} \;\Rightarrow\; A^n = (\vec{\beta}^T\vec{\alpha})^{n-1} \cdot A$$
+</div>
+<div class="tip success"><span class="label">举例：</span>$A = \begin{pmatrix}1\\2\\3\end{pmatrix}(1,1,1)$，则 $A^{100} = (\vec{\beta}^T\vec{\alpha})^{99} A = 6^{99}A$。</div>
+
+<h3>2.2 对角化法</h3>
+<div class="formula">
+$$A = P\Lambda P^{-1} \;\Rightarrow\; A^n = P\Lambda^n P^{-1}$$
+</div>
+
+<h3>2.3 二项式展开法</h3>
+<p>若 $A = \lambda I + B$，其中 $B$ 是低阶幂趋于零或易算的矩阵：</p>
+<div class="formula">
+$$A^n = (\lambda I + B)^n = \sum_{k=0}^n \binom{n}{k}\lambda^{n-k}B^k$$
+</div>
+<div class="tip success"><span class="label">举例：</span>$A = \begin{pmatrix}2 & 1\\0 & 2\end{pmatrix} = 2I + \begin{pmatrix}0 & 1\\0 & 0\end{pmatrix}$，因 $B^2 = O$，故 $A^n = 2^n I + n\cdot 2^{n-1}B$。</div>
+
+<h3>2.4 分块对角矩阵的幂</h3>
+<div class="formula">
+$$\text{若 } A = \begin{pmatrix} A_1 & O \\ O & A_2 \end{pmatrix}, \;\text{则 } A^n = \begin{pmatrix} A_1^n & O \\ O & A_2^n \end{pmatrix}$$
+</div>
+
+<!-- ============== 三、伴随矩阵技巧 ============== -->
+<h2 id="sec3"><span class="num">3</span>伴随矩阵 $A^*$ 速用</h2>
+
+<h3>3.1 万能关系式</h3>
+<div class="formula accent">
+$$AA^* = A^*A = |A|\,I \qquad A^* = |A|A^{-1}$$
+</div>
+<p>一切关于 $A^*$ 的计算都可从此式出发。</p>
+
+<h3>3.2 求解 $A^*$ 相关矩阵方程</h3>
+<div class="tip success"><span class="label">策略：</span>遇到 $A^*$ 时，用 $A^* = |A|A^{-1}$ 替换，化归为 $A$ 或 $A^{-1}$ 的运算。</div>
+<div class="formula">
+$$(A^*)^* = |A|^{n-2}A \qquad (A^*)^{-1} = \frac{A}{|A|}$$
+$$|A^*| = |A|^{n-1} \qquad (kA)^* = k^{n-1}A^*$$
+</div>
+
+<h3>3.3 由 $A^*$ 反推 $A$ 的秩</h3>
+<table>
+<tr><th>$r(A)$</th><th>$r(A^*)$</th><th>$|A^*|$</th></tr>
+<tr><td>$n$（满秩）</td><td>$n$</td><td>$|A|^{n-1} \neq 0$</td></tr>
+<tr><td>$n-1$</td><td>$1$</td><td>$0$</td></tr>
+<tr><td>$\leq n-2$</td><td>$0$</td><td>$0$</td></tr>
+</table>
+
+<!-- ============== 四、秩的快速结论 ============== -->
+<h2 id="sec4"><span class="num">4</span>秩的快速结论</h2>
+
+<h3>4.1 乘以满秩矩阵不改变秩</h3>
+<div class="formula accent">
+$$P, Q \text{ 可逆} \;\Rightarrow\; r(PAQ) = r(A)$$
+$$r(PA) = r(A) = r(AQ)$$
+</div>
+
+<h3>4.2 $AB = O$ 的秩结论</h3>
+<div class="formula accent">
+$$AB = O \;\Rightarrow\; r(A) + r(B) \leq n \quad (A \text{ 为 } m\times n)$$
+</div>
+<div class="tip warning"><span class="label">应用：</span>$B$ 的列向量都是 $A\vec{x}=\vec{0}$ 的解，故 $B$ 的列数 $\geq n - r(A)$ 才能非零。</div>
+
+<h3>4.3 常见秩等式</h3>
+<div class="formula">
+$$r(A^TA) = r(A) = r(AA^T) \qquad r(A) = r(A^T)$$
+$$r\!\begin{pmatrix}A & O \\ O & B\end{pmatrix} = r(A) + r(B)$$
+$$r\!\begin{pmatrix}A \\ B\end{pmatrix} \leq r(A) + r(B) \qquad r(A|B) \leq r(A) + r(B)$$
+</div>
+
+<!-- ============== 五、特征值反推 ============== -->
+<h2 id="sec5"><span class="num">5</span>特征值"连锁反应"速查</h2>
+
+<p>已知 $A$ 的特征值为 $\lambda$，直接写出相关矩阵的特征值：</p>
+<div class="formula accent">
+$$\begin{array}{c|cccccccc}
+\text{矩阵} & A^k & A^{-1} & A^* & f(A) & A+kI & A^T & cA & AB \\
+\hline
+\text{特征值} & \lambda^k & \lambda^{-1} & \frac{|A|}{\lambda} & f(\lambda) & \lambda+k & \lambda & c\lambda & \text{不一定} \\
+\end{array}$$
+</div>
+<p>且各矩阵的<strong>迹</strong>和<strong>行列式</strong>也随之确定：</p>
+<div class="formula">
+$$\text{tr}(A) = \sum \lambda_i, \quad |A| = \prod \lambda_i, \quad |A^{-1}| = \prod \frac{1}{\lambda_i}$$
+</div>
+
+<h3>5.1 特征向量在相似变换中的对应</h3>
+<div class="tip"><span class="label">关键：</span>若 $P^{-1}AP = \Lambda$，则 $A$ 的特征向量构成 $P$ 的列；反过来，$P$ 的列是 $A$ 的特征向量，对角矩阵 $\Lambda$ 上是对应特征值。顺序<strong>一一对应</strong>。</div>
+
+<!-- ============== 六、二次型配方法 ============== -->
+<h2 id="sec6"><span class="num">6</span>二次型配方法秒杀</h2>
+
+<h3>6.1 配方法步骤</h3>
+<div class="formula accent">
+$$\text{若 } f = a_{11}x_1^2 + 2a_{12}x_1 x_2 + a_{22}x_2^2 + \cdots$$
+$$\text{将含 } x_1 \text{ 的项配方：} f = a_{11}\!\left(x_1 + \frac{a_{12}}{a_{11}}x_2 + \cdots\right)^2 + g(x_2, x_3, \ldots)$$
+$$\text{令 } y_1 = x_1 + \frac{a_{12}}{a_{11}}x_2 + \cdots, \;\; \text{继续对 } g \text{ 配方}$$
+</div>
+
+<h3>6.2 无平方项时的处理</h3>
+<div class="tip warning"><span class="label">注意：</span>若 $x_1^2$ 项系数为 $0$，但有交叉项 $x_1 x_2$，先做变换 $\begin{cases} x_1 = y_1+y_2 \\ x_2 = y_1-y_2 \\ x_k = y_k\;(k\geq3)\end{cases}$，制造平方项再配方。</div>
+
+<h3>6.3 正定性快速判断</h3>
+<table>
+<tr><th>方法</th><th>条件</th></tr>
+<tr><td>特征值</td><td>$\lambda_i > 0 \;\forall i$</td></tr>
+<tr><td>顺序主子式</td><td>$\Delta_k > 0 \;\forall k$</td></tr>
+<tr><td>惯性指数</td><td>$p = n$（正惯性指数 = 阶数）</td></tr>
+<tr><td>定义</td><td>$\forall \vec{x}\neq\vec{0},\; \vec{x}^TA\vec{x} > 0$</td></tr>
+<tr><td>合同</td><td>$A \simeq I_n$</td></tr>
+</table>
+<div class="tip success"><span class="label">半正定：</span>$\vec{x}^TA\vec{x} \geq 0$ $\Leftrightarrow$ $\lambda_i \geq 0$ $\forall i$ $\Leftrightarrow$ 各主子式 $\geq 0$。</div>
+
+<!-- ============== 七、特殊结论 ============== -->
+<h2 id="sec7"><span class="num">7</span>特殊结论与高频考点</h2>
+
+<h3>7.1 实对称矩阵的"正交对角化"流程</h3>
+<ol>
+  <li>求特征值 $|\lambda I - A| = 0$</li>
+  <li>对每个 $\lambda_i$，解 $(\lambda_i I - A)\vec{x} = \vec{0}$ 得特征向量</li>
+  <li>对重根对应的多个特征向量做<strong>施密特正交化</strong></li>
+  <li>所有特征向量<strong>单位化</strong></li>
+  <li>以正交单位特征向量为列构造 $Q$，则 $Q^TAQ = \Lambda$</li>
+</ol>
+
+<h3>7.2 $A \sim B$ 的必要条件速查</h3>
+<div class="formula">
+$$A \sim B \;\Rightarrow\; \begin{cases} |A| = |B| \\ \text{tr}(A) = \text{tr}(B) \\ r(A) = r(B) \\ \lambda_A = \lambda_B \\ |{\lambda I - A}| = |{\lambda I - B}| \end{cases}$$
+</div>
+<div class="tip warning"><span class="label">注意：</span>以上是必要条件，不充分。判断能否相似对角化，关键是看<strong>重根的几何重数是否等于代数重数</strong>。</div>
+
+<h3>7.3 常用矩阵等式</h3>
+<div class="formula">
+$$A - A^2 = O \;\Rightarrow\; \text{特征值只能是 } 0 \text{ 或 } 1$$
+$$A^2 = I \;\Rightarrow\; \text{特征值只能是 } \pm 1, \;\; A^{-1} = A$$
+$$A^2 = A \text{（幂等）} \;\Rightarrow\; r(A) = \text{tr}(A)$$
+$$A^2 + A = O \;\Rightarrow\; \text{特征值只能是 } 0 \text{ 或 } -1$$
+$$\text{正交矩阵特征值：} |\lambda| = 1$$
+</div>
+
+<h3>7.4 方程组 $A\vec{x}=\vec{b}$ 解的个数总结</h3>
+<table>
+<tr><th>条件</th><th>解的情况</th><th>解的结构</th></tr>
+<tr><td>$r(A)=r(A|\vec{b})=n$</td><td>唯一解</td><td>$\vec{x} = \vec{\eta}^*$</td></tr>
+<tr><td>$r(A)=r(A|\vec{b})<n$</td><td>无穷多解</td><td>$\vec{x} = \vec{\eta}^* + \sum c_i\vec{\xi}_i$</td></tr>
+<tr><td>$r(A)<r(A|\vec{b})$</td><td>无解</td><td>—</td></tr>
+<tr><td>$A\vec{x}=\vec{0}$，$r(A)=n$</td><td>只有零解</td><td>$\vec{x}=\vec{0}$</td></tr>
+<tr><td>$A\vec{x}=\vec{0}$，$r(A)<n$</td><td>有非零解</td><td>$\vec{x} = \sum c_i\vec{\xi}_i$</td></tr>
+</table>
+
+<h3>7.5 线性代数中"三大变换"对比</h3>
+<table>
+<tr><th>变换</th><th>定义</th><th>不变量</th></tr>
+<tr><td>等价</td><td>$PAQ = B$（$P,Q$ 可逆）</td><td>秩</td></tr>
+<tr><td>相似</td><td>$P^{-1}AP = B$</td><td>特征值、迹、行列式、秩</td></tr>
+<tr><td>合同</td><td>$C^TAC = B$（$C$ 可逆）</td><td>秩、正负惯性指数（对对称矩阵）</td></tr>
+</table>
+<div class="tip"><span class="label">关系：</span>正交相似 $\subset$ 相似；正交相似既相似又合同。实对称矩阵的相似即合同。</div>
+
+</div>
+
+<button class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<footer>
+  <p>线代做题提速常用技巧 · 熟练使用可大幅减少计算时间</p>
+</footer>
+
+</body>
+</html>

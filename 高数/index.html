@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高数复习资料 - 首页</title>
+<link rel="stylesheet" href="assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+
+<header>
+  <h1>高等数学 · 复习资料库</h1>
+  <div class="subtitle">知识点 · 必背公式 · 做题提速常用等式 | 考前系统复习专用</div>
+</header>
+
+<nav class="topnav">
+  <a href="#knowledge">知识点</a>
+  <a href="#formulas">公式速查</a>
+  <a href="#tips">备考建议</a>
+</nav>
+
+<div class="container">
+
+<h2 id="knowledge"><span class="num">一</span>知识点（7 章）</h2>
+<p>每章以 HTML 页面呈现，支持数学公式渲染、快速导航和暗色模式。</p>
+
+<div class="card-grid">
+  <a class="card" href="知识点/01_极限与连续.html">
+    <h3>第一章 · 极限与连续</h3>
+    <p>数列极限、函数极限、无穷小比较、连续性与间断点、闭区间性质</p>
+    <span class="tag">极限</span>
+    <span class="tag">连续</span>
+  </a>
+  <a class="card" href="知识点/02_一元微分学.html">
+    <h3>第二章 · 一元微分学</h3>
+    <p>导数定义、求导法则、中值定理、洛必达、泰勒公式、极值与凹凸性</p>
+    <span class="tag">导数</span>
+    <span class="tag">中值定理</span>
+  </a>
+  <a class="card" href="知识点/03_一元积分学.html">
+    <h3>第三章 · 一元积分学</h3>
+    <p>不定积分、换元与分部、定积分、变限积分、反常积分、几何应用</p>
+    <span class="tag">积分</span>
+    <span class="tag">应用</span>
+  </a>
+  <a class="card" href="知识点/04_多元微分学.html">
+    <h3>第四章 · 多元微分学</h3>
+    <p>偏导数、全微分、复合/隐函数求导、方向导数与梯度、多元极值</p>
+    <span class="tag">偏导</span>
+    <span class="tag">梯度</span>
+  </a>
+  <a class="card" href="知识点/05_多元积分学.html">
+    <h3>第五章 · 多元积分学</h3>
+    <p>二重/三重积分、曲线/曲面积分、格林公式、高斯公式、斯托克斯公式</p>
+    <span class="tag">重积分</span>
+    <span class="tag">场论</span>
+  </a>
+  <a class="card" href="知识点/06_常微分方程.html">
+    <h3>第六章 · 常微分方程</h3>
+    <p>一阶ODE、可降阶方程、常系数线性方程、欧拉方程</p>
+    <span class="tag">ODE</span>
+    <span class="tag">欧拉</span>
+  </a>
+  <a class="card" href="知识点/07_无穷级数.html">
+    <h3>第七章 · 无穷级数</h3>
+    <p>常数项级数判敛、幂级数、函数展开、傅里叶级数</p>
+    <span class="tag">幂级数</span>
+    <span class="tag">傅里叶</span>
+  </a>
+</div>
+
+<h2 id="formulas"><span class="num">二</span>公式速查</h2>
+<p>考前突击背诵用，涵盖全部章节的核心公式和提速等式。</p>
+
+<div class="card-grid">
+  <a class="card" href="公式速查/必背公式.html">
+    <h3>必背公式 · 完整速查表</h3>
+    <p>极限、导数、积分、多元微积分、微分方程、级数 — 全部核心公式</p>
+    <span class="tag">全章节</span>
+  </a>
+  <a class="card" href="公式速查/做题提速常用等式.html">
+    <h3>做题提速常用等式</h3>
+    <p>等价无穷小全表、泰勒展开精度、常用积分结果、凑微分、特殊技巧</p>
+    <span class="tag">提速</span>
+    <span class="tag">技巧</span>
+  </a>
+</div>
+
+<h2 id="tips"><span class="num">三</span>备考建议</h2>
+
+<h3>复习策略</h3>
+<ol>
+  <li><strong>第一轮（通读）</strong>：按章节顺序通读知识点 HTML，理解每个概念和定理的来龙去脉</li>
+  <li><strong>第二轮（背诵）</strong>：重点背诵「必背公式」速查表，确保核心公式烂熟于心</li>
+  <li><strong>第三轮（提速）</strong>：精读「做题提速常用等式」，特别是等价无穷小差的形式和泰勒展开</li>
+  <li><strong>第四轮（刷题）</strong>：做历年真题，遇到不熟的知识点回到对应章节查阅</li>
+</ol>
+
+<h3>高频考点</h3>
+<table>
+<tr><th>章节</th><th>高频考点</th></tr>
+<tr><td>极限</td><td>等价无穷小替换、洛必达、泰勒展开求极限、$1^\infty$ 型</td></tr>
+<tr><td>微分</td><td>复合求导、隐函数/参数方程求导、中值定理证明、极值与最值</td></tr>
+<tr><td>积分</td><td>分部积分、换元法、变限积分求导、反常积分判敛、定积分应用</td></tr>
+<tr><td>多元微分</td><td>偏导数计算、全微分、拉格朗日乘数法</td></tr>
+<tr><td>多元积分</td><td>二重/三重积分计算、格林公式、高斯公式</td></tr>
+<tr><td>微分方程</td><td>一阶线性公式、可降阶方程、常系数线性方程特解设定</td></tr>
+<tr><td>级数</td><td>判敛法选择、幂级数收敛域、函数展开、傅里叶系数</td></tr>
+</table>
+
+<h3>易错点提醒</h3>
+<div class="tip warning">
+<span class="label">考前必看：</span>
+<ul style="margin-top:4px;">
+  <li>等价无穷小<strong>只能替换乘除因子</strong>，加减中要用泰勒展开</li>
+  <li>参数方程二阶导<strong>要再除以 $x'(t)$</strong></li>
+  <li>极坐标面积元素 <strong>$r\,dr\,d\theta$</strong> 不要漏 $r$</li>
+  <li>球坐标体积元素 <strong>$\rho^2\sin\varphi$</strong> 三个因子都不能漏</li>
+  <li>变限积分求导，被积函数含 $x$ 时需先分离</li>
+  <li>高斯公式要求曲面<strong>封闭且取外侧</strong>，不封闭要补面</li>
+  <li>非齐次方程特解设定要乘 $x^k$（当 $\lambda$ 是特征根时）</li>
+  <li>$p$-级数 $\sum \frac{1}{n^p}$ 收敛条件是 <strong>$p > 1$</strong>，不要记反</li>
+</ul>
+</div>
+
+</div>
+
+<footer>
+  <p>高等数学复习资料库 · 考前系统复习专用</p>
+</footer>
+
+</body>
+</html>

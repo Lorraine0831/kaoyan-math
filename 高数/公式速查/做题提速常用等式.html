@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>做题提速常用等式 - 高数考试利器</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+
+<header>
+  <h1>做题提速常用等式 · 考试利器</h1>
+  <div class="subtitle">等价无穷小 · 泰勒展开 · 常用积分 · 凑微分 · 特殊技巧 | 熟练使用可大幅节省时间</div>
+</header>
+
+<nav class="topnav">
+  <a href="#sec1">一、等价无穷小</a>
+  <a href="#sec2">二、泰勒展开</a>
+  <a href="#sec3">三、常用积分</a>
+  <a href="#sec4">四、凑微分</a>
+  <a href="#sec5">五、求导提速</a>
+  <a href="#sec6">六、特殊技巧</a>
+  <a href="#sec7">七、递推公式</a>
+  <a href="../index.html">← 首页</a>
+</nav>
+
+<div class="container">
+
+<!-- ============== 一、等价无穷小全表 ============== -->
+<h2 id="sec1"><span class="num">1</span>等价无穷小（$x\to 0$）</h2>
+
+<div class="tip accent"><span class="label">核心原则：</span>等价无穷小只能替换<strong>乘除因子</strong>。加减中若有不同阶的无穷小相减，<strong>不能直接替换</strong>，须用泰勒展开到同阶。</div>
+
+<h3>1.1 基础八条（必背）</h3>
+<div class="formula accent">
+$$\sin x \sim x \qquad \tan x \sim x \qquad \arcsin x \sim x \qquad \arctan x \sim x$$
+$$\ln(1+x) \sim x \qquad e^x-1 \sim x \qquad 1-\cos x \sim \tfrac{1}{2}x^2 \qquad (1+x)^a-1 \sim ax$$
+</div>
+
+<h3>1.2 进阶（高阶项精度）</h3>
+<div class="formula">
+$$\sin x = x - \tfrac{x^3}{6} + o(x^3) \qquad \cos x = 1 - \tfrac{x^2}{2} + \tfrac{x^4}{24} + o(x^4)$$
+$$\tan x = x + \tfrac{x^3}{3} + o(x^3) \qquad \arcsin x = x + \tfrac{x^3}{6} + o(x^3)$$
+$$\arctan x = x - \tfrac{x^3}{3} + o(x^3) \qquad \ln(1+x) = x - \tfrac{x^2}{2} + \tfrac{x^3}{3} + o(x^3)$$
+$$e^x = 1 + x + \tfrac{x^2}{2} + \tfrac{x^3}{6} + o(x^3)$$
+$$(1+x)^a = 1 + ax + \tfrac{a(a-1)}{2}x^2 + o(x^2)$$
+</div>
+
+<h3>1.3 差的等价（考试高频！）</h3>
+<div class="formula accent">
+$$x - \sin x \sim \frac{x^3}{6} \qquad \tan x - x \sim \frac{x^3}{3} \qquad x - \tan x \sim -\frac{x^3}{3}$$
+$$\arcsin x - x \sim \frac{x^3}{6} \qquad x - \arctan x \sim \frac{x^3}{3}$$
+$$x - \ln(1+x) \sim \frac{x^2}{2} \qquad \ln(1+x) - x \sim -\frac{x^2}{2}$$
+$$\sin x - \tan x \sim -\frac{x^3}{2} \qquad e^x - 1 - x \sim \frac{x^2}{2}$$
+$$1 - \cos x - \frac{x^2}{2} \sim \frac{x^4}{24} \qquad \tan x - \sin x \sim \frac{x^3}{2}$$
+</div>
+<div class="tip"><span class="label">使用技巧：</span>遇到 $\lim\frac{A-B}{x^k}$ 型，直接用差的等价无穷小，一步到位。例如 $\lim\frac{x-\sin x}{x^3} = \frac{1}{6}$。</div>
+
+<h3>1.4 幂指型</h3>
+<div class="formula">
+$$(1+x)^{1/x} \to e \qquad (1+\alpha(x))^{\beta(x)} \to e^{\lim \alpha\beta} \quad (\alpha\to 0,\beta\to\infty)$$
+$$u^v = e^{v\ln u} \quad \Rightarrow \quad \lim u^v = e^{\lim v\ln u}$$
+</div>
+
+<!-- ============== 二、泰勒展开 ============== -->
+<h2 id="sec2"><span class="num">2</span>泰勒展开（$x\to 0$ 时取几阶的速查）</h2>
+
+<div class="tip"><span class="label">核心思路：</span>泰勒展开是处理<strong>"加减型"极限</strong>的终极武器。展开到<strong>分母的阶数</strong>即可，多展开反而浪费。</div>
+
+<h3>2.1 六大展开（展开到 $x^4$ 精度）</h3>
+<div class="formula accent">
+$$e^x = 1 + x + \frac{x^2}{2} + \frac{x^3}{6} + \frac{x^4}{24} + o(x^4)$$
+$$\sin x = x - \frac{x^3}{6} + o(x^5) \qquad \cos x = 1 - \frac{x^2}{2} + \frac{x^4}{24} + o(x^6)$$
+$$\ln(1+x) = x - \frac{x^2}{2} + \frac{x^3}{3} - \frac{x^4}{4} + o(x^4)$$
+$$\frac{1}{1-x} = 1 + x + x^2 + x^3 + x^4 + o(x^4) \qquad \frac{1}{1+x} = 1 - x + x^2 - x^3 + x^4 + o(x^4)$$
+$$(1+x)^\alpha = 1 + \alpha x + \frac{\alpha(\alpha-1)}{2}x^2 + \frac{\alpha(\alpha-1)(\alpha-2)}{6}x^3 + o(x^3)$$
+</div>
+
+<h3>2.2 特殊展开</h3>
+<div class="formula">
+$$\arctan x = x - \frac{x^3}{3} + \frac{x^5}{5} - \cdots + o(x^{2k+1})$$
+$$\arcsin x = x + \frac{x^3}{6} + \frac{3x^5}{40} + o(x^5)$$
+$$\tan x = x + \frac{x^3}{3} + \frac{2x^5}{15} + o(x^5)$$
+$$x - \ln(1+x) = \frac{x^2}{2} - \frac{x^3}{3} + \frac{x^4}{4} - \cdots$$
+$$\ln\frac{1+x}{1-x} = 2\left(x + \frac{x^3}{3} + \frac{x^5}{5} + \cdots\right) \quad (|x|<1)$$
+</div>
+
+<h3>2.3 带拉格朗日余项的泰勒公式</h3>
+<div class="formula">
+$$f(x) = \sum_{k=0}^{n} \frac{f^{(k)}(x_0)}{k!}(x-x_0)^k + \frac{f^{(n+1)}(\xi)}{(n+1)!}(x-x_0)^{n+1}$$
+</div>
+<div class="tip success"><span class="label">使用场景：</span>证明不等式或估计误差时用拉格朗日余项；求极限用佩亚诺余项 $o(x^n)$。</div>
+
+<!-- ============== 三、常用积分 ============== -->
+<h2 id="sec3"><span class="num">3</span>常用积分结果（直接套用省时间）</h2>
+
+<h3>3.1 高频积分</h3>
+<div class="formula accent">
+$$\int \frac{dx}{x^2+a^2} = \frac{1}{a}\arctan\frac{x}{a}+C \qquad \int \frac{dx}{x^2-a^2} = \frac{1}{2a}\ln\left|\frac{x-a}{x+a}\right|+C$$
+$$\int \frac{dx}{\sqrt{a^2-x^2}} = \arcsin\frac{x}{a}+C \qquad \int \frac{dx}{\sqrt{x^2\pm a^2}} = \ln\left|x+\sqrt{x^2\pm a^2}\right|+C$$
+$$\int \frac{dx}{\sqrt{x^2+a^2}} = \ln(x+\sqrt{x^2+a^2})+C \quad (\text{也等于 } \text{arsinh}\,\frac{x}{a}+C)$$
+</div>
+
+<h3>3.2 三角积分</h3>
+<div class="formula">
+$$\int \tan x\,dx = -\ln|\cos x|+C \qquad \int \cot x\,dx = \ln|\sin x|+C$$
+$$\int \sec x\,dx = \ln|\sec x+\tan x|+C \qquad \int \csc x\,dx = \ln|\csc x-\cot x|+C$$
+$$\int \sin^2 x\,dx = \frac{x}{2} - \frac{\sin 2x}{4}+C \qquad \int \cos^2 x\,dx = \frac{x}{2} + \frac{\sin 2x}{4}+C$$
+$$\int \sin^3 x\,dx = -\frac{3}{4}\cos x + \frac{1}{12}\cos 3x + C \quad (\text{或 } -\cos x+\frac{\cos^3 x}{3}+C)$$
+</div>
+
+<h3>3.3 含 $e^x$ 的积分</h3>
+<div class="formula">
+$$\int e^x \sin x\,dx = \frac{e^x(\sin x - \cos x)}{2}+C$$
+$$\int e^x \cos x\,dx = \frac{e^x(\sin x + \cos x)}{2}+C$$
+$$\int x^n e^x\,dx = x^n e^x - n\int x^{n-1}e^x\,dx \quad (\text{递推})$$
+$$\int x^n \ln x\,dx = \frac{x^{n+1}}{n+1}\left(\ln x - \frac{1}{n+1}\right)+C$$
+</div>
+
+<h3>3.4 分部积分的两种 "秒杀" 场景</h3>
+<div class="formula">
+$$\int x^n e^{ax}\,dx : \text{取 } u=x^n,\; dv=e^{ax}dx \text{，分部 }n\text{ 次即可}$$
+$$\int x^n \sin ax\,dx \text{ 或 } \int x^n \cos ax\,dx : \text{同理，取 } u=x^n$$
+$$\int e^{ax}\sin bx\,dx \text{ 和 } \int e^{ax}\cos bx\,dx : \text{分部两次后 "回归"，解方程即得}$$
+</div>
+
+<h3>3.5 定积分速算</h3>
+<div class="formula accent">
+$$\int_0^{\pi} x\sin x\,dx = \pi \qquad \int_0^{\pi} x\cos x\,dx = 0 \quad (\text{分部积分})$$
+$$\int_0^{\pi/2} \sin^n x\,dx = \int_0^{\pi/2} \cos^n x\,dx = I_n, \quad I_n = \frac{n-1}{n}I_{n-2}, \; I_0=\frac{\pi}{2},\; I_1=1$$
+$$\int_{-a}^{a} f(x)\,dx = \begin{cases} 0 & f\text{ 奇} \\ 2\int_0^a f(x)\,dx & f\text{ 偶} \end{cases}$$
+$$\int_0^{\pi} \sin nx\,dx = 0, \quad \int_0^{\pi} \cos nx\,dx = 0 \quad (n\in\mathbb{Z}^+)$$
+$$\int_0^{\pi} \sin mx \sin nx\,dx = \begin{cases} 0 & m\neq n \\ \pi/2 & m=n \end{cases} \quad (\text{正交性})$$
+</div>
+
+<!-- ============== 四、凑微分 ============== -->
+<h2 id="sec4"><span class="num">4</span>凑微分常用形式</h2>
+
+<div class="tip"><span class="label">思路：</span>观察被积函数中是否有 $f'(x)dx = d[f(x)]$ 的结构，把导数关系逆过来用。</div>
+
+<h3>4.1 基础凑微分</h3>
+<div class="formula accent">
+$$\frac{1}{x}dx = d(\ln|x|) \qquad \frac{1}{x^2}dx = -d\!\left(\frac{1}{x}\right) \qquad \frac{1}{\sqrt{x}}dx = 2d(\sqrt{x})$$
+$$x^n dx = \frac{1}{n+1}d(x^{n+1}) \quad (n\neq -1) \qquad e^x dx = d(e^x) \qquad a^x dx = \frac{1}{\ln a}d(a^x)$$
+$$\cos x\,dx = d(\sin x) \qquad \sin x\,dx = -d(\cos x) \qquad \sec^2 x\,dx = d(\tan x)$$
+$$\csc^2 x\,dx = -d(\cot x) \qquad \sec x\tan x\,dx = d(\sec x)$$
+$$\frac{1}{1+x^2}dx = d(\arctan x) \qquad \frac{1}{\sqrt{1-x^2}}dx = d(\arcsin x)$$
+</div>
+
+<h3>4.2 进阶凑微分模式</h3>
+<div class="formula">
+$$\frac{f'(x)}{f(x)}dx = d[\ln|f(x)|] \quad \Rightarrow \quad \int \frac{f'(x)}{f(x)}dx = \ln|f(x)|+C$$
+$$f(x)f'(x)dx = \frac{1}{2}d[f(x)^2] \quad \Rightarrow \quad \int f f' dx = \frac{f^2}{2}+C$$
+$$\frac{x\,dx}{\sqrt{x^2+a}} = d\!\left(\sqrt{x^2+a}\right) \qquad \frac{x\,dx}{(x^2+a)^{3/2}} = -d\!\left(\frac{1}{\sqrt{x^2+a}}\right)$$
+$$\frac{dx}{x\sqrt{x^2-1}} = d(\text{arcsec}\,|x|) \qquad \frac{-x\,dx}{(a^2-x^2)^{3/2}} = d\!\left(\frac{1}{\sqrt{a^2-x^2}}\right)$$
+</div>
+
+<h3>4.3 实战举例</h3>
+<div class="tip success"><span class="label">举例：</span>$\int \frac{\ln x}{x}dx$：注意到 $\frac{1}{x}dx=d(\ln x)$，故原式 $= \int \ln x\,d(\ln x) = \frac{(\ln x)^2}{2}+C$。</div>
+
+<!-- ============== 五、求导提速 ============== -->
+<h2 id="sec5"><span class="num">5</span>求导提速</h2>
+
+<h3>5.1 复合函数"剥洋葱"</h3>
+<div class="formula">
+$$[f(g(h(x)))]' = f'(g(h(x))) \cdot g'(h(x)) \cdot h'(x)$$
+</div>
+<div class="tip"><span class="label">口诀：</span>从外到内，逐层求导，相乘到底。</div>
+
+<h3>5.2 幂指函数求导（对数法）</h3>
+<div class="formula accent">
+$$y = u(x)^{v(x)} \Rightarrow y' = u^v\!\left(\frac{v'u}{u} + v\frac{u'}{u}\right) = u^v\!\left(v'\ln u + \frac{v\,u'}{u}\right)$$
+</div>
+
+<h3>5.3 反函数求导</h3>
+<div class="formula">
+$$\frac{dx}{dy} = \frac{1}{\frac{dy}{dx}} \qquad \frac{d^2x}{dy^2} = -\frac{y''}{(y')^3}$$
+</div>
+
+<h3>5.4 参数方程二阶导（注意对谁求）</h3>
+<div class="formula accent">
+$$\frac{d^2y}{dx^2} = \frac{d}{dx}\!\left(\frac{dy/dt}{dx/dt}\right) = \frac{\frac{d}{dt}\!\left(\frac{y'}{x'}\right)}{x'} = \frac{y''x' - y'x''}{(x')^3}$$
+</div>
+<div class="tip warning"><span class="label">易错点：</span>二阶导要<strong>再除以 $x'$</strong>，很多人忘记这一步！</div>
+
+<h3>5.5 隐函数二阶导</h3>
+<div class="formula">
+$$F(x,y)=0 \Rightarrow y' = -\frac{F_x}{F_y}$$
+$$y'' = -\frac{F_{xx}+2F_{xy}y'+F_{yy}(y')^2}{F_y} \quad \text{或两边再求导后代入 } y'$$
+</div>
+
+<!-- ============== 六、特殊技巧 ============== -->
+<h2 id="sec6"><span class="num">6</span>特殊技巧与结论</h2>
+
+<h3>6.1 极限中的"抓大头"</h3>
+<div class="formula">
+$$\text{当 } x\to\infty, \quad \frac{a_n x^n + \cdots}{b_m x^m + \cdots} \to \begin{cases} 0 & n<m \\ \frac{a_n}{b_m} & n=m \\ \infty & n>m \end{cases}$$
+</div>
+<div class="tip"><span class="label">思路：</span>多项式比值的极限，只看最高次项。</div>
+
+<h3>6.2 $1^\infty$ 型极限的通用公式</h3>
+<div class="formula accent">
+$$\lim u^v = e^{\lim v(u-1)} \quad (u\to 1,\; v\to\infty)$$
+</div>
+<div class="tip success"><span class="label">举例：</span>$\lim_{x\to\infty}\left(\frac{x+2}{x+1}\right)^x = e^{\lim x\cdot\left(\frac{x+2}{x+1}-1\right)} = e^{\lim\frac{x}{x+1}} = e$</div>
+
+<h3>6.3 有理函数拆分（部分分式）</h3>
+<div class="formula">
+$$\frac{P(x)}{(x-a)(x-b)} = \frac{A}{x-a} + \frac{B}{x-b} \quad (a\neq b)$$
+$$\frac{P(x)}{(x-a)^2} = \frac{A}{x-a} + \frac{B}{(x-a)^2}$$
+$$\frac{P(x)}{(x^2+px+q)} = \frac{Ax+B}{x^2+px+q} \quad (p^2<4q)$$
+</div>
+
+<h3>6.4 三角恒等式（积分中常用）</h3>
+<div class="formula accent">
+$$\sin^2 x + \cos^2 x = 1 \qquad 1 + \tan^2 x = \sec^2 x \qquad 1 + \cot^2 x = \csc^2 x$$
+$$\sin 2x = 2\sin x\cos x \qquad \cos 2x = \cos^2 x - \sin^2 x = 1-2\sin^2 x = 2\cos^2 x - 1$$
+$$\sin^2 x = \frac{1-\cos 2x}{2} \qquad \cos^2 x = \frac{1+\cos 2x}{2}$$
+$$\sin A\sin B = \frac{1}{2}[\cos(A-B)-\cos(A+B)]$$
+$$\cos A\cos B = \frac{1}{2}[\cos(A-B)+\cos(A+B)]$$
+$$\sin A\cos B = \frac{1}{2}[\sin(A+B)+\sin(A-B)]$$
+$$\sin A + \sin B = 2\sin\frac{A+B}{2}\cos\frac{A-B}{2}$$
+$$\cos A + \cos B = 2\cos\frac{A+B}{2}\cos\frac{A-B}{2}$$
+</div>
+
+<h3>6.5 积分中的"区间对称化"</h3>
+<div class="formula accent">
+$$\int_0^{\pi} x\,f(\sin x)\,dx = \frac{\pi}{2}\int_0^{\pi} f(\sin x)\,dx$$
+</div>
+<div class="tip success"><span class="label">举例：</span>$\int_0^{\pi} \frac{x\sin x}{1+\cos^2 x}\,dx = \frac{\pi}{2}\int_0^{\pi}\frac{\sin x}{1+\cos^2 x}\,dx = \frac{\pi}{2}\cdot\frac{\pi}{2} = \frac{\pi^2}{4}$</div>
+
+<h3>6.6 华里士公式（Wallis）</h3>
+<div class="formula">
+$$\int_0^{\pi/2} \sin^n x\,dx = \int_0^{\pi/2} \cos^n x\,dx = \frac{(n-1)!!}{n!!}\times\begin{cases} \pi/2 & n\text{ 偶} \\ 1 & n\text{ 奇} \end{cases}$$
+</div>
+
+<h3>6.7 欧拉公式相关</h3>
+<div class="formula">
+$$e^{ix} = \cos x + i\sin x \qquad \cos x = \frac{e^{ix}+e^{-ix}}{2} \qquad \sin x = \frac{e^{ix}-e^{-ix}}{2i}$$
+$$\cos nx = \text{Re}(e^{inx}), \quad \sin nx = \text{Im}(e^{inx})$$
+</div>
+
+<h3>6.8 变限积分中值</h3>
+<div class="formula">
+$$\int_0^{x} f(t)\,dt = xf(\xi), \quad \xi \in (0,x) \quad (\text{积分中值定理})$$
+$$\frac{d}{dx}\int_{\alpha(x)}^{\beta(x)} f(t)\,dt = f(\beta(x))\beta'(x) - f(\alpha(x))\alpha'(x)$$
+</div>
+
+<!-- ============== 七、递推公式 ============== -->
+<h2 id="sec7"><span class="num">7</span>常用递推与特殊结果</h2>
+
+<h3>7.1 $I_n = \int \sin^n x\,dx$ 递推</h3>
+<div class="formula">
+$$I_n = -\frac{\sin^{n-1}x\cos x}{n} + \frac{n-1}{n}I_{n-2} \quad (n\geq 2)$$
+</div>
+
+<h3>7.2 $J_n = \int \frac{dx}{(x^2+a^2)^n}$ 递推</h3>
+<div class="formula accent">
+$$J_n = \frac{x}{2a^2(n-1)(x^2+a^2)^{n-1}} + \frac{2n-3}{2a^2(n-1)}J_{n-1} \quad (n\geq 2)$$
+$$J_1 = \frac{1}{a}\arctan\frac{x}{a}+C$$
+</div>
+
+<h3>7.3 $\int_0^{+\infty} x^n e^{-x}\,dx = \Gamma(n+1) = n!$</h3>
+<div class="formula">
+$$\int_0^{+\infty} x^n e^{-x}\,dx = n! \quad (n=0,1,2,\ldots)$$
+$$\int_0^{+\infty} e^{-x^2}\,dx = \frac{\sqrt{\pi}}{2} \quad (\text{高斯积分})$$
+$$\int_0^{+\infty} \frac{x^{\alpha-1}}{1+x}\,dx = \frac{\pi}{\sin(\alpha\pi)} \quad (0<\alpha<1)$$
+</div>
+
+<h3>7.4 级数求和常用结果</h3>
+<div class="formula accent">
+$$\sum_{n=1}^{\infty} \frac{1}{n^2} = \frac{\pi^2}{6} \qquad \sum_{n=1}^{\infty} \frac{1}{n^4} = \frac{\pi^4}{90} \qquad \sum_{n=1}^{\infty} \frac{1}{(2n-1)^2} = \frac{\pi^2}{8}$$
+$$\sum_{n=1}^{\infty} \frac{(-1)^{n-1}}{n} = \ln 2 \qquad \sum_{n=0}^{\infty} \frac{(-1)^n}{2n+1} = \frac{\pi}{4}$$
+$$\sum_{n=0}^{\infty} \frac{1}{n!} = e \qquad \sum_{n=1}^{\infty} \frac{1}{n(n+1)} = 1$$
+</div>
+
+<h3>7.5 常用函数 $n$ 阶导数</h3>
+<div class="formula">
+$$\left(\frac{1}{ax+b}\right)^{(n)} = \frac{(-1)^n\, a^n\, n!}{(ax+b)^{n+1}}$$
+$$\left(\sin x\right)^{(n)} = \sin\!\left(x+\frac{n\pi}{2}\right) \qquad \left(\cos x\right)^{(n)} = \cos\!\left(x+\frac{n\pi}{2}\right)$$
+$$\left(e^{ax}\right)^{(n)} = a^n e^{ax} \qquad \left(\ln(1+x)\right)^{(n)} = \frac{(-1)^{n-1}(n-1)!}{(1+x)^n}$$
+$$\left(x\ln x\right)^{(n)} = \begin{cases} x\ln x & n=0 \\ \ln x + 1 & n=1 \\ \frac{(-1)^n(n-2)!}{x^{n-1}} & n\geq 2 \end{cases}$$
+</div>
+
+</div>
+
+<button class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<footer>
+  <p>做题提速常用等式 · 熟练使用可大幅减少计算时间</p>
+</footer>
+
+</body>
+</html>

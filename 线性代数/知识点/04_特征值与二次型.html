@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第四章 特征值与二次型 - 线代知识点</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+
+<header>
+  <h1>第四章 · 特征值与二次型</h1>
+  <div class="subtitle">特征值与特征向量 · 相似对角化 · 二次型及其标准形 · 正定性</div>
+</header>
+
+<nav class="topnav">
+  <a href="#sec1">4.1 特征值</a>
+  <a href="#sec2">4.2 相似</a>
+  <a href="#sec3">4.3 对角化</a>
+  <a href="#sec4">4.4 实对称矩阵</a>
+  <a href="#sec5">4.5 二次型</a>
+  <a href="#sec6">4.6 标准形</a>
+  <a href="#sec7">4.7 正定性</a>
+  <a href="../index.html">← 首页</a>
+</nav>
+
+<div class="container">
+
+<h2 id="sec1"><span class="num">1</span>特征值与特征向量</h2>
+
+<h3>1.1 定义</h3>
+<p>设 $A$ 为 $n$ 阶方阵，若存在数 $\lambda$ 和非零向量 $\vec{\alpha}$ 使</p>
+<div class="formula accent">
+$$A\vec{\alpha} = \lambda\vec{\alpha}$$
+</div>
+<p>则称 $\lambda$ 为 $A$ 的特征值，$\vec{\alpha}$ 为对应于 $\lambda$ 的特征向量。</p>
+
+<h3>1.2 求法</h3>
+<ol>
+  <li>求特征方程 $|\lambda I - A| = 0$ 的根，得特征值 $\lambda_i$</li>
+  <li>对每个 $\lambda_i$，解齐次方程组 $(\lambda_i I - A)\vec{x} = \vec{0}$，得特征向量</li>
+</ol>
+
+<h3>1.3 特征值的性质</h3>
+<div class="formula accent">
+$$\sum_{i=1}^n \lambda_i = \text{tr}(A) = \sum a_{ii} \qquad \prod_{i=1}^n \lambda_i = |A|$$
+$$\lambda_{A^T} = \lambda_A \qquad \lambda_{A^k} = \lambda^k \qquad \lambda_{A^{-1}} = \frac{1}{\lambda} \qquad \lambda_{A^*} = \frac{|A|}{\lambda}$$
+$$\lambda_{f(A)} = f(\lambda) \qquad \lambda_{A+kI} = \lambda + k$$
+</div>
+<div class="tip"><span class="label">关键结论：</span>
+<ul style="margin-top:4px;">
+  <li>$\lambda = 0 \Leftrightarrow |A| = 0$（$A$ 不可逆）</li>
+  <li>不同特征值对应的特征向量线性无关</li>
+  <li>$\lambda$ 是 $k$ 重根时，对应特征向量个数（几何重数）$\leq k$（代数重数）</li>
+</ul>
+</div>
+
+<h2 id="sec2"><span class="num">2</span>相似矩阵</h2>
+
+<h3>2.1 定义</h3>
+<div class="formula">
+$$A \sim B \;\Leftrightarrow\; \exists\, P \text{ 可逆}, \;\; P^{-1}AP = B$$
+</div>
+
+<h3>2.2 相似的必要条件</h3>
+<div class="formula">
+$$A \sim B \;\Rightarrow\; \begin{cases} |A| = |B| \\ \text{tr}(A) = \text{tr}(B) \\ r(A) = r(B) \\ \lambda_A = \lambda_B \\ |\lambda I - A| = |\lambda I - B| \end{cases}$$
+</div>
+<div class="tip warning"><span class="label">注意：</span>以上是必要条件，不充分。两个矩阵满足以上所有条件也不一定相似。</div>
+
+<h2 id="sec3"><span class="num">3</span>矩阵的对角化</h2>
+
+<h3>3.1 可对角化的条件</h3>
+<div class="formula accent">
+$$A \text{ 可对角化} \;\Leftrightarrow\; \exists\, P \text{ 可逆}, \;\; P^{-1}AP = \Lambda$$
+$$\Leftrightarrow\; A \text{ 有 } n \text{ 个线性无关的特征向量}$$
+$$\Leftrightarrow\; \text{每个 } k_i \text{ 重特征值有 } k_i \text{ 个线性无关的特征向量}$$
+$$\Leftrightarrow\; \text{每个特征值的几何重数} = \text{代数重数}$$
+</div>
+
+<h3>3.2 对角化步骤</h3>
+<ol>
+  <li>求所有特征值 $\lambda_1, \ldots, \lambda_n$（含重根）</li>
+  <li>对每个 $\lambda_i$ 求特征向量</li>
+  <li>若有 $n$ 个线性无关的特征向量 $\vec{p}_1, \ldots, \vec{p}_n$，令 $P = (\vec{p}_1, \ldots, \vec{p}_n)$</li>
+  <li>则 $P^{-1}AP = \text{diag}(\lambda_1, \ldots, \lambda_n)$</li>
+</ol>
+
+<h3>3.3 判断能否对角化</h3>
+<div class="tip warning"><span class="label">核心：</span>对每个 $k$ 重特征值 $\lambda$，检查 $r(\lambda I - A)$。若 $r(\lambda I - A) = n - k$（即有 $k$ 个线性无关特征向量），则该特征值不阻碍对角化。所有特征值都满足此条件 $\Rightarrow$ 可对角化。</div>
+
+<h2 id="sec4"><span class="num">4</span>实对称矩阵</h2>
+
+<h3>4.1 核心性质</h3>
+<div class="formula accent">
+$$\text{实对称矩阵的特征值全为实数}$$
+$$\text{不同特征值对应的特征向量正交}$$
+$$\text{实对称矩阵一定可正交对角化}$$
+$$\exists\, Q \text{ 正交矩阵}, \;\; Q^{-1}AQ = Q^TAQ = \Lambda$$
+</div>
+
+<h3>4.2 正交对角化步骤</h3>
+<ol>
+  <li>求特征值</li>
+  <li>求特征向量</li>
+  <li>对重根对应的多个特征向量做<strong>施密特正交化</strong></li>
+  <li>所有特征向量<strong>单位化</strong></li>
+  <li>以正交单位特征向量为列构造 $Q$，则 $Q^TAQ = \Lambda$</li>
+</ol>
+<div class="tip success"><span class="label">注意：</span>不同特征值对应的特征向量天然正交，<strong>不需要</strong>正交化，只需单位化。只有同一特征值对应的多个特征向量之间才需要正交化。</div>
+
+<h2 id="sec5"><span class="num">5</span>二次型</h2>
+
+<h3>5.1 定义与矩阵表示</h3>
+<p>含 $n$ 个变量的二次齐次多项式：</p>
+<div class="formula accent">
+$$f = \sum_{i,j} a_{ij}x_i x_j = \vec{x}^T A \vec{x}$$
+</div>
+<p>其中 $A$ 为对称矩阵（$a_{ij} = a_{ji}$），称为二次型的矩阵。$r(A) = r(f)$ 称为二次型的秩。</p>
+
+<h3>5.2 矩阵表示要点</h3>
+<ul>
+  <li>交叉项 $x_i x_j$（$i \neq j$）的系数 $a_{ij}$ 拆成 $a_{ij} = a_{ji} = \frac{\text{系数}}{2}$</li>
+  <li>平方项 $x_i^2$ 的系数直接作为 $a_{ii}$</li>
+</ul>
+
+<h2 id="sec6"><span class="num">6</span>二次型的标准形与规范形</h2>
+
+<h3>6.1 标准形</h3>
+<div class="formula">
+$$f = d_1 y_1^2 + d_2 y_2^2 + \cdots + d_n y_n^2$$
+</div>
+
+<h3>6.2 化标准形的方法</h3>
+
+<p><strong>方法一：正交变换法</strong></p>
+<div class="formula accent">
+$$\text{求 } A \text{ 的特征值 } \lambda_i \;\to\; \text{正交矩阵 } Q \;\to\; \vec{x} = Q\vec{y}$$
+$$f = \lambda_1 y_1^2 + \lambda_2 y_2^2 + \cdots + \lambda_n y_n^2$$
+</div>
+<p><strong>特点</strong>：标准形系数是特征值，结果唯一。</p>
+
+<p><strong>方法二：配方法</strong></p>
+<div class="tip"><span class="label">步骤：</span>逐步将含某变量的所有项配成完全平方，每次消去一个变量。若无平方项，先做变换 $x_i = y_i + y_j, x_j = y_i - y_j$ 制造平方项。</div>
+
+<p><strong>方法三：合同变换法</strong></p>
+<div class="formula">
+$$\begin{pmatrix} A \\ I \end{pmatrix} \xrightarrow{\text{同型行列变换}} \begin{pmatrix} \Lambda \\ C \end{pmatrix}$$
+$$\vec{x} = C\vec{y}, \quad f = \vec{y}^T \Lambda \vec{y}$$
+</div>
+
+<h3>6.3 规范形与惯性定理</h3>
+<div class="formula accent">
+$$f = y_1^2 + \cdots + y_p^2 - y_{p+1}^2 - \cdots - y_{p+q}^2$$
+$$p + q = r(f), \quad p - q = \text{符号差}$$
+$$\textbf{惯性定理：} \;\; p, q \text{ 由 } f \text{ 唯一确定}$$
+</div>
+<div class="tip"><span class="label">关键：</span>不同的化简方法得到的标准形系数可能不同，但正负惯性指数 $p, q$ 唯一确定。</div>
+
+<h2 id="sec7"><span class="num">7</span>正定二次型</h2>
+
+<h3>7.1 定义</h3>
+<div class="formula">
+$$f = \vec{x}^T A \vec{x} \text{ 正定} \;\Leftrightarrow\; \forall\, \vec{x} \neq \vec{0}, \;\; f > 0$$
+</div>
+
+<h3>7.2 判定方法</h3>
+<div class="formula accent">
+$$\text{正定} \;\Leftrightarrow\; A \text{ 的特征值全为正}$$
+$$\Leftrightarrow\; A \text{ 的各阶顺序主子式全为正}$$
+$$\Leftrightarrow\; p = r = n \;\text{（正惯性指数 = 秩 = } n\text{）}$$
+$$\Leftrightarrow\; A \text{ 合同于 } I_n$$
+</div>
+
+<h3>7.3 顺序主子式判据（最常用）</h3>
+<div class="formula">
+$$\Delta_1 = a_{11} > 0$$
+$$\Delta_2 = \begin{vmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{vmatrix} > 0$$
+$$\vdots$$
+$$\Delta_n = |A| > 0$$
+</div>
+<div class="tip warning"><span class="label">注意：</span>是<strong>顺序</strong>主子式（左上角的 $k\times k$ 子式），不是任意主子式。各阶顺序主子式<strong>同时</strong>为正才正定。</div>
+
+<h3>7.4 合同关系</h3>
+<div class="formula">
+$$A \simeq B \;\Leftrightarrow\; \exists\, C \text{ 可逆}, \;\; C^TAC = B$$
+$$\text{实对称矩阵 } A \simeq B \;\Leftrightarrow\; p_A = p_B \text{ 且 } q_A = q_B \;\Leftrightarrow\; \text{正负惯性指数分别相等}$$
+</div>
+<p><strong>等价、相似、合同的关系</strong>：</p>
+<table>
+<tr><th>关系</th><th>定义</th><th>不变量</th></tr>
+<tr><td>等价</td><td>$PAQ = B$</td><td>秩</td></tr>
+<tr><td>相似</td><td>$P^{-1}AP = B$</td><td>特征值、迹、行列式、秩</td></tr>
+<tr><td>合同</td><td>$C^TAC = B$</td><td>秩、正负惯性指数</td></tr>
+</table>
+<div class="tip"><span class="label">联系：</span>正交相似 $\Rightarrow$ 相似且合同。实对称矩阵的相似 $\Leftrightarrow$ 合同。</div>
+
+</div>
+
+<button class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<footer>
+  <p>第四章 · 特征值与二次型 | <a href="03_向量与方程组.html">← 上一章</a> · <a href="../index.html">返回首页 →</a></p>
+</footer>
+
+</body>
+</html>

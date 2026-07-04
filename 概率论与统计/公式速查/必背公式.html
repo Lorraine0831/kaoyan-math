@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>概率论与数理统计必背公式 - 完整速查表</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+
+<header>
+  <h1>概率论与数理统计必背公式 · 完整速查表</h1>
+  <div class="subtitle">概率公式 · 分布 · 期望方差 · 大数定律 · 数理统计 | 考前必背</div>
+</header>
+
+<nav class="topnav">
+  <a href="#sec1">一、概率公式</a>
+  <a href="#sec2">二、常见分布</a>
+  <a href="#sec3">三、数字特征</a>
+  <a href="#sec4">四、二维</a>
+  <a href="#sec5">五、极限定理</a>
+  <a href="#sec6">六、数理统计</a>
+  <a href="../index.html">← 首页</a>
+</nav>
+
+<div class="container">
+
+<!-- ============== 一、概率基本公式 ============== -->
+<h2 id="sec1"><span class="num">1</span>概率基本公式</h2>
+
+<h3>1.1 加法公式</h3>
+<div class="formula accent">
+$$P(A \cup B) = P(A) + P(B) - P(AB)$$
+$$P(A \cup B \cup C) = P(A)+P(B)+P(C) - P(AB)-P(AC)-P(BC) + P(ABC)$$
+$$P(\bar{A}) = 1 - P(A)$$
+</div>
+
+<h3>1.2 条件概率与乘法公式</h3>
+<div class="formula accent">
+$$P(A|B) = \frac{P(AB)}{P(B)} \quad (P(B)>0)$$
+$$P(AB) = P(B)\cdot P(A|B) \quad \text{（乘法公式）}$$
+$$P(ABC) = P(A)\cdot P(B|A)\cdot P(C|AB)$$
+</div>
+
+<h3>1.3 全概率公式与贝叶斯公式</h3>
+<div class="formula accent">
+$$\text{全概率：} \;\; P(B) = \sum_{i=1}^n P(A_i)P(B|A_i) \quad \text{（} \{A_i\} \text{ 为完备事件组）}$$
+$$\text{贝叶斯：} \;\; P(A_k|B) = \frac{P(A_k)P(B|A_k)}{\sum_{i=1}^n P(A_i)P(B|A_i)}$$
+</div>
+
+<h3>1.4 独立性</h3>
+<div class="formula">
+$$A, B \text{ 独立} \;\Leftrightarrow\; P(AB) = P(A)P(B)$$
+$$A, B \text{ 独立} \;\Leftrightarrow\; A, \bar{B} \text{ 独立} \;\Leftrightarrow\; \bar{A}, \bar{B} \text{ 独立}$$
+$$A_1, \ldots, A_n \text{ 相互独立} \;\Rightarrow\; \text{其中任意 } k \text{ 个也独立}$$
+</div>
+
+<h3>1.5 伯努利概型</h3>
+<div class="formula">
+$$P(\text{恰好 } k \text{ 次成功}) = \binom{n}{k}p^k(1-p)^{n-k} \quad (\text{二项分布})$$
+</div>
+
+<!-- ============== 二、常见分布 ============== -->
+<h2 id="sec2"><span class="num">2</span>常见分布速查表</h2>
+
+<h3>2.1 离散型分布</h3>
+<table>
+<tr><th>分布</th><th>分布律</th><th>期望 $E(X)$</th><th>方差 $D(X)$</th></tr>
+<tr><td>0-1分布 $B(1,p)$</td><td>$P(X=k)=p^k(1-p)^{1-k}$</td><td>$p$</td><td>$p(1-p)$</td></tr>
+<tr><td>二项分布 $B(n,p)$</td><td>$P(X=k)=\binom{n}{k}p^k(1-p)^{n-k}$</td><td>$np$</td><td>$np(1-p)$</td></tr>
+<tr><td>泊松分布 $\pi(\lambda)$</td><td>$P(X=k)=\frac{\lambda^k}{k!}e^{-\lambda}$</td><td>$\lambda$</td><td>$\lambda$</td></tr>
+<tr><td>几何分布 $Geo(p)$</td><td>$P(X=k)=(1-p)^{k-1}p$</td><td>$\frac{1}{p}$</td><td>$\frac{1-p}{p^2}$</td></tr>
+<tr><td>超几何分布</td><td>$P(X=k)=\frac{\binom{M}{k}\binom{N-M}{n-k}}{\binom{N}{n}}$</td><td>$\frac{nM}{N}$</td><td>$\frac{nM(N-M)(N-n)}{N^2(N-1)}$</td></tr>
+</table>
+
+<h3>2.2 连续型分布</h3>
+<table>
+<tr><th>分布</th><th>密度函数</th><th>期望</th><th>方差</th></tr>
+<tr><td>均匀 $U(a,b)$</td><td>$f(x)=\frac{1}{b-a}$, $a<x<b$</td><td>$\frac{a+b}{2}$</td><td>$\frac{(b-a)^2}{12}$</td></tr>
+<tr><td>指数 $Exp(\lambda)$</td><td>$f(x)=\lambda e^{-\lambda x}$, $x>0$</td><td>$\frac{1}{\lambda}$</td><td>$\frac{1}{\lambda^2}$</td></tr>
+<tr><td>正态 $N(\mu,\sigma^2)$</td><td>$f(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}$</td><td>$\mu$</td><td>$\sigma^2$</td></tr>
+</table>
+
+<h3>2.3 正态分布的重要性质</h3>
+<div class="formula accent">
+$$X \sim N(\mu, \sigma^2) \;\Rightarrow\; Y = aX+b \sim N(a\mu+b, \; a^2\sigma^2)$$
+$$X \sim N(0,1) \;\Rightarrow\; \Phi(-x) = 1 - \Phi(x) \qquad \Phi(0) = 0.5$$
+$$P(|X-\mu|<\sigma) \approx 0.6826, \;\; P(|X-\mu|<2\sigma) \approx 0.9544, \;\; P(|X-\mu|<3\sigma) \approx 0.9974$$
+$$X \sim N(\mu_1, \sigma_1^2), \; Y \sim N(\mu_2, \sigma_2^2), \; \text{独立} \;\Rightarrow\; X \pm Y \sim N(\mu_1 \pm \mu_2, \; \sigma_1^2 + \sigma_2^2)$$
+</div>
+
+<h3>2.4 泊松定理（二项分布的泊松逼近）</h3>
+<div class="formula">
+$$\binom{n}{k}p^k(1-p)^{n-k} \approx \frac{\lambda^k}{k!}e^{-\lambda}, \quad \lambda = np, \; n \to \infty, \; p \to 0$$
+</div>
+
+<!-- ============== 三、数字特征 ============== -->
+<h2 id="sec3"><span class="num">3</span>期望、方差与矩</h2>
+
+<h3>3.1 期望定义与计算</h3>
+<div class="formula accent">
+$$\text{离散：} \;\; E(X) = \sum_i x_i p_i \qquad \text{连续：} \;\; E(X) = \int_{-\infty}^{+\infty} x\,f(x)\,dx$$
+$$E(g(X)) = \sum_i g(x_i)p_i \quad\text{或}\quad E(g(X)) = \int g(x)f(x)\,dx$$
+$$E(g(X,Y)) = \iint g(x,y)f(x,y)\,dxdy$$
+</div>
+
+<h3>3.2 期望的性质</h3>
+<div class="formula">
+$$E(C) = C \qquad E(CX) = CE(X) \qquad E(X+C) = E(X)+C$$
+$$E(X \pm Y) = E(X) \pm E(Y) \qquad E(XY) = E(X)E(Y) \;\text{（}X,Y\text{ 独立时）}$$
+$$E\!\left(\sum a_i X_i\right) = \sum a_i E(X_i)$$
+</div>
+
+<h3>3.3 方差定义与性质</h3>
+<div class="formula accent">
+$$D(X) = E[(X-EX)^2] = E(X^2) - [E(X)]^2$$
+$$D(C) = 0 \qquad D(CX) = C^2 D(X) \qquad D(X+C) = D(X)$$
+$$D(X \pm Y) = D(X) + D(Y) \pm 2\,\text{Cov}(X,Y)$$
+$$D\!\left(\sum a_i X_i\right) = \sum a_i^2 D(X_i) + 2\sum_{i<j} a_i a_j \,\text{Cov}(X_i, X_j)$$
+$$X, Y \text{ 独立} \;\Rightarrow\; D(X \pm Y) = D(X) + D(Y)$$
+</div>
+
+<h3>3.4 协方差与相关系数</h3>
+<div class="formula accent">
+$$\text{Cov}(X,Y) = E[(X-EX)(Y-EY)] = E(XY) - E(X)E(Y)$$
+$$\rho_{XY} = \frac{\text{Cov}(X,Y)}{\sqrt{D(X)}\sqrt{D(Y)}} \in [-1, 1]$$
+$$|\rho| = 1 \;\Leftrightarrow\; P(Y = aX+b) = 1$$
+$$\rho = 0 \;\Leftrightarrow\; \text{不相关} \quad (\text{独立} \;\Rightarrow\; \text{不相关，反之不成立})$$
+$$\text{Cov}(X,X) = D(X) \qquad \text{Cov}(aX+b, cY+d) = ac\,\text{Cov}(X,Y)$$
+</div>
+
+<h3>3.5 矩</h3>
+<div class="formula">
+$$k \text{ 阶原点矩：} \; E(X^k) \qquad k \text{ 阶中心矩：} \; E[(X-EX)^k]$$
+$$\text{偏度} = \frac{E[(X-EX)^3]}{[D(X)]^{3/2}} \qquad \text{峰度} = \frac{E[(X-EX)^4]}{[D(X)]^2}$$
+</div>
+
+<!-- ============== 四、二维随机变量 ============== -->
+<h2 id="sec4"><span class="num">4</span>二维随机变量</h2>
+
+<h3>4.1 联合分布函数</h3>
+<div class="formula">
+$$F(x,y) = P(X \leq x, Y \leq y)$$
+$$f(x,y) \geq 0, \;\; \iint f(x,y)\,dxdy = 1, \;\; F(x,y) = \int_{-\infty}^y\int_{-\infty}^x f(u,v)\,dudv$$
+</div>
+
+<h3>4.2 边际分布</h3>
+<div class="formula accent">
+$$\text{离散：} \;\; p_{i\cdot} = \sum_j p_{ij}, \quad p_{\cdot j} = \sum_i p_{ij}$$
+$$\text{连续：} \;\; f_X(x) = \int_{-\infty}^{+\infty} f(x,y)\,dy, \quad f_Y(y) = \int_{-\infty}^{+\infty} f(x,y)\,dx$$
+</div>
+
+<h3>4.3 条件分布</h3>
+<div class="formula accent">
+$$\text{离散：} \;\; P(X=x_i | Y=y_j) = \frac{p_{ij}}{p_{\cdot j}}$$
+$$\text{连续：} \;\; f_{X|Y}(x|y) = \frac{f(x,y)}{f_Y(y)} \quad (f_Y(y) > 0)$$
+</div>
+
+<h3>4.4 独立性</h3>
+<div class="formula">
+$$X, Y \text{ 独立} \;\Leftrightarrow\; F(x,y) = F_X(x) \cdot F_Y(y)$$
+$$\Leftrightarrow\; p_{ij} = p_{i\cdot} \cdot p_{\cdot j} \;\text{（离散）}$$
+$$\Leftrightarrow\; f(x,y) = f_X(x) \cdot f_Y(y) \;\text{（连续）}$$
+</div>
+
+<h3>4.5 二维正态分布</h3>
+<div class="formula accent">
+$$(X,Y) \sim N(\mu_1, \mu_2, \sigma_1^2, \sigma_2^2, \rho)$$
+$$X \sim N(\mu_1, \sigma_1^2), \; Y \sim N(\mu_2, \sigma_2^2)$$
+$$X, Y \text{ 独立} \;\Leftrightarrow\; \rho = 0$$
+$$\text{Cov}(X,Y) = \rho\sigma_1\sigma_2$$
+</div>
+
+<h3>4.6 函数的分布</h3>
+<p><strong>$Z = X + Y$ 的密度</strong>（卷积公式）：</p>
+<div class="formula accent">
+$$f_Z(z) = \int_{-\infty}^{+\infty} f_X(x) f_Y(z-x)\,dx = \int_{-\infty}^{+\infty} f(x, z-x)\,dx$$
+</div>
+<p><strong>$Z = X + Y$ 离散情形</strong>：</p>
+<div class="formula">
+$$P(Z = z_k) = \sum_{i} P(X=x_i) P(Y = z_k - x_i)$$
+</div>
+<p><strong>最大值/最小值分布</strong>：</p>
+<div class="formula accent">
+$$F_{\max}(z) = F_X(z) \cdot F_Y(z) \quad (X, Y \text{ 独立})$$
+$$F_{\min}(z) = 1 - [1 - F_X(z)][1 - F_Y(z)]$$
+</div>
+
+<!-- ============== 五、极限定理 ============== -->
+<h2 id="sec5"><span class="num">5</span>大数定律与中心极限定理</h2>
+
+<h3>5.1 切比雪夫不等式</h3>
+<div class="formula accent">
+$$P(|X - E(X)| \geq \varepsilon) \leq \frac{D(X)}{\varepsilon^2}$$
+</div>
+
+<h3>5.2 大数定律</h3>
+<div class="formula">
+$$\text{切比雪夫大数定律：} \;\; \frac{1}{n}\sum_{i=1}^n X_i \xrightarrow{P} \frac{1}{n}\sum E(X_i)$$
+$$\text{辛钦大数定律：} \;\; \frac{1}{n}\sum_{i=1}^n X_i \xrightarrow{P} \mu \;\; (X_i \text{ 独立同分布}, E(X_i)=\mu)$$
+$$\text{伯努利大数定律：} \;\; \frac{n_A}{n} \xrightarrow{P} p \;\; (n_A \text{ 为 } n \text{ 次独立试验中 } A \text{ 发生次数})$$
+</div>
+
+<h3>5.3 中心极限定理</h3>
+<div class="formula accent">
+$$\text{林德伯格-列维：} \;\; X_1, \ldots, X_n \text{ i.i.d.}, \; E(X_i)=\mu, \; D(X_i)=\sigma^2$$
+$$\frac{\sum X_i - n\mu}{\sigma\sqrt{n}} \xrightarrow{d} N(0,1) \;\;\text{即}\;\; \sum X_i \dot{\sim} N(n\mu, \; n\sigma^2)$$
+$$\text{棣莫弗-拉普拉斯：} \;\; X \sim B(n,p) \;\Rightarrow\; \frac{X - np}{\sqrt{np(1-p)}} \dot{\sim} N(0,1)$$
+</div>
+
+<!-- ============== 六、数理统计 ============== -->
+<h2 id="sec6"><span class="num">6</span>数理统计基础</h2>
+
+<h3>6.1 三大抽样分布</h3>
+<div class="formula accent">
+$$\chi^2 = \sum_{i=1}^n Z_i^2 \sim \chi^2(n), \;\; Z_i \sim N(0,1) \;\text{独立}$$
+$$E(\chi^2(n)) = n, \;\; D(\chi^2(n)) = 2n$$
+$$T = \frac{Z}{\sqrt{\chi^2/n}} \sim t(n), \;\; E(T) = 0 \;(n>1), \;\; D(T) = \frac{n}{n-2} \;(n>2)$$
+$$F = \frac{\chi_1^2/m}{\chi_2^2/n} \sim F(m,n), \;\; \frac{1}{F} \sim F(n,m)$$
+</div>
+
+<h3>6.2 正态总体的抽样分布</h3>
+<div class="formula accent">
+$$X_1, \ldots, X_n \sim N(\mu, \sigma^2) \;\text{i.i.d.}, \;\; \bar{X} = \frac{1}{n}\sum X_i, \;\; S^2 = \frac{1}{n-1}\sum(X_i - \bar{X})^2$$
+$$\bar{X} \sim N\!\left(\mu, \;\frac{\sigma^2}{n}\right) \;\;\Rightarrow\;\; \frac{\bar{X} - \mu}{\sigma/\sqrt{n}} \sim N(0,1)$$
+$$\frac{(n-1)S^2}{\sigma^2} \sim \chi^2(n-1)$$
+$$\frac{\bar{X} - \mu}{S/\sqrt{n}} \sim t(n-1)$$
+$$\bar{X} \text{ 与 } S^2 \text{ 独立}$$
+</div>
+
+<h3>6.3 参数估计</h3>
+<p><strong>矩估计</strong>：令 $E(X) = \bar{X}$（一阶），$E(X^2) = \frac{1}{n}\sum X_i^2$（二阶），解出参数。</p>
+<p><strong>最大似然估计</strong>：构造似然函数 $L(\theta) = \prod f(x_i;\theta)$，取对数 $\ln L$，对 $\theta$ 求导令其为零。</p>
+<div class="formula accent">
+$$\hat{\theta}_{MLE}: \;\; \frac{\partial \ln L(\theta)}{\partial \theta} = 0$$
+</div>
+
+<h3>6.4 区间估计</h3>
+<table>
+<tr><th>参数</th><th>置信区间（$\sigma^2$ 已知）</th><th>置信区间（$\sigma^2$ 未知）</th></tr>
+<tr><td>$\mu$（单正态总体）</td><td>$\bar{X} \pm z_{\alpha/2}\frac{\sigma}{\sqrt{n}}$</td><td>$\bar{X} \pm t_{\alpha/2}(n-1)\frac{S}{\sqrt{n}}$</td></tr>
+</table>
+<div class="formula">
+$$\sigma^2 \text{ 的区间：} \;\; \left(\frac{(n-1)S^2}{\chi^2_{\alpha/2}(n-1)}, \;\frac{(n-1)S^2}{\chi^2_{1-\alpha/2}(n-1)}\right)$$
+</div>
+
+<h3>6.5 假设检验</h3>
+<div class="formula">
+$$H_0: \mu = \mu_0 \quad \text{vs} \quad H_1: \mu \neq \mu_0$$
+$$\sigma^2 \text{ 已知：} \;\; W = \left\{|Z| > z_{\alpha/2}\right\}, \;\; Z = \frac{\bar{X} - \mu_0}{\sigma/\sqrt{n}}$$
+$$\sigma^2 \text{ 未知：} \;\; W = \left\{|T| > t_{\alpha/2}(n-1)\right\}, \;\; T = \frac{\bar{X} - \mu_0}{S/\sqrt{n}}$$
+</div>
+<p><strong>两类错误</strong>：</p>
+<ul>
+  <li>第一类错误（弃真）：$P(\text{拒绝}H_0 | H_0 \text{ 真}) = \alpha$</li>
+  <li>第二类错误（取伪）：$P(\text{接受}H_0 | H_1 \text{ 真}) = \beta$</li>
+</ul>
+
+</div>
+
+<button class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<footer>
+  <p>概率论与数理统计必背公式速查表 · 考前复习专用</p>
+</footer>
+
+</body>
+</html>

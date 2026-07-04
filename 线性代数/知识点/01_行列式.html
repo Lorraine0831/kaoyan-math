@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第一章 行列式 - 线代知识点</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+
+<header>
+  <h1>第一章 · 行列式</h1>
+  <div class="subtitle">定义与性质 · 展开定理 · 特殊行列式 · 克莱姆法则</div>
+</header>
+
+<nav class="topnav">
+  <a href="#sec1">1.1 定义</a>
+  <a href="#sec2">1.2 性质</a>
+  <a href="#sec3">1.3 展开定理</a>
+  <a href="#sec4">1.4 特殊行列式</a>
+  <a href="#sec5">1.5 克莱姆法则</a>
+  <a href="../index.html">← 首页</a>
+</nav>
+
+<div class="container">
+
+<h2 id="sec1"><span class="num">1</span>行列式的定义</h2>
+
+<h3>1.1 逆序与逆序数</h3>
+<p>在一个排列 $p_1 p_2 \cdots p_n$ 中，若 $i < j$ 但 $p_i > p_j$，则称其为一个逆序。逆序的总数称为<strong>逆序数</strong>，记作 $\tau(p_1 p_2 \cdots p_n)$。</p>
+<ul>
+  <li>逆序数为偶数的排列称为<strong>偶排列</strong></li>
+  <li>逆序数为奇数的排列称为<strong>奇排列</strong></li>
+</ul>
+
+<h3>1.2 $n$ 阶行列式定义</h3>
+<div class="formula">
+$$|A| = \sum_{\sigma \in S_n} \text{sgn}(\sigma)\, a_{1\sigma(1)} a_{2\sigma(2)} \cdots a_{n\sigma(n)}$$
+</div>
+<p>即所有取自不同行不同列的 $n$ 个元素乘积的代数和，每项的符号由列排列的逆序数决定（偶排列取正，奇排列取负）。</p>
+<div class="tip"><span class="label">直觉：</span>行列式是"加权求和"，每项是主对角线方向元素的乘积，由排列的奇偶性决定正负。</div>
+
+<h3>1.3 2阶和3阶行列式</h3>
+<div class="formula accent">
+$$\begin{vmatrix} a & b \\ c & d \end{vmatrix} = ad - bc$$
+$$\begin{vmatrix} a_1 & a_2 & a_3 \\ b_1 & b_2 & b_3 \\ c_1 & c_2 & c_3 \end{vmatrix} = a_1b_2c_3 + a_2b_3c_1 + a_3b_1c_2 - a_3b_2c_1 - a_1b_3c_2 - a_2b_1c_3$$
+</div>
+<p>3阶可用"沙路法"（Sarrus）记忆：主对角线方向3项为正，副对角线方向3项为负。</p>
+
+<h2 id="sec2"><span class="num">2</span>行列式的性质</h2>
+
+<div class="formula">
+$$\textbf{1.} \;\; |A^T| = |A| \quad \text{（行列等价，行有什么性质列也有）}$$
+$$\textbf{2.} \;\; \text{交换两行（列），行列式变号}$$
+$$\textbf{3.} \;\; \text{某行（列）有公因子 } k, \;\; |A| \text{ 乘以 } k \;\;(\text{即 } |kA| = k^n|A|)$$
+$$\textbf{4.} \;\; \text{两行（列）成比例} \;\Rightarrow\; |A| = 0$$
+$$\textbf{5.} \;\; \text{某行 } = \text{ 两组数之和} \;\Rightarrow\; |A| \text{ 拆成两个行列式之和}$$
+$$\textbf{6.} \;\; \text{某行的若干倍加到另一行，行列式不变}$$
+$$\textbf{7.} \;\; |AB| = |A|\cdot|B| \quad \text{（乘积的行列式 = 行列式的乘积）}$$
+</div>
+
+<h2 id="sec3"><span class="num">3</span>展开定理</h2>
+
+<h3>3.1 代数余子式</h3>
+<p>在 $n$ 阶行列式 $|A|$ 中，划去 $a_{ij}$ 所在的行和列，剩下的 $(n-1)$ 阶行列式记为 $M_{ij}$（余子式），则代数余子式为</p>
+<div class="formula">
+$$A_{ij} = (-1)^{i+j} M_{ij}$$
+</div>
+
+<h3>3.2 展开定理</h3>
+<div class="formula accent">
+$$|A| = a_{i1}A_{i1} + a_{i2}A_{i2} + \cdots + a_{in}A_{in} \quad \text{（按第 } i \text{ 行展开）}$$
+$$|A| = a_{1j}A_{1j} + a_{2j}A_{2j} + \cdots + a_{nj}A_{nj} \quad \text{（按第 } j \text{ 列展开）}$$
+$$a_{i1}A_{j1} + a_{i2}A_{j2} + \cdots + a_{in}A_{jn} = 0 \quad (i \neq j) \;\;\text{（异行展开为0）}$$
+</div>
+<div class="tip"><span class="label">使用策略：</span>先用性质6制造大量零，再按含零最多的行（列）展开，可以大幅减少计算量。</div>
+
+<h2 id="sec4"><span class="num">4</span>特殊行列式</h2>
+
+<h3>4.1 三角与对角行列式</h3>
+<div class="formula accent">
+$$\begin{vmatrix} a_{11} & a_{12} & \cdots & a_{1n} \\ 0 & a_{22} & \cdots & a_{2n} \\ \vdots & & \ddots & \vdots \\ 0 & 0 & \cdots & a_{nn} \end{vmatrix} = a_{11}a_{22}\cdots a_{nn}$$
+</div>
+<p>上三角、下三角、对角行列式的值都等于主对角线元素之积。</p>
+
+<h3>4.2 范德蒙德行列式</h3>
+<div class="formula accent">
+$$V_n = \begin{vmatrix} 1 & 1 & \cdots & 1 \\ x_1 & x_2 & \cdots & x_n \\ \vdots & \vdots & & \vdots \\ x_1^{n-1} & x_2^{n-1} & \cdots & x_n^{n-1} \end{vmatrix} = \prod_{1 \leq j < i \leq n} (x_i - x_j)$$
+</div>
+<p><strong>记忆</strong>：所有后项减前项的乘积，共 $\binom{n}{2}$ 个因子。</p>
+
+<h3>4.3 分块行列式</h3>
+<div class="formula">
+$$\begin{vmatrix} A & C \\ O & B \end{vmatrix} = |A| \cdot |B| \qquad \begin{vmatrix} A & O \\ C & B \end{vmatrix} = |A| \cdot |B|$$
+$$\begin{vmatrix} O & A \\ B & O \end{vmatrix} = (-1)^{mn} |A| \cdot |B| \quad (A \text{ 为 } m\text{ 阶}, B \text{ 为 } n\text{ 阶})$$
+</div>
+
+<h3>4.4 常见计算技巧</h3>
+<ul>
+  <li><strong>消零法</strong>：利用性质6制造零，再展开</li>
+  <li><strong>递推法</strong>：按行展开得到 $D_n$ 与 $D_{n-1}, D_{n-2}$ 的递推关系</li>
+  <li><strong>加边法</strong>：升阶后利用第一行消零</li>
+  <li><strong>箭形/爪形</strong>：消去第一列（行）的非零元素，化为三角</li>
+</ul>
+
+<h2 id="sec5"><span class="num">5</span>克莱姆法则</h2>
+
+<h3>5.1 法则内容</h3>
+<p>若 $n$ 元线性方程组 $A\vec{x} = \vec{b}$ 的系数行列式 $D = |A| \neq 0$，则方程组有唯一解：</p>
+<div class="formula accent">
+$$x_j = \frac{D_j}{D}, \quad j = 1, 2, \ldots, n$$
+</div>
+<p>其中 $D_j$ 是将 $A$ 的第 $j$ 列替换为常数项列 $\vec{b}$ 后所得的行列式。</p>
+
+<h3>5.2 推论</h3>
+<div class="formula">
+$$A\vec{x} = \vec{0} \text{ 只有零解} \;\Leftrightarrow\; |A| \neq 0$$
+$$A\vec{x} = \vec{0} \text{ 有非零解} \;\Leftrightarrow\; |A| = 0$$
+</div>
+<div class="tip warning"><span class="label">注意：</span>克莱姆法则主要用于<strong>理论分析</strong>，实际计算方程组用初等变换更高效。但 $n=2,3$ 时可以直接用。</div>
+
+</div>
+
+<button class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<footer>
+  <p>第一章 · 行列式 | <a href="02_矩阵.html">下一章：矩阵 →</a></p>
+</footer>
+
+</body>
+</html>

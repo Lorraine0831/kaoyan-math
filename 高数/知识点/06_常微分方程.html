@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第六章 常微分方程 - 高数知识点</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+
+<header>
+  <h1>第六章 · 常微分方程</h1>
+  <div class="subtitle">一阶ODE · 可降阶高阶方程 · 常系数线性方程 · 欧拉方程</div>
+</header>
+
+<nav class="topnav">
+  <a href="#sec1">6.1 基本概念</a>
+  <a href="#sec2">6.2 一阶ODE</a>
+  <a href="#sec3">6.3 可降阶</a>
+  <a href="#sec4">6.4 线性理论</a>
+  <a href="#sec5">6.5 常系数齐次</a>
+  <a href="#sec6">6.6 常系数非齐次</a>
+  <a href="#sec7">6.7 欧拉方程</a>
+  <a href="../index.html">← 首页</a>
+</nav>
+
+<div class="container">
+
+<h2 id="sec1"><span class="num">1</span>基本概念</h2>
+
+<h3>1.1 微分方程的分类</h3>
+<table>
+<tr><th>分类标准</th><th>类型</th><th>示例</th></tr>
+<tr><td>自变量个数</td><td>常微分方程 / 偏微分方程</td><td>$y' + xy = 0$ / $u_x + u_y = 0$</td></tr>
+<tr><td>最高阶数</td><td>一阶 / 二阶 / $n$ 阶</td><td>$y'' + y = 0$（二阶）</td></tr>
+<tr><td>未知函数及导数次数</td><td>线性 / 非线性</td><td>$y'' + py' + qy = 0$（线性）</td></tr>
+<tr><td>系数是否常数</td><td>常系数 / 变系数</td><td>$y'' + 4y = 0$（常系数）</td></tr>
+</table>
+
+<h3>1.2 解的概念</h3>
+<ul>
+  <li><strong>通解</strong>：含独立任意常数的个数等于方程阶数的解</li>
+  <li><strong>特解</strong>：通解中给常数确定值后得到的解</li>
+  <li><strong>初值问题（柯西问题）</strong>：求满足初始条件的特解</li>
+</ul>
+
+<h2 id="sec2"><span class="num">2</span>一阶微分方程</h2>
+
+<h3>2.1 可分离变量的方程</h3>
+<p>标准形式：$y' = f(x)g(y)$</p>
+<div class="formula">
+$$\frac{dy}{g(y)} = f(x)\,dx \;\Rightarrow\; \int \frac{dy}{g(y)} = \int f(x)\,dx + C$$
+</div>
+
+<h3>2.2 齐次方程</h3>
+<p>标准形式：$y' = \varphi\!\left(\frac{y}{x}\right)$</p>
+<div class="formula accent">
+$$\text{令 } u = \frac{y}{x}, \;\; y = ux, \;\; y' = u + xu'$$
+$$\Rightarrow \; u + xu' = \varphi(u) \;\Rightarrow\; \frac{du}{\varphi(u)-u} = \frac{dx}{x}$$
+</div>
+<p>化为可分离变量方程后求解。</p>
+
+<h3>2.3 一阶线性微分方程</h3>
+<p>标准形式：$y' + P(x)y = Q(x)$</p>
+<div class="formula accent">
+$$y = e^{-\int P\,dx}\left[\int Q\,e^{\int P\,dx}\,dx + C\right]$$
+</div>
+<div class="tip"><span class="label">推导：</span>乘以积分因子 $\mu = e^{\int P\,dx}$，方程变为 $(y\cdot\mu)' = Q\cdot\mu$，再积分即得。</div>
+
+<h3>2.4 伯努利方程</h3>
+<p>标准形式：$y' + P(x)y = Q(x)\,y^n$ $\;(n \neq 0,1)$</p>
+<div class="formula accent">
+$$\text{令 } z = y^{1-n} \;\Rightarrow\; z' + (1-n)P(x)z = (1-n)Q(x)$$
+</div>
+<p>化为关于 $z$ 的一阶线性方程。</p>
+
+<h3>2.5 全微分方程（恰当方程）</h3>
+<p>若 $P\,dx + Q\,dy = 0$ 满足 $\frac{\partial P}{\partial y} = \frac{\partial Q}{\partial x}$，则存在 $u(x,y)$ 使 $du = P\,dx + Q\,dy$，通解为</p>
+<div class="formula">
+$$u(x,y) = C$$
+</div>
+<p>若不满足恰当条件，可找<strong>积分因子</strong> $\mu(x,y)$ 使 $\mu P\,dx + \mu Q\,dy = 0$ 变为恰当方程。</p>
+
+<h2 id="sec3"><span class="num">3</span>可降阶的高阶方程</h2>
+
+<h3>3.1 $y^{(n)} = f(x)$ 型</h3>
+<p>方程中不含 $y$ 和低阶导数，直接逐次积分：</p>
+<div class="formula">
+$$y^{(n-1)} = \int f(x)\,dx + C_1 \;\Rightarrow\; \text{逐次积分 } n \text{ 次}$$
+</div>
+
+<h3>3.2 缺 $y$ 型：$y'' = f(x, y')$</h3>
+<div class="formula accent">
+$$\text{令 } p = y', \;\; y'' = p' \;\Rightarrow\; p' = f(x, p)$$
+</div>
+<p>这是关于 $p$ 和 $x$ 的一阶方程，解出 $p$ 后再积分得 $y$。</p>
+
+<h3>3.3 缺 $x$ 型：$y'' = f(y, y')$</h3>
+<div class="formula accent">
+$$\text{令 } p = y', \;\; y'' = \frac{dp}{dx} = \frac{dp}{dy}\cdot\frac{dy}{dx} = p\,\frac{dp}{dy}$$
+$$\Rightarrow\; p\frac{dp}{dy} = f(y, p)$$
+</div>
+<p>这是关于 $p$ 和 $y$ 的一阶方程。注意这里<strong>视 $y$ 为自变量</strong>。</p>
+<div class="tip warning"><span class="label">易错点：</span>缺 $x$ 型中 $y'' = p\frac{dp}{dy}$，<strong>不是</strong> $p'$。因为现在 $p$ 是 $y$ 的函数，需用链式法则转换。</div>
+
+<h2 id="sec4"><span class="num">4</span>线性微分方程解的结构</h2>
+
+<h3>4.1 齐次线性方程的叠加原理</h3>
+<p>若 $y_1, y_2$ 是 $y'' + p(x)y' + q(x)y = 0$ 的解，则 $C_1 y_1 + C_2 y_2$ 也是解。</p>
+
+<h3>4.2 线性无关与朗斯基行列式</h3>
+<p>两个解 $y_1, y_2$ 线性无关 $\Leftrightarrow$ $W(y_1, y_2) = \begin{vmatrix} y_1 & y_2 \\ y_1' & y_2' \end{vmatrix} \neq 0$</p>
+
+<h3>4.3 齐次通解</h3>
+<div class="formula">
+$$\bar{y} = C_1 y_1 + C_2 y_2 \quad (y_1, y_2 \text{ 线性无关})$$
+</div>
+
+<h3>4.4 非齐次通解结构</h3>
+<div class="formula accent">
+$$y = \bar{y} + y^* = (\text{齐次通解}) + (\text{非齐次特解})$$
+</div>
+
+<h3>4.5 叠加原理（非齐次）</h3>
+<p>若 $y_1^*$ 是 $Ly = f_1$ 的特解，$y_2^*$ 是 $Ly = f_2$ 的特解，则 $y_1^* + y_2^*$ 是 $Ly = f_1 + f_2$ 的特解。</p>
+
+<h2 id="sec5"><span class="num">5</span>二阶常系数线性齐次方程</h2>
+
+<h3>5.1 解法：特征方程法</h3>
+<p>对方程 $y'' + py' + qy = 0$，写出特征方程：</p>
+<div class="formula">
+$$r^2 + pr + q = 0$$
+</div>
+
+<h3>5.2 三种情况</h3>
+<table>
+<tr><th>判别式</th><th>特征根</th><th>通解</th></tr>
+<tr><td>$\Delta = p^2 - 4q > 0$</td><td>$r_{1,2} = \frac{-p\pm\sqrt{\Delta}}{2}$（不等实根）</td><td>$y = C_1 e^{r_1 x} + C_2 e^{r_2 x}$</td></tr>
+<tr><td>$\Delta = 0$</td><td>$r_1 = r_2 = -\frac{p}{2}$（重根）</td><td>$y = (C_1 + C_2 x)e^{rx}$</td></tr>
+<tr><td>$\Delta < 0$</td><td>$r = \alpha \pm \beta i$，$\alpha = -\frac{p}{2}$，$\beta = \frac{\sqrt{-\Delta}}{2}$</td><td>$y = e^{\alpha x}(C_1 \cos\beta x + C_2 \sin\beta x)$</td></tr>
+</table>
+
+<h3>5.3 高阶推广</h3>
+<p>对于 $n$ 阶常系数齐次方程，同样求特征方程 $r$ 的根：</p>
+<ul>
+  <li>单实根 $r$：对应 $Ce^{rx}$</li>
+  <li>$k$ 重实根 $r$：对应 $(C_0 + C_1 x + \cdots + C_{k-1}x^{k-1})e^{rx}$</li>
+  <li>单共轭复根 $\alpha\pm\beta i$：对应 $e^{\alpha x}(C_1\cos\beta x + C_2\sin\beta x)$</li>
+  <li>$k$ 重共轭复根：乘以 $x$ 的多项式</li>
+</ul>
+
+<h2 id="sec6"><span class="num">6</span>二阶常系数线性非齐次方程</h2>
+
+<h3>6.1 待定系数法</h3>
+<p>对方程 $y'' + py' + qy = f(x)$，根据 $f(x)$ 的类型设特解形式：</p>
+
+<h3>6.2 类型一：$f(x) = P_m(x)\,e^{\lambda x}$</h3>
+<p>其中 $P_m(x)$ 为 $m$ 次多项式。设</p>
+<div class="formula accent">
+$$y^* = x^k \, Q_m(x)\, e^{\lambda x}$$
+$$k = \begin{cases} 0 & \lambda \text{ 不是特征根} \\ 1 & \lambda \text{ 是单特征根} \\ 2 & \lambda \text{ 是二重特征根} \end{cases}$$
+</div>
+<p>$Q_m(x)$ 是与 $P_m$ 同次的待定多项式。</p>
+
+<h3>6.3 类型二：$f(x) = e^{\alpha x}[P_l(x)\cos\beta x + P_n(x)\sin\beta x]$</h3>
+<div class="formula accent">
+$$y^* = x^k \, e^{\alpha x}[Q_m(x)\cos\beta x + R_m(x)\sin\beta x]$$
+$$m = \max(l, n), \quad k = \begin{cases} 0 & \alpha\pm\beta i \text{ 不是特征根} \\ 1 & \alpha\pm\beta i \text{ 是单特征根} \end{cases}$$
+</div>
+
+<h3>6.4 特解形式总结表</h3>
+<table>
+<tr><th>$f(x)$ 的形式</th><th>判断 $\lambda$（或 $\alpha\pm\beta i$）</th><th>$k$ 值</th><th>特解待定形式</th></tr>
+<tr><td rowspan="3">$P_m(x)e^{\lambda x}$</td><td>$\lambda$ 非特征根</td><td>0</td><td>$Q_m(x)e^{\lambda x}$</td></tr>
+<tr><td>$\lambda$ 单根</td><td>1</td><td>$x\,Q_m(x)e^{\lambda x}$</td></tr>
+<tr><td>$\lambda$ 二重根</td><td>2</td><td>$x^2\,Q_m(x)e^{\lambda x}$</td></tr>
+<tr><td rowspan="2">$e^{\alpha x}[\cdots\cos\beta x + \cdots\sin\beta x]$</td><td>$\alpha\pm\beta i$ 非特征根</td><td>0</td><td>$e^{\alpha x}[Q_m\cos\beta x + R_m\sin\beta x]$</td></tr>
+<tr><td>$\alpha\pm\beta i$ 单根</td><td>1</td><td>$x\,e^{\alpha x}[Q_m\cos\beta x + R_m\sin\beta x]$</td></tr>
+</table>
+
+<div class="tip warning"><span class="label">常见错误：</span>
+<ul style="margin-top:4px;">
+  <li>忘记乘 $x^k$：当 $\lambda$ 是特征根时必须乘 $x^k$，否则特解形式与齐次解重复</li>
+  <li>多项式次数设错：$Q_m$ 必须是完整 $m$ 次多项式，不能漏项</li>
+  <li>三角函数型必须同时设 $\cos$ 和 $\sin$，即使 $f(x)$ 只有其中一项</li>
+</ul>
+</div>
+
+<h3>6.5 常数变易法（一般方法）</h3>
+<p>若 $f(x)$ 不属于上述两类，可用常数变易法。已知齐次通解 $\bar{y} = C_1 y_1 + C_2 y_2$，设</p>
+<div class="formula">
+$$y^* = C_1(x)\,y_1 + C_2(x)\,y_2$$
+$$\text{解方程组：} \begin{cases} C_1'y_1 + C_2'y_2 = 0 \\ C_1'y_1' + C_2'y_2' = f(x) \end{cases}$$
+</div>
+<p>求出 $C_1'(x), C_2'(x)$ 后积分即得 $C_1(x), C_2(x)$。</p>
+
+<h2 id="sec7"><span class="num">7</span>欧拉方程</h2>
+
+<h3>7.1 标准形式</h3>
+<div class="formula">
+$$x^n y^{(n)} + p_1 x^{n-1} y^{(n-1)} + \cdots + p_{n-1}xy' + p_n y = f(x)$$
+</div>
+<p>特点：各项系数是 $x$ 的幂次，且幂次与导数阶数一致。</p>
+
+<h3>7.2 解法：欧拉代换</h3>
+<div class="formula accent">
+$$\text{令 } x = e^t \;\;(\text{即 } t = \ln|x|)$$
+$$x\frac{d}{dx} = \frac{d}{dt} \;\equiv\; D, \quad x^2\frac{d^2}{dx^2} = D(D-1), \quad \cdots$$
+$$x^k\frac{d^k}{dx^k} = D(D-1)(D-2)\cdots(D-k+1)$$
+</div>
+<p>代入后化为<strong>常系数</strong>线性方程，解出关于 $t$ 的通解后，回代 $t = \ln|x|$ 即可。</p>
+
+<h3>7.3 微分方程的物理应用</h3>
+<table>
+<tr><th>模型</th><th>方程</th><th>说明</th></tr>
+<tr><td>自由振动（无阻尼）</td><td>$my'' + ky = 0$</td><td>简谐运动</td></tr>
+<tr><td>阻尼振动</td><td>$my'' + cy' + ky = 0$</td><td>由特征根判别振动类型</td></tr>
+<tr><td>受迫振动</td><td>$my'' + cy' + ky = F_0\sin\omega t$</td><td>共振现象</td></tr>
+<tr><td>RLC 电路</td><td>$LC\frac{d^2q}{dt^2} + RC\frac{dq}{dt} + q = E_0\sin\omega t$</td><td>与振动方程同构</td></tr>
+<tr><td>人口增长</td><td>$\frac{dN}{dt} = kN$</td><td>Malthus 模型</td></tr>
+<tr><td>冷却定律</td><td>$\frac{dT}{dt} = -k(T - T_s)$</td><td>Newton 冷却</td></tr>
+</table>
+
+</div>
+
+<button class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<footer>
+  <p>第六章 · 常微分方程 | <a href="05_多元积分学.html">← 上一章</a> · <a href="07_无穷级数.html">下一章：无穷级数 →</a></p>
+</footer>
+
+</body>
+</html>

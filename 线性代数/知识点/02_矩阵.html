@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第二章 矩阵 - 线代知识点</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+
+<header>
+  <h1>第二章 · 矩阵</h1>
+  <div class="subtitle">运算 · 逆矩阵 · 伴随矩阵 · 初等变换 · 秩</div>
+</header>
+
+<nav class="topnav">
+  <a href="#sec1">2.1 运算</a>
+  <a href="#sec2">2.2 逆矩阵</a>
+  <a href="#sec3">2.3 伴随矩阵</a>
+  <a href="#sec4">2.4 初等变换</a>
+  <a href="#sec5">2.5 秩</a>
+  <a href="#sec6">2.6 分块矩阵</a>
+  <a href="../index.html">← 首页</a>
+</nav>
+
+<div class="container">
+
+<h2 id="sec1"><span class="num">1</span>矩阵运算</h2>
+
+<h3>1.1 运算法则</h3>
+<div class="formula">
+$$A + B = B + A \qquad (A+B)+C = A+(B+C)$$
+$$(AB)C = A(BC) \qquad A(B+C) = AB+AC \qquad (A+B)C = AC+BC$$
+$$(AB)^T = B^T A^T \qquad (A^T)^T = A$$
+</div>
+
+<h3>1.2 不满足的性质</h3>
+<div class="tip warning"><span class="label">特别注意：</span>
+<ul style="margin-top:4px;">
+  <li><strong>不交换</strong>：$AB \neq BA$（一般情况）</li>
+  <li><strong>不消去</strong>：$AB = AC$ 且 $A \neq O$，不能推出 $B = C$</li>
+  <li><strong>$AB = O$ 不能推出 $A=O$ 或 $B=O$</strong></li>
+  <li>$(AB)^2 \neq A^2B^2$（一般情况），$(A+B)^2 \neq A^2+2AB+B^2$（除非 $AB=BA$）</li>
+</ul>
+</div>
+
+<h3>1.3 特殊矩阵</h3>
+<table>
+<tr><th>类型</th><th>定义</th><th>关键性质</th></tr>
+<tr><td>对称矩阵</td><td>$A^T = A$</td><td>$a_{ij} = a_{ji}$</td></tr>
+<tr><td>反对称矩阵</td><td>$A^T = -A$</td><td>$a_{ii}=0$</td></tr>
+<tr><td>正交矩阵</td><td>$A^TA = I$</td><td>$A^{-1}=A^T$, $|A|=\pm1$, 行（列）向量正交单位</td></tr>
+<tr><td>幂等矩阵</td><td>$A^2 = A$</td><td>特征值为 $0$ 或 $1$</td></tr>
+<tr><td>对合矩阵</td><td>$A^2 = I$</td><td>$A^{-1} = A$</td></tr>
+<tr><td>正定矩阵</td><td>$\vec{x}^TA\vec{x}>0$</td><td>特征值全正，各阶顺序主子式全正</td></tr>
+</table>
+
+<h2 id="sec2"><span class="num">2</span>逆矩阵</h2>
+
+<h3>2.1 定义与判据</h3>
+<div class="formula accent">
+$$A \text{ 可逆} \;\Leftrightarrow\; \exists\, B,\; AB=BA=I \;\Leftrightarrow\; |A| \neq 0 \;\Leftrightarrow\; r(A) = n \;\Leftrightarrow\; A \text{ 的行/列向量线性无关}$$
+</div>
+
+<h3>2.2 逆矩阵的性质</h3>
+<div class="formula">
+$$(A^{-1})^{-1} = A \qquad (AB)^{-1} = B^{-1}A^{-1} \qquad (A^{-1})^T = (A^T)^{-1}$$
+$$(kA)^{-1} = \frac{1}{k}A^{-1} \quad (k\neq 0) \qquad |A^{-1}| = |A|^{-1}$$
+</div>
+
+<h3>2.3 求逆方法</h3>
+<p><strong>方法一：伴随矩阵法</strong></p>
+<div class="formula">
+$$A^{-1} = \frac{1}{|A|}A^*$$
+</div>
+
+<p><strong>方法二：初等变换法</strong>（推荐用于3阶以上）</p>
+<div class="formula">
+$$(A \mid I) \xrightarrow{\text{初等行变换}} (I \mid A^{-1})$$
+</div>
+
+<p><strong>方法三：分块求逆</strong></p>
+<div class="formula">
+$$\begin{pmatrix} A & O \\ O & B \end{pmatrix}^{-1} = \begin{pmatrix} A^{-1} & O \\ O & B^{-1} \end{pmatrix}, \quad \begin{pmatrix} O & A \\ B & O \end{pmatrix}^{-1} = \begin{pmatrix} O & B^{-1} \\ A^{-1} & O \end{pmatrix}$$
+</div>
+
+<h2 id="sec3"><span class="num">3</span>伴随矩阵 $A^*$</h2>
+
+<h3>3.1 核心关系</h3>
+<div class="formula accent">
+$$AA^* = A^*A = |A|\,I \qquad A^{-1} = \frac{A^*}{|A|} \;\;(|A|\neq 0)$$
+</div>
+
+<h3>3.2 重要性质</h3>
+<div class="formula">
+$$(A^*)^T = (A^T)^* \qquad (AB)^* = B^*A^* \qquad (kA)^* = k^{n-1}A^*$$
+$$(A^*)^* = |A|^{n-2}A \;\;(n\geq 2) \qquad (A^*)^{-1} = \frac{A}{|A|}$$
+$$|A^*| = |A|^{n-1}$$
+$$r(A^*) = \begin{cases} n & r(A)=n \\ 1 & r(A)=n-1 \\ 0 & r(A)\leq n-2 \end{cases}$$
+</div>
+<div class="tip warning"><span class="label">考试高频：</span>$r(A^*)$ 的三种情况几乎每年必考。当 $r(A)=n-1$ 时 $A^*$ 存在但 $|A^*|=0$。</div>
+
+<h2 id="sec4"><span class="num">4</span>初等变换与初等矩阵</h2>
+
+<h3>4.1 三种初等变换</h3>
+<ol>
+  <li>交换两行（列）</li>
+  <li>某行（列）乘非零常数 $k$</li>
+  <li>某行（列）的 $k$ 倍加到另一行（列）</li>
+</ol>
+
+<h3>4.2 初等矩阵</h3>
+<p>对单位矩阵做一次初等变换得到的矩阵称为初等矩阵。初等矩阵均可逆，其逆仍为初等矩阵。</p>
+<table>
+<tr><th>变换</th><th>初等矩阵</th><th>逆矩阵</th><th>行列式</th></tr>
+<tr><td>交换 $i,j$ 行</td><td>$E(i,j)$</td><td>$E(i,j)$</td><td>$-1$</td></tr>
+<tr><td>第 $i$ 行乘 $k$</td><td>$E(i(k))$</td><td>$E(i(1/k))$</td><td>$k$</td></tr>
+<tr><td>第 $j$ 行加 $k$ 倍第 $i$ 行</td><td>$E(ij(k))$</td><td>$E(ij(-k))$</td><td>$1$</td></tr>
+</table>
+
+<h3>4.3 初等变换与矩阵乘法</h3>
+<div class="formula accent">
+$$\text{左乘初等矩阵} = \text{对矩阵做行变换}$$
+$$\text{右乘初等矩阵} = \text{对矩阵做列变换}$$
+$$A \xrightarrow{E_1} E_1A \xrightarrow{E_2} E_2E_1A \;\Rightarrow\; E_k\cdots E_2 E_1 A = I \;\Rightarrow\; A^{-1} = E_k\cdots E_2 E_1$$
+</div>
+
+<h3>4.4 等价标准形</h3>
+<div class="formula">
+$$A \xrightarrow{\text{初等变换}} \begin{pmatrix} I_r & O \\ O & O \end{pmatrix}$$
+$$\text{即 } PAQ = \begin{pmatrix} I_r & O \\ O & O \end{pmatrix}, \quad r = r(A)$$
+</div>
+<p>任何矩阵都等价于上述标准形，$r$ 由矩阵唯一确定。</p>
+
+<h2 id="sec5"><span class="num">5</span>矩阵的秩</h2>
+
+<h3>5.1 定义</h3>
+<p>矩阵 $A$ 中非零子式的最高阶数称为 $A$ 的秩，记作 $r(A)$。</p>
+<div class="formula">
+$$r(A) = r \;\Leftrightarrow\; \exists\, r \text{ 阶非零子式，且所有 } r+1 \text{ 阶子式为零}$$
+$$r(A) = 0 \;\Leftrightarrow\; A = O$$
+</div>
+
+<h3>5.2 秩的性质</h3>
+<div class="formula accent">
+$$r(A) = r(A^T) = r(A^TA) = r(AA^T)$$
+$$r(A+B) \leq r(A) + r(B)$$
+$$r(AB) \leq \min\{r(A), r(B)\}$$
+$$r(A) + r(B) - n \leq r(AB) \quad \text{（西尔维斯特不等式，}A\text{ 为 }m\times n\text{）}$$
+$$AB = O \;\Rightarrow\; r(A) + r(B) \leq n$$
+$$P, Q \text{ 可逆} \;\Rightarrow\; r(PAQ) = r(A)$$
+</div>
+
+<h3>5.3 求秩方法</h3>
+<p>用初等行变换将 $A$ 化为<strong>行阶梯形</strong>，非零行的行数即为 $r(A)$。</p>
+
+<h2 id="sec6"><span class="num">6</span>分块矩阵</h2>
+
+<h3>6.1 分块运算</h3>
+<div class="formula">
+$$\begin{pmatrix} A_1 & A_2 \\ A_3 & A_4 \end{pmatrix} + \begin{pmatrix} B_1 & B_2 \\ B_3 & B_4 \end{pmatrix} = \begin{pmatrix} A_1+B_1 & A_2+B_2 \\ A_3+B_3 & A_4+B_4 \end{pmatrix}$$
+$$\begin{pmatrix} A_1 & A_2 \\ A_3 & A_4 \end{pmatrix}\begin{pmatrix} B_1 & B_2 \\ B_3 & B_4 \end{pmatrix} = \begin{pmatrix} A_1B_1+A_2B_3 & A_1B_2+A_2B_4 \\ A_3B_1+A_4B_3 & A_3B_2+A_4B_4 \end{pmatrix}$$
+</div>
+
+<h3>6.2 分块对角矩阵</h3>
+<div class="formula">
+$$\begin{pmatrix} A_1 & & \\ & A_2 & \\ & & A_3 \end{pmatrix}^k = \begin{pmatrix} A_1^k & & \\ & A_2^k & \\ & & A_3^k \end{pmatrix}$$
+$$\left|\begin{pmatrix} A & & \\ & B & \\ & & C \end{pmatrix}\right| = |A|\cdot|B|\cdot|C|$$
+</div>
+
+</div>
+
+<button class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<footer>
+  <p>第二章 · 矩阵 | <a href="01_行列式.html">← 上一章</a> · <a href="03_向量与方程组.html">下一章 →</a></p>
+</footer>
+
+</body>
+</html>

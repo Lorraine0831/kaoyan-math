@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>概率论做题提速常用技巧 - 考试利器</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+
+<header>
+  <h1>概率论做题提速常用技巧 · 考试利器</h1>
+  <div class="subtitle">分布速查 · 标准化 · 对称性 · 期望方差速推 · 抽样分布</div>
+</header>
+
+<nav class="topnav">
+  <a href="#sec1">一、分布速查</a>
+  <a href="#sec2">二、标准化</a>
+  <a href="#sec3">三、对称性</a>
+  <a href="#sec4">四、期望速推</a>
+  <a href="#sec5">五、常见技巧</a>
+  <a href="#sec6">六、抽样分布</a>
+  <a href="#sec7">七、公式速记</a>
+  <a href="../index.html">← 首页</a>
+</nav>
+
+<div class="container">
+
+<h2 id="sec1"><span class="num">1</span>常用分布期望方差速查表</h2>
+
+<div class="tip success"><span class="label">必背：</span>考试中几乎每道大题都需要用到以下分布的期望和方差。不查表直接写出，可节省大量时间。</div>
+
+<table>
+<tr><th>分布</th><th>参数</th><th>$E(X)$</th><th>$D(X)$</th><th>记忆口诀</th></tr>
+<tr><td>0-1分布</td><td>$p$</td><td>$p$</td><td>$p(1-p)$</td><td>就是$p$和$p(1-p)$</td></tr>
+<tr><td>二项分布</td><td>$n, p$</td><td>$np$</td><td>$np(1-p)$</td><td>0-1分布乘$n$</td></tr>
+<tr><td>泊松分布</td><td>$\lambda$</td><td>$\lambda$</td><td>$\lambda$</td><td>期望方差都是$\lambda$</td></tr>
+<tr><td>几何分布</td><td>$p$</td><td>$\frac{1}{p}$</td><td>$\frac{1-p}{p^2}$</td><td>期望$1/p$</td></tr>
+<tr><td>均匀分布</td><td>$a, b$</td><td>$\frac{a+b}{2}$</td><td>$\frac{(b-a)^2}{12}$</td><td>中点；长度平方/12</td></tr>
+<tr><td>指数分布</td><td>$\lambda$</td><td>$\frac{1}{\lambda}$</td><td>$\frac{1}{\lambda^2}$</td><td>期望方差互为倒数关系</td></tr>
+<tr><td>正态分布</td><td>$\mu, \sigma^2$</td><td>$\mu$</td><td>$\sigma^2$</td><td>直接读参数</td></tr>
+</table>
+
+<h2 id="sec2"><span class="num">2</span>标准化技巧</h2>
+
+<h3>2.1 正态分布标准化</h3>
+<div class="formula accent">
+$$X \sim N(\mu, \sigma^2) \;\Rightarrow\; Z = \frac{X - \mu}{\sigma} \sim N(0, 1)$$
+$$P(X < x) = \Phi\!\left(\frac{x-\mu}{\sigma}\right)$$
+</div>
+<div class="tip success"><span class="label">秒杀：</span>任何正态分布的概率计算，先标准化为 $N(0,1)$，然后查标准正态表。</div>
+
+<h3>2.2 标准正态的分位数</h3>
+<div class="formula">
+$$\Phi(1.64) \approx 0.95 \;\Rightarrow\; z_{0.05} \approx 1.64 \;\text{（单侧）}$$
+$$\Phi(1.96) \approx 0.975 \;\Rightarrow\; z_{0.025} \approx 1.96 \;\text{（双侧}\alpha=0.05\text{）}$$
+$$\Phi(2.58) \approx 0.995 \;\Rightarrow\; z_{0.005} \approx 2.58 \;\text{（双侧}\alpha=0.01\text{）}$$
+$$\Phi(-x) = 1 - \Phi(x) \qquad \Phi(0) = 0.5$$
+</div>
+
+<h3>2.3 中心极限定理标准化</h3>
+<div class="formula accent">
+$$\sum_{i=1}^n X_i \;\dot{\sim}\; N(n\mu, \; n\sigma^2) \;\Rightarrow\; P\!\left(\sum X_i \leq x\right) \approx \Phi\!\left(\frac{x - n\mu}{\sigma\sqrt{n}}\right)$$
+$$\bar{X} \;\dot{\sim}\; N\!\left(\mu, \;\frac{\sigma^2}{n}\right) \;\Rightarrow\; P\!\left(\bar{X} \leq x\right) \approx \Phi\!\left(\frac{x - \mu}{\sigma/\sqrt{n}}\right)$$
+</div>
+
+<h2 id="sec3"><span class="num">3</span>对称性利用</h2>
+
+<h3>3.1 正态分布的对称性</h3>
+<div class="formula accent">
+$$X \sim N(0,1) \;\Rightarrow\; P(X > 0) = P(X < 0) = 0.5$$
+$$P(|X| < a) = 2\Phi(a) - 1 \qquad P(X > a) = 1 - \Phi(a) = \Phi(-a)$$
+$$P(X < -a) = P(X > a) \;\text{（关于 } \mu \text{ 对称）}$$
+</div>
+
+<h3>3.2 $t$ 分布的对称性</h3>
+<div class="formula">
+$$T \sim t(n) \;\Rightarrow\; \text{密度关于 } 0 \text{ 对称}, \;\; P(T > t_\alpha) = P(T < -t_\alpha)$$
+$$t_{1-\alpha}(n) = -t_\alpha(n)$$
+</div>
+
+<h3>3.3 指数分布的无记忆性</h3>
+<div class="formula accent">
+$$X \sim Exp(\lambda) \;\Rightarrow\; P(X > s + t \;|\; X > s) = P(X > t)$$
+</div>
+<div class="tip"><span class="label">直觉：</span>指数分布"忘了"已经等了多久——已存活 $s$ 时间后再存活 $t$ 时间的概率，和从头开始一样。这是指数分布的<strong>特征性质</strong>。</div>
+
+<h2 id="sec4"><span class="num">4</span>期望与方差的快速推导</h2>
+
+<h3>4.1 方差计算公式</h3>
+<div class="formula accent">
+$$D(X) = E(X^2) - [E(X)]^2$$
+</div>
+<div class="tip warning"><span class="label">考试最常用：</span>不要用定义 $E[(X-EX)^2]$ 去算，直接用 $E(X^2) - (EX)^2$，分两步算更简洁。</div>
+
+<h3>4.2 利用线性性质快速求期望</h3>
+<div class="formula">
+$$E(aX + b) = aE(X) + b \qquad E(aX + bY) = aE(X) + bE(Y)$$
+$$D(aX + b) = a^2 D(X) \qquad D(aX + bY) = a^2 D(X) + b^2 D(Y) + 2ab\,\text{Cov}(X,Y)$$
+</div>
+
+<h3>4.3 独立时方差可加</h3>
+<div class="formula accent">
+$$X, Y \text{ 独立} \;\Rightarrow\; D(X \pm Y) = D(X) + D(Y)$$
+$$X, Y \text{ 不相关} \;\Rightarrow\; \text{Cov}(X,Y) = 0 \;\Rightarrow\; D(X \pm Y) = D(X) + D(Y)$$
+</div>
+
+<h3>4.4 协方差的快速计算</h3>
+<div class="formula">
+$$\text{Cov}(X,Y) = E(XY) - E(X)E(Y)$$
+$$\text{Cov}(aX+b, \, cY+d) = ac\,\text{Cov}(X,Y)$$
+$$\text{Cov}(X+Y, \, Z) = \text{Cov}(X,Z) + \text{Cov}(Y,Z)$$
+</div>
+
+<h2 id="sec5"><span class="num">5</span>常见做题技巧</h2>
+
+<h3>5.1 分布函数法求密度</h3>
+<div class="formula accent">
+$$F_Y(y) = P(Y \leq y) = P(g(X) \leq y) \;\;\text{解出 } X \text{ 的范围，用 } F_X \text{ 表示}$$
+$$f_Y(y) = F_Y'(y)$$
+</div>
+<div class="tip success"><span class="label">步骤：</span>先求 $Y = g(X)$ 的分布函数 $F_Y(y)$，再求导得密度 $f_Y(y)$。关键是把 $P(g(X) \leq y)$ 转化为 $P(X \leq h(y))$。</div>
+
+<h3>5.2 卷积公式（$Z = X+Y$）</h3>
+<div class="formula accent">
+$$f_Z(z) = \int_{-\infty}^{+\infty} f_X(x) f_Y(z - x)\,dx$$
+</div>
+<p><strong>使用要点</strong>：</p>
+<ul>
+  <li>仅当 $X, Y$ 独立时，$f(x,y) = f_X(x)f_Y(y)$，才能用卷积公式</li>
+  <li>积分限由密度函数的定义域确定（如均匀分布 $[0,1]$ 则 $0 \leq x \leq 1$ 且 $0 \leq z-x \leq 1$）</li>
+</ul>
+
+<h3>5.3 最大值/最小值分布</h3>
+<div class="formula accent">
+$$M = \max(X_1, \ldots, X_n), \;\; X_i \text{ 独立}$$
+$$F_M(z) = F_{X_1}(z) \cdot F_{X_2}(z) \cdots F_{X_n}(z) = \prod F_{X_i}(z)$$
+$$N = \min(X_1, \ldots, X_n)$$
+$$F_N(z) = 1 - \prod [1 - F_{X_i}(z)]$$
+</div>
+<div class="tip"><span class="label">记忆：</span>最大值"都 $\leq$" → 分布函数相乘；最小值"至少有一个 $\leq$" → 用对立事件"都 $>$" → $1 - \prod(1-F)$。</div>
+
+<h3>5.4 二项分布的分解</h3>
+<div class="formula">
+$$X = X_1 + X_2 + \cdots + X_n, \;\; X_i \sim B(1,p) \;\text{独立}$$
+$$\Rightarrow X \sim B(n,p), \;\; E(X) = np, \;\; D(X) = np(1-p)$$
+</div>
+
+<h3>5.5 正态分布的可加性</h3>
+<div class="formula accent">
+$$X \sim N(\mu_1, \sigma_1^2), \; Y \sim N(\mu_2, \sigma_2^2), \; X, Y \text{ 独立}$$
+$$\Rightarrow aX + bY \sim N(a\mu_1 + b\mu_2, \; a^2\sigma_1^2 + b^2\sigma_2^2)$$
+</div>
+<div class="tip warning"><span class="label">注意：</span>必须<strong>独立</strong>才能用。不独立时方差需加 $2ab\,\text{Cov}(X,Y)$ 项。</div>
+
+<h2 id="sec6"><span class="num">6</span>抽样分布速记</h2>
+
+<h3>6.1 构造规则</h3>
+<table>
+<tr><th>分布</th><th>构造方法</th><th>自由度</th><th>关键性质</th></tr>
+<tr><td>$\chi^2$</td><td>$\sum Z_i^2$, $Z_i\sim N(0,1)$ 独立</td><td>$n$</td><td>$E=n$, $D=2n$, 可加性</td></tr>
+<tr><td>$t$</td><td>$\frac{Z}{\sqrt{\chi^2/n}}$, $Z$ 与 $\chi^2$ 独立</td><td>$n$</td><td>关于0对称, $n\to\infty \to N(0,1)$</td></tr>
+<tr><td>$F$</td><td>$\frac{\chi_1^2/m}{\chi_2^2/n}$, 两个 $\chi^2$ 独立</td><td>$(m,n)$</td><td>$1/F \sim F(n,m)$</td></tr>
+</table>
+
+<h3>6.2 正态总体的"四大抽样分布"</h3>
+<div class="formula accent">
+$$\frac{\bar{X}-\mu}{\sigma/\sqrt{n}} \sim N(0,1) \qquad \frac{(n-1)S^2}{\sigma^2} \sim \chi^2(n-1)$$
+$$\frac{\bar{X}-\mu}{S/\sqrt{n}} \sim t(n-1) \qquad \frac{S_1^2/\sigma_1^2}{S_2^2/\sigma_2^2} \sim F(n_1-1, n_2-1)$$
+</div>
+<div class="tip success"><span class="label">记忆线索：</span>用 $\sigma$ 已知→$Z$ 或 $\chi^2$；用 $S$（样本标准差）→$t$ 或 $F$。$\sigma$ 未知时用 $S$ 替代，分布从 $Z$ 变 $t$、从 $\chi^2$ 不变但自由度减1。</div>
+
+<h3>6.3 $\chi^2$ 的可加性</h3>
+<div class="formula">
+$$\chi_1^2 \sim \chi^2(n_1), \;\; \chi_2^2 \sim \chi^2(n_2), \;\; \text{独立} \;\Rightarrow\; \chi_1^2 + \chi_2^2 \sim \chi^2(n_1 + n_2)$$
+</div>
+
+<h2 id="sec7"><span class="num">7</span>公式速记卡</h2>
+
+<h3>7.1 全概率与贝叶斯的核心思路</h3>
+<div class="tip"><span class="label">全概率：</span>"由因推果"——已知各"因"的概率及各"因"下结果的概率，求结果的概率。</div>
+<div class="tip"><span class="label">贝叶斯：</span>"由果推因"——已知结果发生了，反推各"因"的概率。$P(\text{因}|\text{果}) = \frac{P(\text{因})P(\text{果}|\text{因})}{P(\text{果})}$。</div>
+
+<h3>7.2 估计方法对照</h3>
+<table>
+<tr><th>方法</th><th>思路</th><th>步骤</th></tr>
+<tr><td>矩估计</td><td>用样本矩替代总体矩</td><td>令 $E(X)=\bar{X}$, $E(X^2)=\frac{1}{n}\sum X_i^2$，解出参数</td></tr>
+<tr><td>最大似然</td><td>使样本出现的概率最大</td><td>构造 $L=\prod f(x_i;\theta)$ → $\ln L$ → 求导=0</td></tr>
+</table>
+
+<h3>7.3 常用等价关系</h3>
+<div class="formula accent">
+$$X, Y \text{ 独立} \;\Rightarrow\; \text{Cov}(X,Y) = 0 \;\Leftrightarrow\; E(XY) = E(X)E(Y) \;\Leftrightarrow\; \rho = 0$$
+$$\text{但} \;\rho=0 \;\nRightarrow\; \text{独立（除非正态）}$$
+$$\text{二维正态：} \;\rho = 0 \;\Leftrightarrow\; \text{独立}$$
+</div>
+
+</div>
+
+<button class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<footer>
+  <p>概率论做题提速常用技巧 · 熟练使用可大幅减少计算时间</p>
+</footer>
+
+</body>
+</html>

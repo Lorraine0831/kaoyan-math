@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第三章 向量与线性方程组 - 线代知识点</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+
+<header>
+  <h1>第三章 · 向量与线性方程组</h1>
+  <div class="subtitle">线性相关性 · 极大无关组 · 方程组解的结构 · 向量空间</div>
+</header>
+
+<nav class="topnav">
+  <a href="#sec1">3.1 线性相关</a>
+  <a href="#sec2">3.2 极大无关组</a>
+  <a href="#sec3">3.3 内积与正交</a>
+  <a href="#sec4">3.4 方程组判据</a>
+  <a href="#sec5">3.5 齐次解结构</a>
+  <a href="#sec6">3.6 非齐次解结构</a>
+  <a href="../index.html">← 首页</a>
+</nav>
+
+<div class="container">
+
+<h2 id="sec1"><span class="num">1</span>向量的线性相关性</h2>
+
+<h3>1.1 线性组合与线性表出</h3>
+<p>设 $\vec{\alpha}_1, \ldots, \vec{\alpha}_m$ 为一组向量，$k_1\vec{\alpha}_1 + \cdots + k_m\vec{\alpha}_m$ 称为它们的线性组合。若 $\vec{\beta} = k_1\vec{\alpha}_1 + \cdots + k_m\vec{\alpha}_m$，则称 $\vec{\beta}$ 可由 $\vec{\alpha}_1, \ldots, \vec{\alpha}_m$ 线性表出。</p>
+<div class="formula">
+$$\vec{\beta} \text{ 可由 } \vec{\alpha}_1, \ldots, \vec{\alpha}_m \text{ 线性表出} \;\Leftrightarrow\; r(\vec{\alpha}_1, \ldots, \vec{\alpha}_m) = r(\vec{\alpha}_1, \ldots, \vec{\alpha}_m, \vec{\beta})$$
+</div>
+
+<h3>1.2 线性相关与线性无关</h3>
+<div class="formula accent">
+$$\vec{\alpha}_1, \ldots, \vec{\alpha}_m \text{ 线性相关} \;\Leftrightarrow\; \exists\, k_1, \ldots, k_m \text{ 不全为零}, \;\sum_{i=1}^m k_i\vec{\alpha}_i = \vec{0}$$
+$$\text{线性无关} \;\Leftrightarrow\; \sum k_i\vec{\alpha}_i = \vec{0} \;\Rightarrow\; k_i = 0 \;\forall\, i$$
+</div>
+
+<h3>1.3 重要结论</h3>
+<ul>
+  <li>单个向量 $\vec{\alpha}$ 线性相关 $\Leftrightarrow$ $\vec{\alpha} = \vec{0}$</li>
+  <li>两个向量线性相关 $\Leftrightarrow$ 成比例（共线）</li>
+  <li>$m > n$ 时，$m$ 个 $n$ 维向量必线性相关</li>
+  <li>部分相关 $\Rightarrow$ 整体相关；整体无关 $\Rightarrow$ 部分无关</li>
+  <li>低维无关 $\Rightarrow$ 增加分量后高维无关（"接长"）；高维相关 $\Rightarrow$ 去掉分量后低维相关（"截短"）</li>
+  <li>若 $\vec{\alpha}_1, \ldots, \vec{\alpha}_r$ 线性无关，而 $\vec{\alpha}_1, \ldots, \vec{\alpha}_r, \vec{\beta}$ 线性相关，则 $\vec{\beta}$ 可由 $\vec{\alpha}_1, \ldots, \vec{\alpha}_r$ 唯一表出</li>
+</ul>
+
+<h3>1.4 判定方法</h3>
+<table>
+<tr><th>方法</th><th>判据</th></tr>
+<tr><td>定义法</td><td>设 $\sum k_i\vec{\alpha}_i = \vec{0}$，解齐次方程组，有非零解 $\Leftrightarrow$ 相关</td></tr>
+<tr><td>秩法</td><td>$r(\vec{\alpha}_1, \ldots, \vec{\alpha}_m) < m \Leftrightarrow$ 线性相关；$= m \Leftrightarrow$ 线性无关</td></tr>
+<tr><td>行列式法</td><td>$m = n$（向量个数=维数）时，$|A| = 0 \Leftrightarrow$ 相关</td></tr>
+</table>
+
+<h2 id="sec2"><span class="num">2</span>极大线性无关组与秩</h2>
+
+<h3>2.1 定义</h3>
+<p>向量组 $T$ 中的一个部分组 $\vec{\alpha}_1, \ldots, \vec{\alpha}_r$ 称为<strong>极大线性无关组</strong>，若：</p>
+<ol>
+  <li>$\vec{\alpha}_1, \ldots, \vec{\alpha}_r$ 线性无关</li>
+  <li>$T$ 中任一向量可由 $\vec{\alpha}_1, \ldots, \vec{\alpha}_r$ 线性表出</li>
+</ol>
+<p>极大无关组中向量的个数 $r$ 称为该向量组的<strong>秩</strong>。极大无关组不唯一，但秩唯一。</p>
+
+<h3>2.2 求极大无关组</h3>
+<p>将向量组排成矩阵，做初等行变换化为行阶梯形，主元所在列对应的原向量即为极大无关组。</p>
+
+<h3>2.3 向量组的等价</h3>
+<div class="formula">
+$$\text{向量组 } A \text{ 与 } B \text{ 等价} \;\Leftrightarrow\; A \text{ 与 } B \text{ 可互相线性表出} \;\Leftrightarrow\; r(A) = r(B) = r(A|B)$$
+</div>
+
+<h2 id="sec3"><span class="num">3</span>内积与正交</h2>
+
+<h3>3.1 内积</h3>
+<div class="formula">
+$$\langle\vec{\alpha}, \vec{\beta}\rangle = \vec{\alpha}^T\vec{\beta} = \sum_{i=1}^n a_i b_i \qquad \|\vec{\alpha}\| = \sqrt{\langle\vec{\alpha},\vec{\alpha}\rangle}$$
+$$\langle\vec{\alpha}, \vec{\beta}\rangle = 0 \;\Leftrightarrow\; \vec{\alpha} \perp \vec{\beta}$$
+</div>
+
+<h3>3.2 施密特正交化</h3>
+<p>将线性无关向量组 $\vec{\alpha}_1, \ldots, \vec{\alpha}_m$ 化为正交向量组 $\vec{\beta}_1, \ldots, \vec{\beta}_m$：</p>
+<div class="formula accent">
+$$\vec{\beta}_1 = \vec{\alpha}_1$$
+$$\vec{\beta}_2 = \vec{\alpha}_2 - \frac{\langle\vec{\alpha}_2, \vec{\beta}_1\rangle}{\langle\vec{\beta}_1, \vec{\beta}_1\rangle}\vec{\beta}_1$$
+$$\vec{\beta}_k = \vec{\alpha}_k - \sum_{i=1}^{k-1}\frac{\langle\vec{\alpha}_k, \vec{\beta}_i\rangle}{\langle\vec{\beta}_i, \vec{\beta}_i\rangle}\vec{\beta}_i$$
+$$\text{单位化：} \;\; \vec{e}_k = \frac{\vec{\beta}_k}{\|\vec{\beta}_k\|}$$
+</div>
+
+<h3>3.3 正交矩阵</h3>
+<div class="formula">
+$$A^TA = I \;\Leftrightarrow\; A \text{ 为正交矩阵} \;\Leftrightarrow\; \text{行（列）向量组为正交单位向量组}$$
+$$A^{-1} = A^T \qquad |A| = \pm 1$$
+</div>
+
+<h2 id="sec4"><span class="num">4</span>线性方程组解的判据</h2>
+
+<h3>4.1 非齐次方程组 $A\vec{x} = \vec{b}$</h3>
+<p>设 $A$ 为 $m \times n$ 矩阵，增广矩阵 $\bar{A} = (A|\vec{b})$：</p>
+<div class="formula accent">
+$$\text{无解} \;\Leftrightarrow\; r(A) < r(\bar{A})$$
+$$\text{唯一解} \;\Leftrightarrow\; r(A) = r(\bar{A}) = n$$
+$$\text{无穷多解} \;\Leftrightarrow\; r(A) = r(\bar{A}) < n$$
+</div>
+
+<h3>4.2 齐次方程组 $A\vec{x} = \vec{0}$</h3>
+<div class="formula accent">
+$$\text{只有零解} \;\Leftrightarrow\; r(A) = n$$
+$$\text{有非零解} \;\Leftrightarrow\; r(A) < n \;\Leftrightarrow\; |A| = 0 \text{（方阵时）}$$
+</div>
+
+<h2 id="sec5"><span class="num">5</span>齐次方程组解的结构</h2>
+
+<h3>5.1 解空间的性质</h3>
+<ul>
+  <li>若 $\vec{\xi}_1, \vec{\xi}_2$ 是 $A\vec{x}=\vec{0}$ 的解，则 $k_1\vec{\xi}_1 + k_2\vec{\xi}_2$ 也是解</li>
+  <li>解集构成向量空间，维数 $= n - r(A)$</li>
+</ul>
+
+<h3>5.2 基础解系</h3>
+<p>基础解系是解空间的一个基，含 $n - r(A)$ 个线性无关的解向量 $\vec{\xi}_1, \ldots, \vec{\xi}_{n-r}$。</p>
+<div class="formula accent">
+$$\vec{x} = c_1\vec{\xi}_1 + c_2\vec{\xi}_2 + \cdots + c_{n-r}\vec{\xi}_{n-r} \quad (c_i \in \mathbb{R})$$
+</div>
+<div class="tip"><span class="label">求法：</span>将 $A$ 化为行最简形，令自由变量分别取 $(1,0,\ldots,0)^T, (0,1,\ldots,0)^T, \ldots$，回代得基础解系。</div>
+
+<h2 id="sec6"><span class="num">6</span>非齐次方程组解的结构</h2>
+
+<h3>6.1 通解公式</h3>
+<div class="formula accent">
+$$\vec{x} = \vec{\eta}^* + c_1\vec{\xi}_1 + c_2\vec{\xi}_2 + \cdots + c_{n-r}\vec{\xi}_{n-r}$$
+</div>
+<p>其中 $\vec{\eta}^*$ 是 $A\vec{x}=\vec{b}$ 的一个特解，$\vec{\xi}_i$ 是对应齐次方程组 $A\vec{x}=\vec{0}$ 的基础解系。</p>
+
+<h3>6.2 解的性质</h3>
+<ul>
+  <li>若 $\vec{\eta}_1, \vec{\eta}_2$ 是 $A\vec{x}=\vec{b}$ 的解，则 $\vec{\eta}_1 - \vec{\eta}_2$ 是 $A\vec{x}=\vec{0}$ 的解</li>
+  <li>若 $\vec{\eta}$ 是 $A\vec{x}=\vec{b}$ 的解，$\vec{\xi}$ 是 $A\vec{x}=\vec{0}$ 的解，则 $\vec{\eta} + \vec{\xi}$ 是 $A\vec{x}=\vec{b}$ 的解</li>
+  <li>若 $A\vec{x}=\vec{b}$ 有 $\vec{\eta}_1, \ldots, \vec{\eta}_{r+1}$ 个线性无关的解，则 $r + 1 = n - r(A) + 1$</li>
+</ul>
+
+<h3>6.3 公共解与同解</h3>
+<div class="formula">
+$$A\vec{x}=\vec{0} \text{ 与 } B\vec{x}=\vec{0} \text{ 同解} \;\Leftrightarrow\; r(A) = r(B) = r\!\begin{pmatrix}A \\ B\end{pmatrix}$$
+$$A\vec{x}=\vec{0} \text{ 的解都是 } B\vec{x}=\vec{0} \text{ 的解} \;\Leftrightarrow\; r(A) = r\!\begin{pmatrix}A \\ B\end{pmatrix}$$
+</div>
+
+</div>
+
+<button class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<footer>
+  <p>第三章 · 向量与线性方程组 | <a href="02_矩阵.html">← 上一章</a> · <a href="04_特征值与二次型.html">下一章 →</a></p>
+</footer>
+
+</body>
+</html>

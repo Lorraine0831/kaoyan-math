@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>线性代数必背公式 - 完整速查表</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+
+<header>
+  <h1>线性代数必背公式 · 完整速查表</h1>
+  <div class="subtitle">行列式 · 矩阵 · 向量 · 方程组 · 特征值 · 二次型 | 考前必背</div>
+</header>
+
+<nav class="topnav">
+  <a href="#sec1">一、行列式</a>
+  <a href="#sec2">二、矩阵</a>
+  <a href="#sec3">三、逆与伴随</a>
+  <a href="#sec4">四、秩</a>
+  <a href="#sec5">五、向量</a>
+  <a href="#sec6">六、方程组</a>
+  <a href="#sec7">七、特征值</a>
+  <a href="#sec8">八、二次型</a>
+  <a href="../index.html">← 首页</a>
+</nav>
+
+<div class="container">
+
+<!-- ============== 一、行列式 ============== -->
+<h2 id="sec1"><span class="num">1</span>行列式</h2>
+
+<h3>1.1 行列式性质</h3>
+<div class="formula">
+$$|A^T| = |A| \qquad |AB| = |A|\cdot|B| \qquad |kA| = k^n|A|$$
+$$|A^{-1}| = \frac{1}{|A|} \qquad |A^*| = |A|^{n-1} \quad (A \text{ 为 } n \text{ 阶})$$
+$$|A^m| = |A|^m \qquad |AB|=0 \Leftrightarrow |A|=0 \text{ 或 } |B|=0$$
+</div>
+
+<h3>1.2 展开定理</h3>
+<div class="formula accent">
+$$|A| = \sum_{k=1}^n a_{ik}A_{ik} \quad (\text{按第 } i \text{ 行展开})$$
+$$|A| = \sum_{k=1}^n a_{kj}A_{kj} \quad (\text{按第 } j \text{ 列展开})$$
+$$\sum_{k=1}^n a_{ik}A_{jk} = 0 \quad (i \neq j) \qquad \text{（异行（列）展开为0）}$$
+</div>
+
+<h3>1.3 特殊行列式</h3>
+<table>
+<tr><th>类型</th><th>值</th></tr>
+<tr><td>上/下三角行列式</td><td>$a_{11}a_{22}\cdots a_{nn}$（主对角线元素之积）</td></tr>
+<tr><td>对角行列式</td><td>$a_{11}a_{22}\cdots a_{nn}$</td></tr>
+<tr><td>2阶</td><td>$\begin{vmatrix} a & b \\ c & d \end{vmatrix} = ad - bc$</td></tr>
+<tr><td>3阶（沙路法）</td><td>$a_1b_2c_3 + a_2b_3c_1 + a_3b_1c_2 - a_3b_2c_1 - a_1b_3c_2 - a_2b_1c_3$</td></tr>
+<tr><td>范德蒙德行列式</td><td>$\prod_{1\leq j < i \leq n}(x_i - x_j)$</td></tr>
+<tr><td>分块上三角</td><td>$\begin{vmatrix} A & C \\ O & B \end{vmatrix} = |A||B|$</td></tr>
+<tr><td>分块下三角</td><td>$\begin{vmatrix} A & O \\ C & B \end{vmatrix} = |A||B|$</td></tr>
+</table>
+
+<h3>1.4 克莱姆法则</h3>
+<p>若 $n$ 元线性方程组 $A\vec{x}=\vec{b}$ 的系数行列式 $|A| \neq 0$，则唯一解为：</p>
+<div class="formula accent">
+$$x_j = \frac{D_j}{D}, \quad D = |A|, \quad D_j = \begin{vmatrix} a_{11} & \cdots & b_1 & \cdots & a_{1n} \\ \vdots & & \vdots & & \vdots \\ a_{n1} & \cdots & b_n & \cdots & a_{nn} \end{vmatrix}$$
+</div>
+<p>其中 $D_j$ 是把 $A$ 的第 $j$ 列换成 $\vec{b}$ 后的行列式。</p>
+<div class="tip"><span class="label">推论：</span>齐次方程组 $A\vec{x}=\vec{0}$ 有非零解 $\Leftrightarrow$ $|A| = 0$。</div>
+
+<!-- ============== 二、矩阵运算 ============== -->
+<h2 id="sec2"><span class="num">2</span>矩阵运算</h2>
+
+<h3>2.1 基本运算法则</h3>
+<div class="formula">
+$$A + B = B + A \qquad (A+B)+C = A+(B+C)$$
+$$(AB)C = A(BC) \qquad A(B+C) = AB + AC \qquad (B+C)A = BA + CA$$
+$$k(AB) = (kA)B = A(kB) \qquad (AB)^T = B^T A^T$$
+$$(A^T)^T = A \qquad (A+B)^T = A^T + B^T$$
+</div>
+<div class="tip warning"><span class="label">注意：</span>矩阵乘法<strong>不满足交换律</strong>（$AB \neq BA$ 一般情况），也<strong>不满足消去律</strong>（$AB=AC$ 且 $A\neq O$ 不能推出 $B=C$）。</div>
+
+<h3>2.2 转置与特殊矩阵</h3>
+<table>
+<tr><th>类型</th><th>定义</th><th>性质</th></tr>
+<tr><td>对称矩阵</td><td>$A^T = A$</td><td>$a_{ij} = a_{ji}$</td></tr>
+<tr><td>反对称矩阵</td><td>$A^T = -A$</td><td>$a_{ii}=0$, $a_{ij}=-a_{ji}$</td></tr>
+<tr><td>正交矩阵</td><td>$A^T A = I$</td><td>$A^T = A^{-1}$, $|A|=\pm 1$</td></tr>
+<tr><td>幂等矩阵</td><td>$A^2 = A$</td><td>特征值只能是 $0$ 或 $1$</td></tr>
+<tr><td>对合矩阵</td><td>$A^2 = I$</td><td>$A^{-1} = A$</td></tr>
+</table>
+
+<h3>2.3 矩阵的幂</h3>
+<div class="formula">
+$$(AB)^k \neq A^k B^k \text{（一般情况）} \qquad (A^k)^l = A^{kl}$$
+$$\text{若 } A = \alpha\beta^T \text{（秩1矩阵）} \;\Rightarrow\; A^n = (\beta^T\alpha)^{n-1} A$$
+</div>
+
+<!-- ============== 三、逆矩阵与伴随矩阵 ============== -->
+<h2 id="sec3"><span class="num">3</span>逆矩阵与伴随矩阵</h2>
+
+<h3>3.1 逆矩阵定义与判据</h3>
+<div class="formula">
+$$A \text{ 可逆} \;\Leftrightarrow\; \exists\, B, \; AB = BA = I \;\Leftrightarrow\; |A| \neq 0 \;\Leftrightarrow\; r(A) = n$$
+$$A^{-1} = \frac{1}{|A|} A^* \quad (\text{伴随矩阵法})$$
+</div>
+
+<h3>3.2 逆矩阵的性质</h3>
+<div class="formula accent">
+$$(A^{-1})^{-1} = A \qquad (AB)^{-1} = B^{-1}A^{-1} \qquad (A^{-1})^T = (A^T)^{-1}$$
+$$(kA)^{-1} = \frac{1}{k}A^{-1} \quad (k\neq 0) \qquad (A^*)^{-1} = \frac{A}{|A|} \quad (|A|\neq 0)$$
+$$|A^{-1}| = |A|^{-1} \qquad (A^{-1})^* = \frac{A}{|A|}$$
+</div>
+
+<h3>3.3 伴随矩阵 $A^*$ 的核心性质</h3>
+<div class="formula accent">
+$$AA^* = A^*A = |A|\,I \qquad A^* = |A|\,A^{-1} \;\;(|A|\neq 0)$$
+$$(A^*)^T = (A^T)^* \qquad (A^*)^* = |A|^{n-2}A \;\;(n\geq 2)$$
+$$(AB)^* = B^*A^* \qquad (kA)^* = k^{n-1}A^*$$
+$$|A^*| = |A|^{n-1} \qquad r(A^*) = \begin{cases} n & r(A)=n \\ 1 & r(A)=n-1 \\ 0 & r(A)\leq n-2 \end{cases}$$
+</div>
+<div class="tip warning"><span class="label">高频考点：</span>$r(A^*)$ 的三种情况是考试常考结论。$r(A)=n-1$ 时 $A^* \neq O$ 但 $|A^*|=0$。</div>
+
+<h3>3.4 分块矩阵的逆</h3>
+<div class="formula">
+$$\begin{pmatrix} A & O \\ O & B \end{pmatrix}^{-1} = \begin{pmatrix} A^{-1} & O \\ O & B^{-1} \end{pmatrix}$$
+$$\begin{pmatrix} O & A \\ B & O \end{pmatrix}^{-1} = \begin{pmatrix} O & B^{-1} \\ A^{-1} & O \end{pmatrix}$$
+$$\begin{pmatrix} A & C \\ O & B \end{pmatrix}^{-1} = \begin{pmatrix} A^{-1} & -A^{-1}CB^{-1} \\ O & B^{-1} \end{pmatrix}$$
+</div>
+
+<!-- ============== 四、秩 ============== -->
+<h2 id="sec4"><span class="num">4</span>矩阵的秩</h2>
+
+<h3>4.1 秩的重要不等式</h3>
+<div class="formula accent">
+$$r(AB) \leq \min\{r(A),\, r(B)\}$$
+$$r(A+B) \leq r(A) + r(B)$$
+$$r(A) + r(B) - n \leq r(AB) \quad (\text{西尔维斯特不等式})$$
+$$\max\{r(A), r(B)\} \leq r\begin{pmatrix} A \\ B \end{pmatrix} \leq r(A) + r(B)$$
+</div>
+
+<h3>4.2 秩与可逆性</h3>
+<ul>
+  <li>$A$ 为 $m\times n$ 矩阵，$r(A) = r \Leftrightarrow$ 存在 $r$ 阶非零子式，且所有 $r+1$ 阶子式为零</li>
+  <li>$r(A) = n \Leftrightarrow$ $A$ 可逆（$n$ 阶方阵）</li>
+  <li>初等变换不改变秩</li>
+  <li>$r(A) = r(A^TA) = r(AA^T)$</li>
+</ul>
+
+<h3>4.3 初等矩阵</h3>
+<table>
+<tr><th>初等变换</th><th>对应的初等矩阵</th><th>行列式</th></tr>
+<tr><td>交换 $i,j$ 行</td><td>$E(i,j)$</td><td>$-1$</td></tr>
+<tr><td>第 $i$ 行乘 $k$</td><td>$E(i(k))$</td><td>$k$</td></tr>
+<tr><td>第 $j$ 行加 $k$ 倍第 $i$ 行</td><td>$E(ij(k))$</td><td>$1$</td></tr>
+</table>
+<div class="formula">
+$$A \xrightarrow{\text{左乘}} EA \quad A \xrightarrow{\text{右乘}} AE \qquad E^{-1} \text{ 仍为初等矩阵}$$
+</div>
+
+<!-- ============== 五、向量 ============== -->
+<h2 id="sec5"><span class="num">5</span>向量</h2>
+
+<h3>5.1 线性相关与线性无关</h3>
+<div class="formula">
+$$\vec{\alpha}_1, \ldots, \vec{\alpha}_m \text{ 线性相关} \;\Leftrightarrow\; \exists\, k_1,\ldots,k_m \text{ 不全为零}, \; \sum k_i\vec{\alpha}_i = \vec{0}$$
+$$\text{线性无关} \;\Leftrightarrow\; \sum k_i\vec{\alpha}_i = \vec{0} \Rightarrow k_i = 0 \;\;\forall i$$
+</div>
+<ul>
+  <li>单个向量 $\vec{\alpha}$ 线性相关 $\Leftrightarrow$ $\vec{\alpha}=\vec{0}$</li>
+  <li>两个向量线性相关 $\Leftrightarrow$ 成比例</li>
+  <li>$m > n$ 时，$m$ 个 $n$ 维向量必线性相关</li>
+  <li>部分相关 $\Rightarrow$ 整体相关；整体无关 $\Rightarrow$ 部分无关</li>
+</ul>
+
+<h3>5.2 内积、正交与施密特正交化</h3>
+<div class="formula">
+$$\langle \vec{\alpha}, \vec{\beta} \rangle = \vec{\alpha}^T\vec{\beta} = \sum a_i b_i \qquad \|\vec{\alpha}\| = \sqrt{\langle\vec{\alpha},\vec{\alpha}\rangle}$$
+$$\vec{\alpha} \perp \vec{\beta} \;\Leftrightarrow\; \langle\vec{\alpha},\vec{\beta}\rangle = 0$$
+</div>
+<p><strong>施密特正交化</strong>：</p>
+<div class="formula accent">
+$$\vec{\beta}_1 = \vec{\alpha}_1$$
+$$\vec{\beta}_2 = \vec{\alpha}_2 - \frac{\langle\vec{\alpha}_2,\vec{\beta}_1\rangle}{\langle\vec{\beta}_1,\vec{\beta}_1\rangle}\vec{\beta}_1$$
+$$\vec{\beta}_3 = \vec{\alpha}_3 - \frac{\langle\vec{\alpha}_3,\vec{\beta}_1\rangle}{\langle\vec{\beta}_1,\vec{\beta}_1\rangle}\vec{\beta}_1 - \frac{\langle\vec{\alpha}_3,\vec{\beta}_2\rangle}{\langle\vec{\beta}_2,\vec{\beta}_2\rangle}\vec{\beta}_2$$
+$$\text{单位化：} \;\; \vec{e}_i = \frac{\vec{\beta}_i}{\|\vec{\beta}_i\|}$$
+</div>
+
+<h3>5.3 向量空间</h3>
+<div class="formula">
+$$\text{基} \to \text{维数} \to \text{坐标} \qquad \text{过渡矩阵 } P: (\vec{\beta}_1,\ldots,\vec{\beta}_n) = (\vec{\alpha}_1,\ldots,\vec{\alpha}_n)P$$
+$$\text{坐标变换：} \;\; \vec{x}_{\text{新}} = P^{-1}\vec{x}_{\text{旧}}$$
+</div>
+
+<!-- ============== 六、线性方程组 ============== -->
+<h2 id="sec6"><span class="num">6</span>线性方程组</h2>
+
+<h3>6.1 解的判据</h3>
+<p>对 $A\vec{x}=\vec{b}$（$A$ 为 $m\times n$）：</p>
+<div class="formula accent">
+$$\text{无解} \;\Leftrightarrow\; r(A) \neq r(A|\vec{b})$$
+$$\text{唯一解} \;\Leftrightarrow\; r(A) = r(A|\vec{b}) = n$$
+$$\text{无穷多解} \;\Leftrightarrow\; r(A) = r(A|\vec{b}) < n$$
+$$\text{齐次 } A\vec{x}=\vec{0} \text{ 有非零解} \;\Leftrightarrow\; r(A) < n$$
+</div>
+
+<h3>6.2 齐次方程组 $A\vec{x}=\vec{0}$ 的解结构</h3>
+<p>基础解系含 $n - r(A)$ 个线性无关的解向量 $\vec{\xi}_1, \ldots, \vec{\xi}_{n-r}$：</p>
+<div class="formula">
+$$\vec{x} = c_1\vec{\xi}_1 + c_2\vec{\xi}_2 + \cdots + c_{n-r}\vec{\xi}_{n-r}$$
+$$\text{解空间维数} = n - r(A)$$
+</div>
+
+<h3>6.3 非齐次方程组 $A\vec{x}=\vec{b}$ 的解结构</h3>
+<div class="formula accent">
+$$\vec{x} = \vec{\eta}^* + c_1\vec{\xi}_1 + \cdots + c_{n-r}\vec{\xi}_{n-r}$$
+</div>
+<p>其中 $\vec{\eta}^*$ 为特解，$\vec{\xi}_i$ 为对应齐次方程组的基础解系。</p>
+<div class="tip"><span class="label">性质：</span>若 $\vec{\eta}_1, \vec{\eta}_2$ 是 $A\vec{x}=\vec{b}$ 的解，则 $\vec{\eta}_1-\vec{\eta}_2$ 是 $A\vec{x}=\vec{0}$ 的解。</div>
+
+<h3>6.4 公共解与同解</h3>
+<div class="formula">
+$$A\vec{x}=\vec{0} \text{ 与 } B\vec{x}=\vec{0} \text{ 同解} \;\Leftrightarrow\; r(A) = r(B) = r\!\begin{pmatrix}A\\B\end{pmatrix}$$
+</div>
+
+<!-- ============== 七、特征值与特征向量 ============== -->
+<h2 id="sec7"><span class="num">7</span>特征值与特征向量</h2>
+
+<h3>7.1 定义与求法</h3>
+<div class="formula accent">
+$$A\vec{\alpha} = \lambda\vec{\alpha} \;\;(\vec{\alpha}\neq\vec{0}) \qquad |\lambda I - A| = 0 \;\text{（特征方程）}$$
+$$(\lambda I - A)\vec{\alpha} = \vec{0} \;\text{（求特征向量）}$$
+</div>
+
+<h3>7.2 特征值的性质</h3>
+<div class="formula accent">
+$$\sum_{i=1}^n \lambda_i = \text{tr}(A) = \sum a_{ii} \qquad \prod_{i=1}^n \lambda_i = |A|$$
+$$\lambda_{A^T} = \lambda_A \qquad \lambda_{A^{-1}} = \frac{1}{\lambda_A} \qquad \lambda_{A^*} = \frac{|A|}{\lambda_A}$$
+$$\lambda_{A^k} = \lambda_A^k \qquad \lambda_{A+kI} = \lambda_A + k \qquad \lambda_{f(A)} = f(\lambda_A)$$
+</div>
+<div class="tip warning"><span class="label">注意：</span>$\lambda_A = 0 \Leftrightarrow |A| = 0$（$A$ 不可逆）。不同特征值对应的特征向量线性无关。</div>
+
+<h3>7.3 相似与对角化</h3>
+<div class="formula">
+$$A \sim B \;\Leftrightarrow\; \exists\, P \text{ 可逆}, \;\; P^{-1}AP = B$$
+$$A \text{ 可对角化} \;\Leftrightarrow\; \exists\, P, \;\; P^{-1}AP = \Lambda = \text{diag}(\lambda_1,\ldots,\lambda_n)$$
+$$\Leftrightarrow\; A \text{ 有 } n \text{ 个线性无关的特征向量}$$
+$$\Leftrightarrow\; \text{每个 } k_i \text{ 重特征值有 } k_i \text{ 个线性无关特征向量}$$
+</div>
+
+<h3>7.4 实对称矩阵</h3>
+<div class="formula accent">
+$$\text{实对称矩阵的特征值全为实数}$$
+$$\text{不同特征值对应的特征向量正交}$$
+$$\text{实对称矩阵一定可正交对角化}:\;\; Q^TAQ = \Lambda, \;\; Q^TQ = I$$
+</div>
+
+<h3>7.5 相似变换的性质</h3>
+<div class="formula">
+$$A \sim B \;\Rightarrow\; |A|=|B|,\; \text{tr}(A)=\text{tr}(B),\; r(A)=r(B),\; \lambda_A = \lambda_B$$
+$$A \sim B \;\Rightarrow\; A^k \sim B^k,\; A^{-1}\sim B^{-1},\; A^T\sim B^T$$
+$$A \sim B \;\Rightarrow\; f(A)\sim f(B)$$
+</div>
+
+<!-- ============== 八、二次型 ============== -->
+<h2 id="sec8"><span class="num">8</span>二次型</h2>
+
+<h3>8.1 二次型的矩阵表示</h3>
+<div class="formula">
+$$f = \vec{x}^T A \vec{x}, \quad A \text{ 为对称矩阵}, \quad r(A) = r(f) \text{（二次型的秩）}$$
+</div>
+
+<h3>8.2 标准形与规范形</h3>
+<div class="formula accent">
+$$\text{标准形：} \;\; f = d_1 y_1^2 + d_2 y_2^2 + \cdots + d_n y_n^2$$
+$$\text{规范形：} \;\; f = y_1^2 + \cdots + y_p^2 - y_{p+1}^2 - \cdots - y_{p+q}^2$$
+$$p + q = r(f) \;\;(\text{秩}), \quad p - q = \text{符号差}$$
+$$\text{惯性定理：} \;\; p, q \text{ 由 } f \text{ 唯一确定（合同不变量）}$$
+</div>
+
+<h3>8.3 正交变换化标准形</h3>
+<div class="formula">
+$$\text{实对称矩阵 } A \;\to\; \text{求特征值 } \lambda_i \;\to\; \text{正交化单位化特征向量} \;\to\; Q$$
+$$Q^TAQ = \Lambda = \text{diag}(\lambda_1, \ldots, \lambda_n), \quad f = \lambda_1 y_1^2 + \cdots + \lambda_n y_n^2$$
+</div>
+
+<h3>8.4 配方法化标准形</h3>
+<div class="tip"><span class="label">步骤：</span>逐步将含某变量的交叉项配成完全平方，每次消去一个变量，直到没有交叉项。</div>
+
+<h3>8.5 正定二次型</h3>
+<div class="formula accent">
+$$f = \vec{x}^T A \vec{x} \text{ 正定} \;\Leftrightarrow\; \forall\, \vec{x}\neq\vec{0},\; f > 0$$
+$$\Leftrightarrow\; A \text{ 的特征值全为正}$$
+$$\Leftrightarrow\; A \text{ 的各阶顺序主子式全为正}$$
+$$\Leftrightarrow\; p = r = n \;\text{（正惯性指数 = 秩 = n）}$$
+$$\Leftrightarrow\; A \text{ 合同于 } I_n$$
+</div>
+<p><strong>顺序主子式判据</strong>（最常用）：</p>
+<div class="formula">
+$$\Delta_1 = a_{11} > 0, \;\; \Delta_2 = \begin{vmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{vmatrix} > 0, \;\; \ldots, \;\; \Delta_n = |A| > 0$$
+</div>
+
+<h3>8.6 合同关系</h3>
+<div class="formula">
+$$A \simeq B \;\Leftrightarrow\; \exists\, C \text{ 可逆}, \;\; C^TAC = B$$
+$$A \simeq B \;\Rightarrow\; r(A)=r(B), \;\; \text{正负惯性指数相同}$$
+$$\text{实对称矩阵 } A \simeq B \;\Leftrightarrow\; \text{正惯性指数、负惯性指数分别相等}$$
+</div>
+
+</div>
+
+<button class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<footer>
+  <p>线性代数必背公式速查表 · 考前复习专用</p>
+</footer>
+
+</body>
+</html>

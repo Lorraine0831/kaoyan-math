@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第五章 多元积分学 - 高数知识点</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+
+<header>
+  <h1>第五章 · 多元积分学</h1>
+  <div class="subtitle">二重积分 · 三重积分 · 曲线积分 · 曲面积分 · 格林/高斯/斯托克斯公式</div>
+</header>
+
+<nav class="topnav">
+  <a href="#sec1">5.1 二重积分</a>
+  <a href="#sec2">5.2 三重积分</a>
+  <a href="#sec3">5.3 曲线积分</a>
+  <a href="#sec4">5.4 格林公式</a>
+  <a href="#sec5">5.5 曲面积分</a>
+  <a href="#sec6">5.6 高斯公式</a>
+  <a href="#sec7">5.7 斯托克斯</a>
+  <a href="#sec8">5.8 场论</a>
+  <a href="../index.html">← 首页</a>
+</nav>
+
+<div class="container">
+
+<h2 id="sec1"><span class="num">1</span>二重积分</h2>
+
+<h3>1.1 定义</h3>
+<div class="formula">
+$$\iint_D f(x,y)\,d\sigma = \lim_{\lambda\to 0}\sum_{i=1}^n f(\xi_i,\eta_i)\,\Delta\sigma_i$$
+</div>
+<p>当 $f$ 在有界闭区域 $D$ 上连续时，二重积分存在。</p>
+
+<h3>1.2 直角坐标系下的计算</h3>
+<p><strong>X 型区域</strong>（先 $y$ 后 $x$）：$D = \{(x,y) \mid a \leq x \leq b,\; y_1(x) \leq y \leq y_2(x)\}$</p>
+<div class="formula">
+$$\iint_D f\,dxdy = \int_a^b\left[\int_{y_1(x)}^{y_2(x)} f(x,y)\,dy\right]dx$$
+</div>
+<p><strong>Y 型区域</strong>（先 $x$ 后 $y$）：$D = \{(x,y) \mid c \leq y \leq d,\; x_1(y) \leq x \leq x_2(y)\}$</p>
+<div class="formula">
+$$\iint_D f\,dxdy = \int_c^d\left[\int_{x_1(y)}^{x_2(y)} f(x,y)\,dx\right]dy$$
+</div>
+
+<h3>1.3 极坐标系下的计算</h3>
+<p>令 $x = r\cos\theta$，$y = r\sin\theta$：</p>
+<div class="formula accent">
+$$\iint_D f(x,y)\,dxdy = \iint_D f(r\cos\theta, r\sin\theta)\,r\,dr\,d\theta$$
+</div>
+<div class="tip warning"><span class="label">注意：</span>面积元素 $d\sigma = r\,dr\,d\theta$，<strong>不要漏 $r$</strong>！</div>
+
+<p><strong>极坐标适用场景</strong>：</p>
+<ul>
+  <li>积分域为圆、圆环、扇形或其一部分</li>
+  <li>被积函数含 $x^2+y^2$</li>
+  <li>被积函数含 $\arctan(y/x)$（即 $\theta$）</li>
+</ul>
+
+<h3>1.4 二重积分的对称性</h3>
+<div class="formula accent">
+$$D \text{ 关于 } y \text{ 轴对称：} \iint_D f\,d\sigma = \begin{cases} 0 & f \text{ 关于 } x \text{ 为奇} \\ 2\iint_{D_1} f\,d\sigma & f \text{ 关于 } x \text{ 为偶} \end{cases}$$
+</div>
+<p>同理，关于 $x$ 轴对称、关于原点对称也有类似的对称性简化。</p>
+<div class="tip"><span class="label">轮换对称性：</span>若 $D$ 关于 $y=x$ 对称（即 $x,y$ 可交换），则 $\iint_D f(x,y)\,d\sigma = \iint_D f(y,x)\,d\sigma$，特别地 $\iint_D x\,d\sigma = \iint_D y\,d\sigma$。</div>
+
+<h3>1.5 二重积分的几何意义</h3>
+<ul>
+  <li>$f \geq 0$ 时，$\iint_D f\,d\sigma$ 表示以 $D$ 为底、$z=f(x,y)$ 为顶的曲顶柱体体积</li>
+  <li>$f \equiv 1$ 时，$\iint_D d\sigma = D$ 的面积</li>
+</ul>
+
+<h2 id="sec2"><span class="num">2</span>三重积分</h2>
+
+<h3>2.1 直角坐标系</h3>
+<p><strong>先一后二（投影法）</strong>：$\Omega$ 投影到 $xy$ 面得 $D_{xy}$，$z$ 从 $z_1(x,y)$ 到 $z_2(x,y)$：</p>
+<div class="formula">
+$$\iiint_\Omega f\,dV = \iint_{D_{xy}}\left[\int_{z_1(x,y)}^{z_2(x,y)} f\,dz\right]dxdy$$
+</div>
+<p><strong>先二后一（截面法）</strong>：用 $z=z$ 截 $\Omega$ 得截面 $D_z$：</p>
+<div class="formula">
+$$\iiint_\Omega f\,dV = \int_c^d\left[\iint_{D_z} f(x,y,z)\,dxdy\right]dz$$
+</div>
+<div class="tip"><span class="label">选法：</span>若被积函数只含 $z$（或 $z$ 的函数），用先二后一更方便。</p>
+
+<h3>2.2 柱坐标</h3>
+<p>令 $x = r\cos\theta$，$y = r\sin\theta$，$z = z$：</p>
+<div class="formula accent">
+$$\iiint_\Omega f\,dV = \iiint_\Omega f(r\cos\theta, r\sin\theta, z)\,r\,dz\,dr\,d\theta$$
+</div>
+<div class="tip warning"><span class="label">注意：</span>体积元素 $r\,dz\,dr\,d\theta$，<strong>不要漏 $r$</strong>。</div>
+<p><strong>适用场景</strong>：积分域含旋转对称轴（圆柱、圆锥、旋转抛物面），被积函数含 $x^2+y^2$。</p>
+
+<h3>2.3 球坐标</h3>
+<p>令 $x = \rho\sin\varphi\cos\theta$，$y = \rho\sin\varphi\sin\theta$，$z = \rho\cos\varphi$：</p>
+<div class="formula accent">
+$$\iiint_\Omega f\,dV = \iiint_\Omega f(\rho,\varphi,\theta)\,\rho^2\sin\varphi\,d\rho\,d\varphi\,d\theta$$
+</div>
+<div class="tip warning"><span class="label">注意：</span>体积元素 $\rho^2\sin\varphi\,d\rho\,d\varphi\,d\theta$，<strong>三个因子都不能漏</strong>。其中 $\varphi$ 是与 $z$ 轴正方向的夹角（$0\leq\varphi\leq\pi$），$\theta$ 是 $xy$ 面上的方位角。</div>
+<p><strong>适用场景</strong>：积分域为球、球壳或锥面与球面围成，被积函数含 $x^2+y^2+z^2$。</p>
+
+<h3>2.4 三重积分的对称性</h3>
+<p>与二重积分类似：</p>
+<ul>
+  <li><strong>奇偶对称性</strong>：$\Omega$ 关于某坐标面对称，$f$ 关于该变量为奇 $\Rightarrow$ 积分为 $0$</li>
+  <li><strong>轮换对称性</strong>：$\Omega$ 关于 $x,y,z$ 的轮换对称 $\Rightarrow \iiint x\,dV = \iiint y\,dV = \iiint z\,dV$</li>
+</ul>
+<div class="tip success"><span class="label">举例：</span>若 $\Omega$ 是球体 $x^2+y^2+z^2\leq R^2$，则 $\iiint_\Omega x\,dV = \iiint_\Omega y\,dV = \iiint_\Omega z\,dV = \iiint_\Omega (x+y+z)\,dV / 3$。</div>
+
+<h2 id="sec3"><span class="num">3</span>曲线积分</h2>
+
+<h3>3.1 第一类曲线积分（对弧长）</h3>
+<div class="formula">
+$$\int_L f(x,y)\,ds$$
+</div>
+<p><strong>参数方程</strong> $x=x(t), y=y(t)$，$\alpha \leq t \leq \beta$：</p>
+<div class="formula">
+$$\int_L f\,ds = \int_\alpha^\beta f(x(t),y(t))\sqrt{x'^2+y'^2}\,dt$$
+</div>
+<p><strong>注意</strong>：积分限必须 <strong>$\alpha < \beta$</strong>（从下限到上限，与方向无关），因为弧长元素 $ds \geq 0$。</p>
+
+<h3>3.2 第二类曲线积分（对坐标）</h3>
+<div class="formula">
+$$\int_L P\,dx + Q\,dy$$
+</div>
+<p><strong>参数方程</strong>，起点 $t=\alpha$，终点 $t=\beta$：</p>
+<div class="formula">
+$$\int_L P\,dx + Q\,dy = \int_\alpha^\beta [P(x(t),y(t))x'(t) + Q(x(t),y(t))y'(t)]\,dt$$
+</div>
+<p><strong>注意</strong>：积分限与曲线方向有关，<strong>起点对应下限，终点对应上限</strong>。</p>
+
+<h3>3.3 两类曲线积分的关系</h3>
+<div class="formula">
+$$\int_L P\,dx + Q\,dy = \int_L (P\cos\alpha + Q\cos\beta)\,ds$$
+</div>
+<p>其中 $(\cos\alpha, \cos\beta)$ 是 $L$ 在点 $(x,y)$ 处与方向一致的单位切向量。</p>
+
+<h3>3.4 第一类曲线积分的对称性</h3>
+<p>曲线 $L$ 关于 $y$ 轴对称，$f$ 关于 $x$ 为奇 $\Rightarrow \int_L f\,ds = 0$。其余类似。</p>
+
+<h2 id="sec4"><span class="num">4</span>格林公式</h2>
+
+<h3>4.1 格林公式</h3>
+<div class="formula accent">
+$$\oint_L P\,dx + Q\,dy = \iint_D \left(\frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y}\right)dxdy$$
+</div>
+<div class="tip"><span class="label">条件：</span>$L$ 为 $D$ 的正向边界（逆时针为正），$P,Q$ 在 $D$ 上有连续的一阶偏导数。</div>
+<div class="tip warning"><span class="label">注意：</span>"正向"指沿 $L$ 行走时 $D$ 在左侧。对于有"洞"的区域，外边界逆时针、内边界顺时针为正。</div>
+
+<h3>4.2 平面路径无关与保守场</h3>
+<p>设 $P,Q$ 在单连通区域 $D$ 上有连续一阶偏导，以下四条等价：</p>
+<div class="formula accent">
+$$\frac{\partial P}{\partial y} = \frac{\partial Q}{\partial x} \;\;\text{（在 } D \text{ 内）}$$
+$$\Leftrightarrow \oint_L P\,dx+Q\,dy = 0 \;\;\text{（对 } D \text{ 内任意闭曲线）}$$
+$$\Leftrightarrow \int_L P\,dx+Q\,dy \text{ 与路径无关（在 } D \text{ 内）}$$
+$$\Leftrightarrow P\,dx+Q\,dy \text{ 是某函数 } u(x,y) \text{ 的全微分：} du = P\,dx + Q\,dy$$
+</div>
+
+<h3>4.3 二元原函数的求法</h3>
+<p>若 $\frac{\partial P}{\partial y} = \frac{\partial Q}{\partial x}$，则存在 $u(x,y)$ 使 $du = P\,dx + Q\,dy$，且</p>
+<div class="formula">
+$$u(x,y) = \int_{x_0}^x P(x,y_0)\,dx + \int_{y_0}^y Q(x,y)\,dy + C$$
+</div>
+<p>或用"凑微分"法直接观察。</p>
+
+<h3>4.4 利用格林公式简化计算</h3>
+<div class="tip success"><span class="label">技巧：</span>
+<ul style="margin-top:4px;">
+  <li>若 $L$ 不是闭曲线，可补一条线段 $L'$ 使 $L+L'$ 为闭曲线，然后用格林公式，最后减去 $\int_{L'}$</li>
+  <li>若 $\frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y}$ 比 $P,Q$ 本身简单，用格林公式更高效</li>
+  <li>注意奇点：若 $P,Q$ 在 $D$ 内有奇点（如原点），需挖洞处理</li>
+</ul>
+</div>
+
+<h2 id="sec5"><span class="num">5</span>曲面积分</h2>
+
+<h3>5.1 第一类曲面积分（对面积）</h3>
+<div class="formula">
+$$\iint_\Sigma f(x,y,z)\,dS$$
+</div>
+<p>若 $\Sigma$ 的方程为 $z = z(x,y)$，投影到 $xy$ 面得 $D_{xy}$：</p>
+<div class="formula">
+$$\iint_\Sigma f\,dS = \iint_{D_{xy}} f(x,y,z(x,y))\sqrt{1+z_x^2+z_y^2}\,dxdy$$
+</div>
+
+<h3>5.2 第二类曲面积分（对坐标）</h3>
+<div class="formula">
+$$\iint_\Sigma P\,dydz + Q\,dzdx + R\,dxdy$$
+</div>
+<p>若 $\Sigma$ 方程为 $z=z(x,y)$，上侧为正：</p>
+<div class="formula">
+$$\iint_\Sigma R\,dxdy = \pm\iint_{D_{xy}} R(x,y,z(x,y))\,dxdy$$
+</div>
+<p>上侧取 $+$，下侧取 $-$。类似地有对 $dydz$ 和 $dzdx$ 的投影公式。</p>
+
+<h3>5.3 两类曲面积分的关系</h3>
+<div class="formula">
+$$\iint_\Sigma P\,dydz + Q\,dzdx + R\,dxdy = \iint_\Sigma (P\cos\alpha + Q\cos\beta + R\cos\gamma)\,dS$$
+</div>
+<p>其中 $(\cos\alpha, \cos\beta, \cos\gamma)$ 是 $\Sigma$ 在指定侧的单位法向量。</p>
+
+<h2 id="sec6"><span class="num">6</span>高斯公式</h2>
+
+<h3>6.1 高斯公式（散度定理）</h3>
+<div class="formula accent">
+$$\oiint_\Sigma P\,dydz + Q\,dzdx + R\,dxdy = \iiint_\Omega \left(\frac{\partial P}{\partial x} + \frac{\partial Q}{\partial y} + \frac{\partial R}{\partial z}\right)dV$$
+</div>
+<div class="tip"><span class="label">条件：</span>$\Sigma$ 是 $\Omega$ 的边界曲面取<strong>外侧</strong>，$P,Q,R$ 在 $\Omega$ 上有连续一阶偏导。</div>
+
+<h3>6.2 散度</h3>
+<div class="formula">
+$$\text{div}\,\vec{F} = \frac{\partial P}{\partial x} + \frac{\partial Q}{\partial y} + \frac{\partial R}{\partial z}$$
+$$\oiint_\Sigma \vec{F}\cdot d\vec{S} = \iiint_\Omega \text{div}\,\vec{F}\,dV$$
+</div>
+<p>高斯公式说明：向量场穿过闭曲面的通量等于其散度在体内的体积分。</p>
+
+<h3>6.3 使用高斯公式的注意事项</h3>
+<div class="tip warning"><span class="label">检查清单：</span>
+<ul style="margin-top:4px;">
+  <li>曲面必须<strong>封闭</strong>。若不封闭，补面后用高斯公式再减去补面的积分</li>
+  <li>法向量取<strong>外侧</strong></li>
+  <li>$P,Q,R$ 在 $\Omega$ 内<strong>无奇点</strong>。若有奇点（如原点），需挖一个小球面处理</li>
+  <li>区分 $dydz, dzdx, dxdy$ 分别对应 $P, Q, R$</li>
+</ul>
+</div>
+
+<h2 id="sec7"><span class="num">7</span>斯托克斯公式</h2>
+
+<h3>7.1 斯托克斯公式</h3>
+<div class="formula accent">
+$$\oint_\Gamma P\,dx + Q\,dy + R\,dz = \iint_\Sigma \begin{vmatrix} dydz & dzdx & dxdy \\ \frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\ P & Q & R \end{vmatrix}$$
+$$= \iint_\Sigma \left(\frac{\partial R}{\partial y} - \frac{\partial Q}{\partial z}\right)dydz + \left(\frac{\partial P}{\partial z} - \frac{\partial R}{\partial x}\right)dzdx + \left(\frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y}\right)dxdy$$
+</div>
+<div class="tip"><span class="label">条件：</span>$\Gamma$ 为空间闭曲线，$\Sigma$ 是以 $\Gamma$ 为边界的曲面，$\Gamma$ 的方向与 $\Sigma$ 的侧符合<strong>右手螺旋法则</strong>。</div>
+
+<h3>7.2 旋度</h3>
+<div class="formula">
+$$\text{rot}\,\vec{F} = \nabla \times \vec{F} = \begin{vmatrix} \vec{i} & \vec{j} & \vec{k} \\ \frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\ P & Q & R \end{vmatrix}$$
+$$\oint_\Gamma \vec{F}\cdot d\vec{r} = \iint_\Sigma (\text{rot}\,\vec{F})\cdot d\vec{S}$$
+</div>
+
+<h3>7.3 三个公式的统一视角</h3>
+<div class="tip"><span class="label">记忆框架：</span>
+<ul style="margin-top:4px;">
+  <li><strong>格林公式</strong>：平面闭曲线积分 $\leftrightarrow$ 二重积分（二维斯托克斯）</li>
+  <li><strong>高斯公式</strong>：闭曲面积分 $\leftrightarrow$ 三重积分（散度定理）</li>
+  <li><strong>斯托克斯公式</strong>：空间闭曲线积分 $\leftrightarrow$ 曲面积分（旋度定理）</li>
+</ul>
+核心思想都是："边界上的积分 = 内部微分形式的积分"。
+</div>
+
+<h2 id="sec8"><span class="num">8</span>场论初步</h2>
+
+<h3>8.1 梯度、散度、旋度对比</h3>
+<table>
+<tr><th>算子</th><th>作用对象</th><th>结果类型</th><th>公式</th></tr>
+<tr><td>梯度 $\nabla f$</td><td>标量场 $f$</td><td>向量场</td><td>$(f_x, f_y, f_z)$</td></tr>
+<tr><td>散度 $\nabla\cdot\vec{F}$</td><td>向量场 $\vec{F}$</td><td>标量场</td><td>$P_x+Q_y+R_z$</td></tr>
+<tr><td>旋度 $\nabla\times\vec{F}$</td><td>向量场 $\vec{F}$</td><td>向量场</td><td>行列式形式</td></tr>
+</table>
+
+<h3>8.2 保守场（无旋场）</h3>
+<div class="formula">
+$$\text{rot}\,\vec{F} = \vec{0} \;\Leftrightarrow\; \vec{F} \text{ 为保守场} \;\Leftrightarrow\; \exists\, u, \;\vec{F} = \nabla u$$
+</div>
+<p>保守场中曲线积分与路径无关，沿闭曲线积分为零。</p>
+
+<h3>8.3 有势场与势函数</h3>
+<p>若 $\vec{F} = \nabla u$，则 $u$ 称为 $\vec{F}$ 的<strong>势函数</strong>。求势函数的方法与求原函数相同（沿路径积分）。</p>
+
+</div>
+
+<button class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<footer>
+  <p>第五章 · 多元积分学 | <a href="04_多元微分学.html">← 上一章</a> · <a href="06_常微分方程.html">下一章：常微分方程 →</a></p>
+</footer>
+
+</body>
+</html>

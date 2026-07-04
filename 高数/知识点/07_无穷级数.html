@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第七章 无穷级数 - 高数知识点</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+
+<header>
+  <h1>第七章 · 无穷级数</h1>
+  <div class="subtitle">常数项级数 · 幂级数 · 傅里叶级数</div>
+</header>
+
+<nav class="topnav">
+  <a href="#sec1">7.1 常数项级数</a>
+  <a href="#sec2">7.2 正项级数判敛</a>
+  <a href="#sec3">7.3 交错级数</a>
+  <a href="#sec4">7.4 幂级数</a>
+  <a href="#sec5">7.5 函数展开</a>
+  <a href="#sec6">7.6 傅里叶级数</a>
+  <a href="../index.html">← 首页</a>
+</nav>
+
+<div class="container">
+
+<h2 id="sec1"><span class="num">1</span>常数项级数</h2>
+
+<h3>1.1 收敛与发散的定义</h3>
+<p>设 $S_n = \sum_{k=1}^n a_k$ 为部分和。若 $\lim_{n\to\infty} S_n = S$ 存在，则称级数 $\sum a_n$ 收敛，和为 $S$；否则发散。</p>
+
+<h3>1.2 收敛的必要条件</h3>
+<div class="formula">
+$$\sum a_n \text{ 收敛} \;\Rightarrow\; \lim_{n\to\infty} a_n = 0$$
+</div>
+<div class="tip warning"><span class="label">注意：</span>这是必要条件，不是充分条件。$\lim a_n = 0$ <strong>不能保证</strong> $\sum a_n$ 收敛（反例：调和级数 $\sum \frac{1}{n}$ 发散）。但若 $\lim a_n \neq 0$，则级数<strong>一定发散</strong>。</div>
+
+<h3>1.3 收敛级数的基本性质</h3>
+<ul>
+  <li><strong>线性</strong>：$\sum a_n$ 和 $\sum b_n$ 都收敛 $\Rightarrow$ $\sum(\alpha a_n + \beta b_n)$ 收敛</li>
+  <li><strong>改变有限项</strong>：不改变敛散性（但可能改变和）</li>
+  <li><strong>加括号</strong>：收敛级数加括号后仍收敛且和不变；但加括号后收敛不能推出原级数收敛</li>
+  <li><strong>级数收敛 $\Rightarrow$ $a_n \to 0$</strong>，但反之不然</li>
+</ul>
+
+<h3>1.4 重要参考级数</h3>
+<table>
+<tr><th>级数</th><th>敛散性</th><th>条件</th></tr>
+<tr><td>等比级数 $\sum ar^{n-1}$</td><td>$|r|<1$ 收敛，$|r|\geq 1$ 发散</td><td>和 $= \frac{a}{1-r}$（$|r|<1$）</td></tr>
+<tr><td>$p$-级数 $\sum \frac{1}{n^p}$</td><td>$p > 1$ 收敛，$p \leq 1$ 发散</td><td>—</td></tr>
+<tr><td>调和级数 $\sum \frac{1}{n}$</td><td>发散</td><td>$p=1$ 的特例</td></tr>
+<tr><td>交错调和级数 $\sum \frac{(-1)^{n-1}}{n}$</td><td>条件收敛</td><td>和 $= \ln 2$</td></tr>
+</table>
+
+<h2 id="sec2"><span class="num">2</span>正项级数判敛法</h2>
+
+<p>以下判敛法适用于 $a_n \geq 0$ 的正项级数。正项级数收敛 $\Leftrightarrow$ 部分和有上界。</p>
+
+<h3>2.1 比较判敛法</h3>
+<p>若 $0 \leq a_n \leq b_n$：</p>
+<ul>
+  <li>$\sum b_n$ 收敛 $\Rightarrow$ $\sum a_n$ 收敛（"大的收敛则小的收敛"）</li>
+  <li>$\sum a_n$ 发散 $\Rightarrow$ $\sum b_n$ 发散（"小的发散则大的发散"）</li>
+</ul>
+
+<h3>2.2 比较判敛法的极限形式</h3>
+<div class="formula">
+$$\lim_{n\to\infty} \frac{a_n}{b_n} = c: \quad \begin{cases} 0 < c < +\infty & \Rightarrow \text{同敛散} \\ c = 0 & \Rightarrow \sum b_n \text{ 收敛则 } \sum a_n \text{ 收敛} \\ c = +\infty & \Rightarrow \sum b_n \text{ 发散则 } \sum a_n \text{ 发散} \end{cases}$$
+</div>
+<div class="tip success"><span class="label">选参考级数：</span>通项含 $\frac{1}{n^p}$ 形式时，选 $p$-级数比较；含 $n!$ 或 $a^n$ 时，通常本身收敛，选等比级数比较。</div>
+
+<h3>2.3 比值判敛法（达朗贝尔）</h3>
+<div class="formula accent">
+$$\lim_{n\to\infty} \frac{a_{n+1}}{a_n} = \rho: \quad \begin{cases} \rho < 1 & \Rightarrow \text{收敛} \\ \rho > 1 & \Rightarrow \text{发散} \\ \rho = 1 & \Rightarrow \text{不能确定} \end{cases}$$
+</div>
+<p><strong>适用场景</strong>：通项含 $n!$、$a^n$、$n^n$ 等。</p>
+
+<h3>2.4 根值判敛法（柯西）</h3>
+<div class="formula accent">
+$$\lim_{n\to\infty} \sqrt[n]{a_n} = \rho: \quad \begin{cases} \rho < 1 & \Rightarrow \text{收敛} \\ \rho > 1 & \Rightarrow \text{发散} \\ \rho = 1 & \Rightarrow \text{不能确定} \end{cases}$$
+</div>
+<p><strong>适用场景</strong>：通项含 $n$ 次幂，如 $a_n = \left(\frac{n}{n+1}\right)^{n^2}$。</p>
+
+<h3>2.5 积分判敛法（柯西积分判敛法）</h3>
+<p>若 $a_n = f(n)$，$f(x)$ 在 $[1,+\infty)$ 上非负、连续、递减，则</p>
+<div class="formula">
+$$\sum_{n=1}^\infty a_n \text{ 与 } \int_1^{+\infty} f(x)\,dx \text{ 同敛散}$$
+</div>
+<p><strong>适用场景</strong>：$a_n = \frac{1}{n(\ln n)^p}$ 等形式。</p>
+
+<h3>2.6 判敛法选择流程</h3>
+<div class="tip"><span class="label">做题思路：</span>
+<ol style="margin-top:4px;">
+  <li>先看 $\lim a_n$ 是否为 $0$。若 $\neq 0$，直接发散</li>
+  <li>通项含 $n!$ 或 $a^n$ → 比值法</li>
+  <li>通项含 $n$ 次幂 → 根值法</li>
+  <li>通项是 $n$ 的有理式或含 $\ln n$ → 与 $p$-级数比较</li>
+  <li>以上都失效 → 考虑积分判敛法或比较法</li>
+</ol>
+</div>
+
+<h2 id="sec3"><span class="num">3</span>交错级数与绝对收敛</h2>
+
+<h3>3.1 莱布尼茨判敛法</h3>
+<p>对交错级数 $\sum (-1)^{n-1} a_n$（$a_n > 0$），若满足：</p>
+<ol>
+  <li>$a_n$ 单调递减（$a_{n+1} \leq a_n$）</li>
+  <li>$\lim a_n = 0$</li>
+</ol>
+<div class="formula accent">
+$$\text{则级数收敛，且 } |S - S_n| \leq a_{n+1}$$
+</div>
+<p>即截断误差不超过第一项去掉的绝对值。</p>
+
+<h3>3.2 绝对收敛与条件收敛</h3>
+<div class="formula">
+$$\sum |a_n| \text{ 收敛} \;\Rightarrow\; \sum a_n \text{ 收敛（绝对收敛）}$$
+$$\sum a_n \text{ 收敛但 } \sum |a_n| \text{ 发散} \;\Rightarrow\; \text{条件收敛}$$
+</div>
+<div class="tip"><span class="label">重要性质：</span>绝对收敛的级数任意重排后和不变（无条件收敛）；条件收敛的重排可能改变和甚至改变敛散性（黎曼定理）。</div>
+
+<h2 id="sec4"><span class="num">4</span>幂级数</h2>
+
+<h3>4.1 收敛半径与收敛域</h3>
+<p>对幂级数 $\sum_{n=0}^\infty a_n x^n$，若</p>
+<div class="formula accent">
+$$R = \lim_{n\to\infty}\left|\frac{a_n}{a_{n+1}}\right| \quad \text{（若极限存在）}$$
+$$\text{或} \quad R = \frac{1}{\lim_{n\to\infty}\sqrt[n]{|a_n|}} \quad \text{（柯西-阿达马公式）}$$
+</div>
+<p>则 $(-R, R)$ 为收敛区间，端点 $x=\pm R$ 需单独判断。</p>
+
+<h3>4.2 幂级数的性质</h3>
+<p>在收敛域 $(-R, R)$ 内：</p>
+<ul>
+  <li><strong>逐项求导</strong>：$\left(\sum a_n x^n\right)' = \sum n a_n x^{n-1}$，收敛半径不变</li>
+  <li><strong>逐项积分</strong>：$\int_0^x \sum a_n t^n\,dt = \sum \frac{a_n}{n+1}x^{n+1}$，收敛半径不变</li>
+  <li>幂级数的和函数在其收敛域内连续（在收敛域上含端点）</li>
+</ul>
+<div class="tip warning"><span class="label">注意：</span>逐项求导和逐项积分后收敛半径<strong>不变</strong>，但端点敛散性可能改变。</div>
+
+<h3>4.3 求和函数的常用技巧</h3>
+<div class="tip success"><span class="label">方法：</span>
+<ul style="margin-top:4px;">
+  <li>先求导再积分，或先积分再求导，化为已知级数（等比级数求和）</li>
+  <li>$\sum_{n=0}^\infty x^n = \frac{1}{1-x}$（$|x|<1$）是最常用的"已知和"</li>
+  <li>$\sum_{n=1}^\infty \frac{x^n}{n} = -\ln(1-x)$（$|x|<1$），由 $\frac{1}{1-x}$ 积分得到</li>
+  <li>$\sum_{n=1}^\infty n x^n = \frac{x}{(1-x)^2}$（$|x|<1$），由 $\frac{1}{1-x}$ 求导乘 $x$ 得到</li>
+</ul>
+</div>
+
+<h2 id="sec5"><span class="num">5</span>函数的幂级数展开</h2>
+
+<h3>5.1 泰勒级数与麦克劳林级数</h3>
+<p>若 $f(x)$ 在 $x_0$ 处任意阶可导，其泰勒级数为</p>
+<div class="formula">
+$$f(x) = \sum_{n=0}^\infty \frac{f^{(n)}(x_0)}{n!}(x-x_0)^n$$
+</div>
+<p>$x_0=0$ 时称为麦克劳林级数。<strong>收敛条件</strong>：余项 $R_n(x) \to 0$（$n\to\infty$）。</p>
+
+<h3>5.2 常用函数的幂级数展开</h3>
+<div class="formula accent">
+$$e^x = \sum_{n=0}^\infty \frac{x^n}{n!} = 1 + x + \frac{x^2}{2!} + \cdots, \quad x \in (-\infty, +\infty)$$
+$$\sin x = \sum_{n=0}^\infty \frac{(-1)^n x^{2n+1}}{(2n+1)!}, \quad x \in (-\infty, +\infty)$$
+$$\cos x = \sum_{n=0}^\infty \frac{(-1)^n x^{2n}}{(2n)!}, \quad x \in (-\infty, +\infty)$$
+$$\ln(1+x) = \sum_{n=1}^\infty \frac{(-1)^{n-1} x^n}{n}, \quad x \in (-1, 1]$$
+$$(1+x)^\alpha = \sum_{n=0}^\infty \binom{\alpha}{n} x^n, \quad x \in (-1, 1)$$
+$$\frac{1}{1-x} = \sum_{n=0}^\infty x^n, \quad x \in (-1, 1)$$
+$$\frac{1}{1+x} = \sum_{n=0}^\infty (-1)^n x^n, \quad x \in (-1, 1)$$
+$$\arctan x = \sum_{n=0}^\infty \frac{(-1)^n x^{2n+1}}{2n+1}, \quad x \in [-1, 1]$$
+</div>
+
+<h3>5.3 间接展开法</h3>
+<div class="tip"><span class="label">技巧：</span>不直接用定义求 $f^{(n)}$，而是利用已知展开式通过以下方法间接展开：
+<ul style="margin-top:4px;">
+  <li><strong>代换</strong>：$f(x)$ 中以 $-x$、$x^2$ 等替换 $x$</li>
+  <li><strong>逐项求导/积分</strong>：对已知展开式求导或积分</li>
+  <li><strong>加减</strong>：将 $f$ 拆为已知展开式的组合</li>
+</ul>
+</div>
+
+<h3>5.4 幂级数展开的应用</h3>
+<ul>
+  <li><strong>近似计算</strong>：利用展开式计算 $e$、$\pi$、$\ln 2$ 等的近似值</li>
+  <li><strong>求极限</strong>：用泰勒展开代替等价无穷小，精度更高</li>
+  <li><strong>求积分解</strong>：如 $\int \frac{\sin x}{x}\,dx$ 无法用初等函数表示，可用幂级数展开积分</li>
+  <li><strong>解微分方程</strong>：幂级数解法</li>
+</ul>
+
+<h2 id="sec6"><span class="num">6</span>傅里叶级数</h2>
+
+<h3>6.1 周期为 $2\pi$ 的傅里叶级数</h3>
+<div class="formula accent">
+$$f(x) \sim \frac{a_0}{2} + \sum_{n=1}^\infty \left(a_n \cos nx + b_n \sin nx\right)$$
+$$a_n = \frac{1}{\pi}\int_{-\pi}^{\pi} f(x)\cos nx\,dx \quad (n = 0, 1, 2, \ldots)$$
+$$b_n = \frac{1}{\pi}\int_{-\pi}^{\pi} f(x)\sin nx\,dx \quad (n = 1, 2, 3, \ldots)$$
+</div>
+
+<h3>6.2 狄利克雷收敛定理</h3>
+<p>若 $f(x)$ 在 $[-\pi, \pi]$ 上分段单调且有界（或分段可微），则其傅里叶级数</p>
+<div class="formula">
+$$\text{在连续点收敛于 } f(x), \quad \text{在间断点收敛于 } \frac{f(x_0^+) + f(x_0^-)}{2}$$
+</div>
+<div class="tip"><span class="label">关键：</span>不需要 $f$ 连续，只需满足狄利克雷条件，傅里叶级数就收敛（可能在间断点收敛于左右极限的平均值）。</div>
+
+<h3>6.3 正弦级数与余弦级数</h3>
+<p><strong>奇函数</strong>：$a_n = 0$，只有正弦项</p>
+<div class="formula">
+$$f(x) \sim \sum_{n=1}^\infty b_n \sin nx, \quad b_n = \frac{2}{\pi}\int_0^\pi f(x)\sin nx\,dx$$
+</div>
+<p><strong>偶函数</strong>：$b_n = 0$，只有余弦项</p>
+<div class="formula">
+$$f(x) \sim \frac{a_0}{2} + \sum_{n=1}^\infty a_n \cos nx, \quad a_n = \frac{2}{\pi}\int_0^\pi f(x)\cos nx\,dx$$
+</div>
+
+<h3>6.4 周期为 $2l$ 的傅里叶级数</h3>
+<p>令 $t = \frac{\pi x}{l}$，将 $f(x)$ 化为周期 $2\pi$ 的函数：</p>
+<div class="formula accent">
+$$f(x) \sim \frac{a_0}{2} + \sum_{n=1}^\infty \left(a_n \cos\frac{n\pi x}{l} + b_n \sin\frac{n\pi x}{l}\right)$$
+$$a_n = \frac{1}{l}\int_{-l}^{l} f(x)\cos\frac{n\pi x}{l}\,dx, \quad b_n = \frac{1}{l}\int_{-l}^{l} f(x)\sin\frac{n\pi x}{l}\,dx$$
+</div>
+
+<h3>6.5 奇延拓与偶延拓</h3>
+<p>对定义在 $[0, l]$ 上的函数 $f(x)$：</p>
+<ul>
+  <li><strong>奇延拓</strong>：延拓为 $(-l, l)$ 上的奇函数 → 展开为正弦级数</li>
+  <li><strong>偶延拓</strong>：延拓为 $(-l, l)$ 上的偶函数 → 展开为余弦级数</li>
+</ul>
+
+<h3>6.6 帕塞瓦尔等式</h3>
+<p>若 $f(x)$ 满足狄利克雷条件：</p>
+<div class="formula accent">
+$$\frac{a_0^2}{2} + \sum_{n=1}^\infty (a_n^2 + b_n^2) = \frac{1}{\pi}\int_{-\pi}^{\pi} [f(x)]^2\,dx$$
+</div>
+<p><strong>应用</strong>：利用已知的傅里叶系数，求某些收敛级数的和。例如由 $f(x)=x$ 的正弦展开可推出 $\sum \frac{1}{n^2} = \frac{\pi^2}{6}$。</p>
+
+<h3>6.7 常用傅里叶级数结果</h3>
+<div class="formula">
+$$x = 2\sum_{n=1}^\infty \frac{(-1)^{n-1}}{n}\sin nx, \quad x \in (-\pi, \pi)$$
+$$x^2 = \frac{\pi^2}{3} + 4\sum_{n=1}^\infty \frac{(-1)^n}{n^2}\cos nx, \quad x \in [-\pi, \pi]$$
+$$|x| = \frac{\pi}{2} - \frac{4}{\pi}\sum_{n=1}^\infty \frac{\cos(2n-1)x}{(2n-1)^2}, \quad x \in [-\pi, \pi]$$
+</div>
+<p>由这些结果可推出：</p>
+<div class="formula accent">
+$$\sum_{n=1}^\infty \frac{1}{n^2} = \frac{\pi^2}{6}, \quad \sum_{n=1}^\infty \frac{(-1)^{n-1}}{n^2} = \frac{\pi^2}{12}, \quad \sum_{n=1}^\infty \frac{1}{(2n-1)^2} = \frac{\pi^2}{8}$$
+</div>
+
+</div>
+
+<button class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<footer>
+  <p>第七章 · 无穷级数 | <a href="06_常微分方程.html">← 上一章</a> · <a href="../index.html">返回首页 →</a></p>
+</footer>
+
+</body>
+</html>

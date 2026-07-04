@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第四章 多元微分学 - 高数知识点</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+
+<header>
+  <h1>第四章 · 多元微分学</h1>
+  <div class="subtitle">偏导数 · 全微分 · 复合/隐函数求导 · 方向导数与梯度 · 多元极值</div>
+</header>
+
+<nav class="topnav">
+  <a href="#sec1">4.1 偏导数</a>
+  <a href="#sec2">4.2 全微分</a>
+  <a href="#sec3">4.3 复合求导</a>
+  <a href="#sec4">4.4 隐函数</a>
+  <a href="#sec5">4.5 方向导数</a>
+  <a href="#sec6">4.6 极值</a>
+  <a href="#sec7">4.7 条件极值</a>
+  <a href="#sec8">4.8 几何应用</a>
+  <a href="../index.html">← 首页</a>
+</nav>
+
+<div class="container">
+
+<h2 id="sec1"><span class="num">1</span>偏导数</h2>
+
+<h3>1.1 定义</h3>
+<p>设 $z = f(x,y)$，固定 $y$ 对 $x$ 求导：</p>
+<div class="formula">
+$$f_x(x_0,y_0) = \lim_{\Delta x \to 0}\frac{f(x_0+\Delta x, y_0)-f(x_0,y_0)}{\Delta x}$$
+$$f_y(x_0,y_0) = \lim_{\Delta y \to 0}\frac{f(x_0, y_0+\Delta y)-f(x_0,y_0)}{\Delta y}$$
+</div>
+<div class="tip"><span class="label">理解：</span>偏导数就是"其他变量视为常数"时对某一变量的导数，反映函数沿坐标轴方向的变化率。</div>
+
+<h3>1.2 二阶偏导数与混合偏导</h3>
+<div class="formula">
+$$f_{xx} = \frac{\partial^2 f}{\partial x^2}, \quad f_{yy} = \frac{\partial^2 f}{\partial y^2}, \quad f_{xy} = \frac{\partial^2 f}{\partial x\,\partial y}, \quad f_{yx} = \frac{\partial^2 f}{\partial y\,\partial x}$$
+</div>
+
+<h3>1.3 混合偏导相等的条件</h3>
+<div class="formula accent">
+$$\text{若 } f_{xy} \text{ 和 } f_{yx} \text{ 在某区域内连续} \;\Rightarrow\; f_{xy} = f_{yx}$$
+</div>
+<div class="tip"><span class="label">实操：</span>考试中遇到的初等函数一般都满足此条件，混合偏导可交换求导顺序。</div>
+
+<h2 id="sec2"><span class="num">2</span>全微分</h2>
+
+<h3>2.1 定义</h3>
+<p>若 $\Delta z = f(x+\Delta x, y+\Delta y) - f(x,y)$ 可表示为</p>
+<div class="formula">
+$$\Delta z = A\,\Delta x + B\,\Delta y + o(\rho), \quad \rho = \sqrt{\Delta x^2+\Delta y^2}$$
+</div>
+<p>则称 $f$ 在 $(x,y)$ 可微，记 $dz = A\,dx + B\,dy$。若可微，则 $A = f_x$，$B = f_y$。</p>
+
+<h3>2.2 可微的必要条件</h3>
+<div class="formula">
+$$f \text{ 可微} \;\Rightarrow\; f_x \text{ 和 } f_y \text{ 均存在}$$
+</div>
+<div class="tip warning"><span class="label">注意：</span>偏导数存在<strong>不一定</strong>可微！需验证 $\lim_{\rho\to 0}\frac{\Delta z - f_x\Delta x - f_y\Delta y}{\rho} = 0$。</div>
+
+<h3>2.3 可微的充分条件</h3>
+<div class="formula accent">
+$$f_x \text{ 和 } f_y \text{ 连续} \;\Rightarrow\; f \text{ 可微}$$
+</div>
+
+<h3>2.4 全微分公式</h3>
+<div class="formula accent">
+$$dz = \frac{\partial f}{\partial x}dx + \frac{\partial f}{\partial y}dy$$
+$$\text{三元：} \quad dz = f_x\,dx + f_y\,dy + f_z\,dz$$
+</div>
+
+<h3>2.5 全微分形式不变性</h3>
+<p>无论 $u, v$ 是自变量还是中间变量，$z = f(u,v)$ 的全微分形式不变：</p>
+<div class="formula">
+$$dz = f_u\,du + f_v\,dv$$
+</div>
+
+<h3>2.6 近似计算</h3>
+<div class="formula">
+$$\Delta z \approx dz = f_x\,\Delta x + f_y\,\Delta y$$
+$$f(x_0+\Delta x, y_0+\Delta y) \approx f(x_0,y_0) + f_x(x_0,y_0)\Delta x + f_y(x_0,y_0)\Delta y$$
+</div>
+
+<h2 id="sec3"><span class="num">3</span>多元复合函数求导</h2>
+
+<h3>3.1 链式法则（一般情形）</h3>
+<div class="formula accent">
+$$z = f(u,v), \quad u = \varphi(x,y), \quad v = \psi(x,y)$$
+$$\frac{\partial z}{\partial x} = \frac{\partial f}{\partial u}\frac{\partial u}{\partial x} + \frac{\partial f}{\partial v}\frac{\partial v}{\partial x}$$
+$$\frac{\partial z}{\partial y} = \frac{\partial f}{\partial u}\frac{\partial u}{\partial y} + \frac{\partial f}{\partial v}\frac{\partial v}{\partial y}$$
+</div>
+
+<h3>3.2 全导数（中间变量为一元函数）</h3>
+<div class="formula">
+$$z = f(u(t), v(t)) \;\Rightarrow\; \frac{dz}{dt} = \frac{\partial f}{\partial u}\frac{du}{dt} + \frac{\partial f}{\partial v}\frac{dv}{dt}$$
+</div>
+
+<h3>3.3 复合关系中既有 $x$ 又有中间变量含 $x$</h3>
+<div class="formula">
+$$z = f(x, u(x,y)) \;\Rightarrow\; \frac{\partial z}{\partial x} = \frac{\partial f}{\partial x} + \frac{\partial f}{\partial u}\frac{\partial u}{\partial x}$$
+</div>
+<div class="tip warning"><span class="label">符号注意：</span>这里 $\frac{\partial f}{\partial x}$ 是把 $u$ 视为常数时对 $x$ 的偏导，与 $\frac{\partial z}{\partial x}$ 含义不同！</div>
+
+<h3>3.4 画树状图辅助记忆</h3>
+<div class="tip"><span class="label">技巧：</span>画出函数依赖关系树：$z \to u \to x$ 和 $z \to v \to x$，从 $z$ 到 $x$ 的每条路径对应一项乘积，所有路径之和即为 $\frac{\partial z}{\partial x}$。</div>
+
+<h2 id="sec4"><span class="num">4</span>隐函数求导</h2>
+
+<h3>4.1 一个方程的情形</h3>
+<div class="formula accent">
+$$F(x,y) = 0 \;\Rightarrow\; \frac{dy}{dx} = -\frac{F_x}{F_y} \quad (F_y \neq 0)$$
+$$F(x,y,z) = 0 \;\Rightarrow\; \frac{\partial z}{\partial x} = -\frac{F_x}{F_z}, \quad \frac{\partial z}{\partial y} = -\frac{F_y}{F_z} \quad (F_z \neq 0)$$
+</div>
+
+<h3>4.2 方程组的情形</h3>
+<p>设 $\begin{cases} F(x,y,z) = 0 \\ G(x,y,z) = 0 \end{cases}$ 确定 $y=y(x), z=z(x)$，则</p>
+<div class="formula">
+$$\frac{dy}{dx} = -\frac{\begin{vmatrix} F_x & F_z \\ G_x & G_z \end{vmatrix}}{\begin{vmatrix} F_y & F_z \\ G_y & G_z \end{vmatrix}} = -\frac{F_xG_z - F_zG_x}{F_yG_z - F_zG_y}, \quad \frac{dz}{dx} = -\frac{\begin{vmatrix} F_y & F_x \\ G_y & G_x \end{vmatrix}}{\begin{vmatrix} F_y & F_z \\ G_y & G_z \end{vmatrix}}$$
+</div>
+<div class="tip"><span class="label">实操技巧：</span>对方程组两边直接对 $x$ 求导（视 $y,z$ 为 $x$ 的函数），解线性方程组，比记行列式更可靠。</div>
+
+<h3>4.3 隐函数存在定理</h3>
+<p>若 $F(x_0,y_0)=0$，$F_y$ 在某邻域连续且 $F_y(x_0,y_0) \neq 0$，则在 $(x_0,y_0)$ 附近唯一确定连续可微的隐函数 $y=y(x)$。</p>
+
+<h2 id="sec5"><span class="num">5</span>方向导数与梯度</h2>
+
+<h3>5.1 方向导数</h3>
+<p>函数 $f(x,y)$ 沿方向 $\vec{l} = (\cos\alpha, \cos\beta)$ 的方向导数：</p>
+<div class="formula accent">
+$$\frac{\partial f}{\partial \vec{l}} = f_x\cos\alpha + f_y\cos\beta$$
+$$\text{三元：} \quad \frac{\partial f}{\partial \vec{l}} = f_x\cos\alpha + f_y\cos\beta + f_z\cos\gamma$$
+</div>
+
+<h3>5.2 梯度</h3>
+<div class="formula accent">
+$$\text{梯度：} \quad \vec{\nabla f} = (f_x, \; f_y) \quad \text{（三元：}\;(f_x, f_y, f_z)\text{）}$$
+$$\text{方向导数} = \vec{\nabla f} \cdot \vec{l^0}$$
+</div>
+
+<h3>5.3 梯度的意义</h3>
+<ul>
+  <li>方向导数的最大值 $= |\nabla f| = \sqrt{f_x^2 + f_y^2}$，方向沿梯度方向</li>
+  <li>方向导数最小值 $= -|\nabla f|$，方向沿负梯度方向</li>
+  <li>梯度方向是函数增长最快的方向</li>
+  <li>梯度垂直于等值线（面）</li>
+</ul>
+
+<h2 id="sec6"><span class="num">6</span>多元函数的极值</h2>
+
+<h3>6.1 极值的必要条件</h3>
+<p>若 $f$ 在 $(x_0,y_0)$ 有偏导且取极值，则</p>
+<div class="formula">
+$$f_x(x_0,y_0) = 0, \quad f_y(x_0,y_0) = 0$$
+</div>
+<p>满足此条件的点称为<strong>驻点</strong>。极值点一定是驻点或偏导不存在的点。</p>
+
+<h3>6.2 极值的充分条件（判别法）</h3>
+<p>设 $f_x(x_0,y_0)=0$，$f_y(x_0,y_0)=0$，令 $A = f_{xx}$，$B = f_{xy}$，$C = f_{yy}$，$\Delta = AC - B^2$：</p>
+<table>
+<tr><th>条件</th><th>结论</th></tr>
+<tr><td>$\Delta > 0$，$A > 0$</td><td>极小值</td></tr>
+<tr><td>$\Delta > 0$，$A < 0$</td><td>极大值</td></tr>
+<tr><td>$\Delta < 0$</td><td>不是极值（鞍点）</td></tr>
+<tr><td>$\Delta = 0$</td><td>不能确定，需用其他方法</td></tr>
+</table>
+<div class="tip"><span class="label">记忆：</span>$\Delta = AC-B^2$ 就像一个"判别式"，$\Delta>0$ 才有极值，再看 $A$ 的正负决定极大极小。</div>
+
+<h2 id="sec7"><span class="num">7</span>条件极值与拉格朗日乘数法</h2>
+
+<h3>7.1 拉格朗日乘数法</h3>
+<p>目标：在约束 $\varphi(x,y) = 0$ 下求 $f(x,y)$ 的极值。构造拉格朗日函数：</p>
+<div class="formula accent">
+$$\mathcal{L}(x,y,\lambda) = f(x,y) + \lambda\,\varphi(x,y)$$
+$$\text{解方程组：} \begin{cases} \mathcal{L}_x = f_x + \lambda\varphi_x = 0 \\ \mathcal{L}_y = f_y + \lambda\varphi_y = 0 \\ \mathcal{L}_\lambda = \varphi(x,y) = 0 \end{cases}$$
+</div>
+
+<h3>7.2 多约束条件</h3>
+<p>若有两个约束 $\varphi_1=0, \varphi_2=0$，则引入两个乘子：</p>
+<div class="formula">
+$$\mathcal{L} = f + \lambda_1\varphi_1 + \lambda_2\varphi_2$$
+$$\text{对 } x,y,z,\lambda_1,\lambda_2 \text{ 求偏导令其为零，解方程组}$$
+</div>
+
+<h3>7.3 条件极值的几何理解</h3>
+<div class="tip"><span class="label">直觉：</span>在约束曲面上移动，当目标函数的梯度与约束曲面的法向量平行时（即 $\nabla f = -\lambda\nabla\varphi$），达到极值。</div>
+
+<h2 id="sec8"><span class="num">8</span>多元微分学的几何应用</h2>
+
+<h3>8.1 空间曲线的切线与法平面</h3>
+<p><strong>参数方程</strong> $\vec{r}(t) = (x(t), y(t), z(t))$，在 $t=t_0$ 处：</p>
+<div class="formula">
+$$\text{切向量：} \;\vec{T} = (x'(t_0), y'(t_0), z'(t_0))$$
+$$\text{切线方程：} \;\frac{x-x_0}{x'(t_0)} = \frac{y-y_0}{y'(t_0)} = \frac{z-z_0}{z'(t_0)}$$
+$$\text{法平面方程：} \;x'(t_0)(x-x_0) + y'(t_0)(y-y_0) + z'(t_0)(z-z_0) = 0$$
+</div>
+
+<h3>8.2 曲面的切平面与法线</h3>
+<p><strong>隐式方程</strong> $F(x,y,z) = 0$，在 $(x_0,y_0,z_0)$ 处：</p>
+<div class="formula">
+$$\text{法向量：} \;\vec{n} = (F_x, F_y, F_z)\Big|_{(x_0,y_0,z_0)}$$
+$$\text{切平面方程：} \;F_x(x-x_0) + F_y(y-y_0) + F_z(z-z_0) = 0$$
+$$\text{法线方程：} \;\frac{x-x_0}{F_x} = \frac{y-y_0}{F_y} = \frac{z-z_0}{F_z}$$
+</div>
+
+<p><strong>显式方程</strong> $z = f(x,y)$：</p>
+<div class="formula">
+$$\text{法向量：} \;\vec{n} = (f_x, f_y, -1) \quad \text{或} \quad (-f_x, -f_y, 1)$$
+$$\text{切平面：} \;z - z_0 = f_x(x-x_0) + f_y(y-y_0)$$
+</div>
+
+<h3>8.3 方向导数与切平面的关系</h3>
+<div class="tip"><span class="label">联系：</span>曲面 $z=f(x,y)$ 在 $(x_0,y_0)$ 处的切平面方程 $z = z_0 + f_x\Delta x + f_y\Delta y$ 本质上就是全微分 $dz = f_x\,dx + f_y\,dy$ 的几何表现。方向导数就是切平面上沿给定方向的斜率。</div>
+
+</div>
+
+<button class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<footer>
+  <p>第四章 · 多元微分学 | <a href="03_一元积分学.html">← 上一章</a> · <a href="05_多元积分学.html">下一章：多元积分学 →</a></p>
+</footer>
+
+</body>
+</html>

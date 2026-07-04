@@ -144,10 +144,14 @@ h3 {
 
 /* 表格 */
 table {
+  display: block;
   width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
   border-collapse: collapse;
   margin: 12px 0;
   font-size: 14px;
+  -webkit-overflow-scrolling: touch;
 }
 th, td {
   border: 1px solid var(--border);

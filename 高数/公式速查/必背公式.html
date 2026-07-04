@@ -7,7 +7,14 @@
 <link rel="stylesheet" href="../assets/style.css">
 <script>
 window.MathJax = {
-  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+  tex: {
+    inlineMath: [['$','$'],['\\(','\\)']],
+    displayMath: [['$$','$$'],['\\[','\\]']],
+    macros: {
+      oiint: ['\\mathop{\\unicode{x222F}}\\nolimits', 1],
+      oiiint: ['\\mathop{\\unicode{x2230}}\\nolimits', 1]
+    }
+  },
   svg: { fontCache: 'global' }
 };
 </script>
@@ -29,6 +36,7 @@ window.MathJax = {
   <a href="#sec6">六、多元积分</a>
   <a href="#sec7">七、微分方程</a>
   <a href="#sec8">八、级数</a>
+  <a href="#sec9">九、高分技巧</a>
   <a href="../index.html">← 首页</a>
 </nav>
 
@@ -506,6 +514,84 @@ $$a_n = \frac{1}{l}\int_{-l}^{l} f(x)\cos\frac{n\pi x}{l}\,dx, \qquad b_n = \fra
 <h3>8.6 帕塞瓦尔等式</h3>
 <div class="formula">
 $$\frac{a_0^2}{2} + \sum_{n=1}^\infty (a_n^2+b_n^2) = \frac{1}{\pi}\int_{-\pi}^{\pi} [f(x)]^2\,dx$$
+</div>
+
+
+<!-- ============== 九、考试高分技巧与易漏考点 ============== -->
+<h2 id="sec9"><span class="num">9</span>高分技巧与易漏考点</h2>
+
+<h3>9.1 归结原则（海涅定理）——极限与数列的桥梁</h3>
+<div class="formula accent">
+$$\lim_{x\to x_0} f(x) = A \;\Leftrightarrow\; \forall \{x_n\} \subset D,\; x_n \neq x_0,\; x_n \to x_0, \;\; \lim_{n\to\infty} f(x_n) = A$$
+</div>
+<div class="tip"><span class="label">用途：</span>证明函数极限不存在时，找两个不同极限的子列即可。如 $f(x)=\sin\frac{1}{x}$ 在 $x\to 0$ 时取 $x_n=\frac{1}{2n\pi}$ 和 $x_n=\frac{1}{2n\pi+\pi/2}$。</div>
+
+<h3>9.2 Stolz定理——数列极限的"洛必达"</h3>
+<div class="formula accent">
+$$\text{若 } \lim x_n = \pm\infty \;\text{ 或 } \lim x_n = \lim y_n = 0, \;\text{则 } \lim\frac{x_n}{y_n} = \lim\frac{x_{n+1}-x_n}{y_{n+1}-y_n}$$
+</div>
+<div class="tip"><span class="label">好用场景：</span>$n$ 项和除以 $n$、$n$ 项积的极限等。例如 $\lim\frac{1^k+2^k+\cdots+n^k}{n^{k+1}}$。</div>
+
+<h3>9.3 中值定理证明题——辅助函数构造法</h3>
+<div class="formula accent">
+$$\text{证 } f'(\xi)=0: \text{用罗尔定理，构造函数使端点值相等}$$
+$$\text{证 } f'(\xi)=k: \text{构造 } g(x)=f(x)-kx, \text{用罗尔定理}$$
+$$\text{证 } f''(\xi)=0: \text{找三点使 } f \text{ 相等，两次用罗尔定理}$$
+$$\text{证 } f^{(n)}(\xi)=0: f \text{ 有 } n+1 \text{ 个零点} \Rightarrow f^{(n)} \text{ 有零点}$$
+</div>
+<p><strong>经典构造回顾</strong>：</p>
+<table>
+<tr><th>待证结论</th><th>构造辅助函数</th></tr>
+<tr><td>$f'(\xi) + f(\xi) = 0$</td><td>$g(x) = e^x f(x)$</td></tr>
+<tr><td>$f'(\xi) - f(\xi) = 0$</td><td>$g(x) = e^{-x}f(x)$</td></tr>
+<tr><td>$\xi f'(\xi) + f(\xi) = 0$</td><td>$g(x) = x f(x)$</td></tr>
+<tr><td>$f'(\xi)g(\xi) - f(\xi)g'(\xi) = 0$</td><td>$h(x) = \frac{f(x)}{g(x)}$</td></tr>
+<tr><td>$f'(\xi) + P(\xi)f(\xi) = 0$</td><td>$g(x) = e^{\int P(x)dx} f(x)$</td></tr>
+</table>
+
+<h3>9.4 积分不等式证明技巧</h3>
+<div class="tip"><span class="label">三大方法：</span>
+<ul style="margin-top:4px;">
+<li><strong>单调性法</strong>：构造 $F(x)=\int_a^x$（证明所需不等式），求导证单调性</li>
+<li><strong>最值法</strong>：对被积函数放缩，用 $m(b-a) \leq \int f \leq M(b-a)$</li>
+<li><strong>柯西-施瓦茨不等式</strong>：$(\int fg)^2 \leq \int f^2 \cdot \int g^2$</li>
+</ul>
+</div>
+<div class="formula">
+$$(\text{柯西-施瓦茨}) \quad \left[\int_a^b f(x)g(x)\,dx\right]^2 \leq \int_a^b f^2(x)\,dx \cdot \int_a^b g^2(x)\,dx$$
+</div>
+
+<h3>9.5 斜渐近线速求</h3>
+<div class="formula accent">
+$$\text{设 } k = \lim_{x\to\infty}\frac{f(x)}{x}, \;\; b = \lim_{x\to\infty}[f(x) - kx]$$
+$$\text{若两极限均存在，则 } y = kx + b \text{ 为斜渐近线}$$
+</div>
+<div class="tip success"><span class="label">注意：</span>若 $\lim f(x)$ 存在（水平渐近线），则该方向不可能有斜渐近线。左右两侧分开求。</div>
+
+<h3>9.6 数项级数判别法选择流程图</h3>
+<div class="tip"><span class="label">做题时按顺序尝试：</span>
+<ol>
+<li>若 $a_n \nrightarrow 0$ → 直接发散</li>
+<li>若通项含 $n!$, $a^n$, $n^n$ → 比值法/根值法</li>
+<li>若通项是 $n$ 的有理式 → 与 $p$-级数比较</li>
+<li>若通项含 $\ln n$ → 尝试积分判别法或与 $\frac{1}{n}$ 比较</li>
+<li>若是交错级数 → 莱布尼茨判别法</li>
+<li>若 $a_n$ 可以递推 → 考虑比较或积分</li>
+</ol>
+</div>
+
+<h3>9.7 变限积分含被积函数也含 $x$ 的处理</h3>
+<div class="formula accent">
+$$\frac{d}{dx}\int_a^x x f(t)\,dt = \int_a^x f(t)\,dt + x f(x) \quad (\text{乘法求导})$$
+$$\frac{d}{dx}\int_a^x f(x-t)\,dt = f(0) \quad (\text{先换元：令 }u=x-t\text{)}$$
+</div>
+<div class="tip warning"><span class="label">关键：</span>被积函数中含 $x$ 时，先通过换元或提出因子将 $x$ 移到积分号外，再求导。</div>
+
+<h3>9.8 定积分的特殊变换</h3>
+<div class="formula accent">
+$$\int_0^a f(x)\,dx = \int_0^a f(a-x)\,dx \quad (\text{区间反转})$$
+$$\int_0^{\pi} x\,f(\sin x)\,dx = \frac{\pi}{2}\int_0^{\pi} f(\sin x)\,dx \quad (\text{高频使用})$$
+$$\int_0^{\pi/2} f(\sin x, \cos x)\,dx = \int_0^{\pi/2} f(\cos x, \sin x)\,dx$$
 </div>
 
 </div>

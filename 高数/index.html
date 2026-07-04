@@ -7,7 +7,14 @@
 <link rel="stylesheet" href="assets/style.css">
 <script>
 window.MathJax = {
-  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+  tex: {
+    inlineMath: [['$','$'],['\\(','\\)']],
+    displayMath: [['$$','$$'],['\\[','\\]']],
+    macros: {
+      oiint: ['\\mathop{\\unicode{x222F}}\\nolimits', 1],
+      oiiint: ['\\mathop{\\unicode{x2230}}\\nolimits', 1]
+    }
+  },
   svg: { fontCache: 'global' }
 };
 </script>

@@ -7,7 +7,14 @@
 <link rel="stylesheet" href="../assets/style.css">
 <script>
 window.MathJax = {
-  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+  tex: {
+    inlineMath: [['$','$'],['\\(','\\)']],
+    displayMath: [['$$','$$'],['\\[','\\]']],
+    macros: {
+      oiint: ['\\mathop{\\unicode{x222F}}\\nolimits', 1],
+      oiiint: ['\\mathop{\\unicode{x2230}}\\nolimits', 1]
+    }
+  },
   svg: { fontCache: 'global' }
 };
 </script>
@@ -176,7 +183,7 @@ $$[f(g(h(x)))]' = f'(g(h(x))) \cdot g'(h(x)) \cdot h'(x)$$
 
 <h3>5.2 幂指函数求导（对数法）</h3>
 <div class="formula accent">
-$$y = u(x)^{v(x)} \Rightarrow y' = u^v\!\left(\frac{v'u}{u} + v\frac{u'}{u}\right) = u^v\!\left(v'\ln u + \frac{v\,u'}{u}\right)$$
+$$y = u(x)^{v(x)} \;\Rightarrow\; \ln y = v\ln u \;\Rightarrow\; \frac{y'}{y} = v'\ln u + \frac{v\,u'}{u} \;\Rightarrow\; y' = u^v\!\left(v'\ln u + \frac{v\,u'}{u}\right)$$
 </div>
 
 <h3>5.3 反函数求导</h3>

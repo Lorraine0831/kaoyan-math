@@ -7,7 +7,14 @@
 <link rel="stylesheet" href="../assets/style.css">
 <script>
 window.MathJax = {
-  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+  tex: {
+    inlineMath: [['$','$'],['\\(','\\)']],
+    displayMath: [['$$','$$'],['\\[','\\]']],
+    macros: {
+      oiint: ['\\mathop{\\unicode{x222F}}\\nolimits', 1],
+      oiiint: ['\\mathop{\\unicode{x2230}}\\nolimits', 1]
+    }
+  },
   svg: { fontCache: 'global' }
 };
 </script>
@@ -29,6 +36,7 @@ window.MathJax = {
   <a href="#sec6">六、方程组</a>
   <a href="#sec7">七、特征值</a>
   <a href="#sec8">八、二次型</a>
+  <a href="#sec9">九、高分技巧</a>
   <a href="../index.html">← 首页</a>
 </nav>
 
@@ -308,6 +316,67 @@ $$\Delta_1 = a_{11} > 0, \;\; \Delta_2 = \begin{vmatrix} a_{11} & a_{12} \\ a_{2
 $$A \simeq B \;\Leftrightarrow\; \exists\, C \text{ 可逆}, \;\; C^TAC = B$$
 $$A \simeq B \;\Rightarrow\; r(A)=r(B), \;\; \text{正负惯性指数相同}$$
 $$\text{实对称矩阵 } A \simeq B \;\Leftrightarrow\; \text{正惯性指数、负惯性指数分别相等}$$
+</div>
+
+
+<!-- ============== 九、高分技巧与易漏考点 ============== -->
+<h2 id="sec9"><span class="num">9</span>高分技巧与易漏考点</h2>
+
+<h3>9.1 $AB=O$ 的深层次理解</h3>
+<div class="formula accent">
+$$AB = O \;\Rightarrow\; \begin{cases} r(A) + r(B) \leq n \\ B \text{ 的每一列都是 } A\vec{x}=\vec{0} \text{ 的解} \\ B \text{ 的列向量空间 } \subseteq \text{Ker}(A) \end{cases}$$
+</div>
+<div class="tip success"><span class="label">做题思路：</span>$AB=O$ 不是"$A,B$ 为零"的意思——而是 $B$ 的非零列是 $A\vec{x}=\vec{0}$ 的非零解向量。这给出了<strong>解向量的来源</strong>。</div>
+
+<h3>9.2 齐次方程组同解的条件（完善版）</h3>
+<div class="formula accent">
+$$Ax=0 \text{ 与 } Bx=0 \text{ 同解} \;\Leftrightarrow\; r(A)=r(B)=r\!\begin{pmatrix}A\\B\end{pmatrix}$$
+$$\Leftrightarrow\; A, B \text{ 的行向量组等价}$$
+$$\Leftrightarrow\; A \text{ 的行可由 } B \text{ 的行线性表出，且反之亦然}$$
+</div>
+
+<h3>9.3 最小二乘解与正规方程</h3>
+<div class="formula accent">
+$$A\vec{x}=\vec{b} \text{ 无解时，求其最小二乘解：} \;\; A^TA\vec{x} = A^T\vec{b}$$
+$$\text{该方程必有解，且最小二乘解使 } \|A\vec{x}-\vec{b}\|^2 \text{ 最小}$$
+</div>
+<div class="tip"><span class="label">背景：</span>$A^TA$ 是正定或半正定的，因此 $A^TA\vec{x}=A^T\vec{b}$ 总相容。这在线性回归中用得非常多。</div>
+
+<h3>9.4 秩1矩阵的速判与速算</h3>
+<div class="formula accent">
+$$\text{若 } r(A)=1, \;\text{则 } A = \vec{u}\vec{v}^T, \;\; A^n = (\vec{v}^T\vec{u})^{n-1} A = (\text{tr}(A))^{n-1} A$$
+$$\text{特征值：} \;\; \lambda_1 = \text{tr}(A), \;\; \lambda_2 = \cdots = \lambda_n = 0$$
+</div>
+<div class="tip warning"><span class="label">注意：</span>秩1矩阵的迹 $=\vec{v}^T\vec{u}$。直接用 $A^n=(\text{tr}A)^{n-1}A$，比对角化快得多。</div>
+
+<h3>9.5 实对称矩阵一个常被忽视的性质</h3>
+<div class="formula">
+$$A \text{ 实对称且 } A^k = O \;\Rightarrow\; A = O \quad (\text{特别是 } A^2=O \Rightarrow A=O)$$
+$$A \text{ 实对称且正定} \;\Rightarrow\; A^{-1} \text{ 也正定，} A^* \text{ 也正定}$$
+</div>
+<div class="tip"><span class="label">应用：</span>证 $A=O$ 常走"先证 $A^2=O$，如果 $A$ 还是实对称则完事"。一般矩阵 $A^2=O$ 不能推出 $A=O$。</div>
+
+<h3>9.6 正交矩阵特征值的三个结论</h3>
+<div class="formula accent">
+$$A \text{ 正交矩阵} \;\Rightarrow\; |\lambda| = 1$$
+$$\text{实正交矩阵的复特征值成对出现：} \;\; e^{\pm i\theta}$$
+$$\text{奇数阶实正交矩阵必有特征值 } \lambda = 1 \text{ 或 } -1$$
+</div>
+
+<h3>9.7 "主对角占优"快速判断行列式非零</h3>
+<div class="tip"><span class="label">技巧：</span>考试中看到严格对角占优矩阵（每行主对角线绝对值 > 同行的其他所有元素绝对值之和），直接判可逆（$|A|\neq 0$），不需计算行列式。</div>
+
+<h3>9.8 二次型与特征值的"翻译"关系</h3>
+<div class="formula accent">
+$$\lambda_{\min}(A) \cdot \|\vec{x}\|^2 \leq \vec{x}^T A\vec{x} \leq \lambda_{\max}(A) \cdot \|\vec{x}\|^2 \quad (A \text{ 实对称})$$
+$$\max_{\|\vec{x}\|=1} \vec{x}^T A\vec{x} = \lambda_{\max}, \qquad \min_{\|\vec{x}\|=1} \vec{x}^T A\vec{x} = \lambda_{\min}$$
+</div>
+<div class="tip success"><span class="label">雷利商：</span>$\frac{\vec{x}^T A\vec{x}}{\vec{x}^T \vec{x}}$ 在特征向量处取极值——证明题中非常有用。</div>
+
+<h3>9.9 求解矩阵方程的"降维"策略</h3>
+<div class="tip"><span class="label">高频套路：</span>已知 $A$ 的特征值和特征向量，求 $B = f(A)$ 的特征和性质。口诀——<strong>"特征值走代数运算，特征向量原封不动"</strong>。</div>
+<div class="formula">
+$$A\vec{\alpha} = \lambda\vec{\alpha} \;\Rightarrow\; f(A)\vec{\alpha} = f(\lambda)\vec{\alpha}$$
 </div>
 
 </div>

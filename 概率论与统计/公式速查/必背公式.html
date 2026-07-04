@@ -7,7 +7,14 @@
 <link rel="stylesheet" href="../assets/style.css">
 <script>
 window.MathJax = {
-  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+  tex: {
+    inlineMath: [['$','$'],['\\(','\\)']],
+    displayMath: [['$$','$$'],['\\[','\\]']],
+    macros: {
+      oiint: ['\\mathop{\\unicode{x222F}}\\nolimits', 1],
+      oiiint: ['\\mathop{\\unicode{x2230}}\\nolimits', 1]
+    }
+  },
   svg: { fontCache: 'global' }
 };
 </script>
@@ -27,6 +34,7 @@ window.MathJax = {
   <a href="#sec4">四、二维</a>
   <a href="#sec5">五、极限定理</a>
   <a href="#sec6">六、数理统计</a>
+  <a href="#sec7">七、高分技巧</a>
   <a href="../index.html">← 首页</a>
 </nav>
 
@@ -262,6 +270,84 @@ $$\sigma^2 \text{ 未知：} \;\; W = \left\{|T| > t_{\alpha/2}(n-1)\right\}, \;
   <li>第一类错误（弃真）：$P(\text{拒绝}H_0 | H_0 \text{ 真}) = \alpha$</li>
   <li>第二类错误（取伪）：$P(\text{接受}H_0 | H_1 \text{ 真}) = \beta$</li>
 </ul>
+
+
+<!-- ============== 七、高分技巧与易漏考点 ============== -->
+<h2 id="sec7"><span class="num">7</span>高分技巧与易漏考点</h2>
+
+<h3>7.1 常见分布的分布函数速查</h3>
+<table>
+<tr><th>分布</th><th>密度 $f(x)$</th><th>分布函数 $F(x)$</th></tr>
+<tr><td>均匀 $U(a,b)$</td><td>$\frac{1}{b-a}$</td><td>$\frac{x-a}{b-a},\; a<x<b$</td></tr>
+<tr><td>指数 $Exp(\lambda)$</td><td>$\lambda e^{-\lambda x}$</td><td>$1-e^{-\lambda x},\; x>0$</td></tr>
+<tr><td>标准正态 $N(0,1)$</td><td>$\frac{1}{\sqrt{2\pi}}e^{-x^2/2}$</td><td>$\Phi(x)$（查表）</td></tr>
+</table>
+<div class="tip warning"><span class="label">必背：</span>指数分布 $F(x) = 1 - e^{-\lambda x}$ 是考试中最高频的分布函数。写反（写成 $e^{-\lambda x}$）是经典错误。</div>
+
+<h3>7.2 标准化在概率计算中的实战</h3>
+<div class="formula accent">
+$$P(X \leq a) = \Phi\!\left(\frac{a - \mu}{\sigma}\right)$$
+$$P(a < X < b) = \Phi\!\left(\frac{b - \mu}{\sigma}\right) - \Phi\!\left(\frac{a - \mu}{\sigma}\right)$$
+$$P(X > a) = 1 - \Phi\!\left(\frac{a - \mu}{\sigma}\right) = \Phi\!\left(\frac{\mu - a}{\sigma}\right)$$
+</div>
+<div class="tip success"><span class="label">心算技巧：</span>$P(|X-\mu|<k\sigma) \approx$ —— $k=1$ 约 68%，$k=2$ 约 95%，$k=3$ 约 99.7%。选择题常用。</div>
+
+<h3>7.3 中心极限定理的"标准话术"</h3>
+<div class="formula accent">
+$$\text{无论 } X_i \text{ 的分布是什么（i.i.d., 方差有限），} \;\sum X_i \;\dot{\sim}\; N(n\mu, \; n\sigma^2)$$
+$$\text{题目问"至少/至多"时：} \;\; \text{先用标准化，再查正态表}$$
+</div>
+<div class="tip"><span class="label">二项分布的正态近似：</span>$B(n,p) \dot{\sim} N(np, np(1-p))$。当 $np\geq5$ 且 $n(1-p)\geq5$ 时近似较好。</div>
+
+<h3>7.4 期望存在性的判定</h3>
+<div class="formula">
+$$E(X) \text{ 存在} \;\Leftrightarrow\; \int_{-\infty}^{+\infty} |x| f(x)\,dx < +\infty \quad \text{（绝对可积）}$$
+$$\text{柯西分布 } f(x)=\frac{1}{\pi(1+x^2)} \text{ 的期望不存在}$$
+</div>
+
+<h3>7.5 三大抽样分布的"关键数字"速记</h3>
+<table>
+<tr><th>分布</th><th>期望</th><th>方差</th><th>对称性</th><th>极限</th></tr>
+<tr><td>$\chi^2(n)$</td><td>$n$</td><td>$2n$</td><td>右偏</td><td>$\frac{\chi^2_n - n}{\sqrt{2n}} \to N(0,1)$</td></tr>
+<tr><td>$t(n)$</td><td>$0$ ($n>1$)</td><td>$\frac{n}{n-2}$ ($n>2$)</td><td>关于0对称</td><td>$t(n) \to N(0,1)$</td></tr>
+<tr><td>$F(m,n)$</td><td>$\frac{n}{n-2}$ ($n>2$)</td><td>—</td><td>右偏</td><td>—</td></tr>
+</table>
+<div class="formula accent">
+$$\text{上分位数关系：} \;\; F_{1-\alpha}(m,n) = \frac{1}{F_\alpha(n,m)}$$
+$$t_{1-\alpha}(n) = -t_\alpha(n) \qquad \chi^2_{1-\alpha}(n) = \text{需查表}$$
+</div>
+
+<h3>7.6 连续型随机变量函数的分布——常见"坑"</h3>
+<div class="tip warning"><span class="label">三大常见错误：</span>
+<ul style="margin-top:4px;">
+<li><strong>直接代公式</strong>：$Y=g(X)$ 只在 $g$ 严格单调时才能用公式法；若不单调（如 $Y=X^2$），必须用分布函数法分段处理</li>
+<li><strong>漏定义域</strong>：卷积公式求 $f_Z(z)$ 时，积分限必须同时满足 $f_X(x)$ 和 $f_Y(z-x)$ 的非零区间</li>
+<li><strong>错用独立条件</strong>：卷积公式 $\int f_X(x)f_Y(z-x)dx$ 只对<strong>独立</strong>变量成立；不独立时用 $\int f(x,z-x)dx$</li>
+</ul>
+</div>
+
+<h3>7.7 矩估计与最大似然估计的"陷阱"</h3>
+<div class="formula accent">
+$$\text{均匀分布 } U(0,\theta) \text{ 的 MLE：} \;\; \hat{\theta} = \max(X_1,\ldots,X_n) \text{（不能用求导法！）}$$
+</div>
+<div class="tip warning"><span class="label">注意：</span>均匀分布 $U(0,\theta)$ 的最大似然估计在边界取到，常规的"求导=0"不适用——似然函数 $\frac{1}{\theta^n}$ 关于 $\theta$ 单调递减，应在满足 $X_{(n)}\leq\theta$ 的前提下取最小的 $\theta$，即 $\hat{\theta} = X_{(n)} = \max_i X_i$。</div>
+
+<h3>7.8 正态总体的"一句话"记忆</h3>
+<div class="formula accent">
+$$\text{已知 } \sigma^2 \to Z\text{/}\chi^2; \quad \text{未知 } \sigma^2 \to t\text{/}\chi^2 \text{（自由度 } n-1\text{）}$$
+$$\text{单样本均值} \to Z \text{（}\sigma\text{已知）或 } t(n-1)\text{（}\sigma\text{未知）}$$
+$$\text{单样本方差} \to \chi^2(n-1) \quad \text{两样本方差比} \to F$$
+$$\text{两样本均值差（等方差）} \to t(n_1+n_2-2)$$
+</div>
+
+<h3>7.9 独立性判定的"一步到位"法</h3>
+<div class="tip success"><span class="label">考试策略：</span>
+<ul style="margin-top:4px;">
+<li><strong>离散型</strong>：检查 $p_{ij} = p_{i\cdot} \cdot p_{\cdot j}$ 是否对所有 $i,j$ 成立。只要有一对不成立，就不独立</li>
+<li><strong>连续型</strong>：看 $f(x,y)$ 能否写成 $h_1(x) \cdot h_2(y)$ 的形式（即变量可分离）。若能，则独立；注意定义域必须也是矩形乘积</li>
+<li><strong>二维正态</strong>：$\rho = 0 \Leftrightarrow$ 独立 ← 考试用得最多</li>
+</ul>
+</div>
 
 </div>
 

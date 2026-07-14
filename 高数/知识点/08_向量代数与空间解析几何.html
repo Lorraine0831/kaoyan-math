@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第八章 向量代数与空间解析几何 - 高数知识点</title>
+<link rel="stylesheet" href="../assets/style.css?v=2">
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$','$'],['\\(','\\)']],
+    displayMath: [['$$','$$'],['\\[','\\]']],
+    macros: {
+      oiint: ['\\mathop{\\unicode{x222F}}\\nolimits', 1],
+      oiiint: ['\\mathop{\\unicode{x2230}}\\nolimits', 1]
+    }
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+
+<header>
+  <h1>第八章 · 向量代数与空间解析几何</h1>
+  <div class="subtitle">向量运算 · 平面与直线 · 曲面方程 · 空间曲线</div>
+</header>
+
+<nav class="topnav">
+  <a href="#sec1">8.1 向量运算</a>
+  <a href="#sec2">8.2 数量积</a>
+  <a href="#sec3">8.3 向量积</a>
+  <a href="#sec4">8.4 混合积</a>
+  <a href="#sec5">8.5 平面</a>
+  <a href="#sec6">8.6 直线</a>
+  <a href="#sec7">8.7 曲面</a>
+  <a href="#sec8">8.8 曲线</a>
+  <a href="../index.html">← 首页</a>
+</nav>
+
+<main>
+<div class="container">
+
+<h2 id="sec1"><span class="num">1</span>向量的基本运算</h2>
+
+<h3>1.1 坐标表示</h3>
+<div class="formula">
+$$\vec{a} = (a_x, a_y, a_z) = a_x\vec{i} + a_y\vec{j} + a_z\vec{k}$$
+$$\text{模：} \|\vec{a}\| = \sqrt{a_x^2 + a_y^2 + a_z^2} \qquad \text{方向余弦：} \cos\alpha = \frac{a_x}{\|\vec{a}\|},\; \cos\beta = \frac{a_y}{\|\vec{a}\|},\; \cos\gamma = \frac{a_z}{\|\vec{a}\|}$$
+$$\text{单位向量：} \;\; \vec{a}^0 = \frac{\vec{a}}{\|\vec{a}\|} \qquad \cos^2\alpha + \cos^2\beta + \cos^2\gamma = 1$$
+</div>
+
+<h3>1.2 加法与数乘</h3>
+<div class="formula">
+$$\vec{a} + \vec{b} = (a_x+b_x,\, a_y+b_y,\, a_z+b_z) \qquad k\vec{a} = (ka_x, ka_y, ka_z)$$
+$$\vec{a} \parallel \vec{b} \;\Leftrightarrow\; \vec{a} = \lambda\vec{b} \;\Leftrightarrow\; \frac{a_x}{b_x} = \frac{a_y}{b_y} = \frac{a_z}{b_z}$$
+</div>
+
+<h2 id="sec2"><span class="num">2</span>数量积（点积、内积）</h2>
+
+<div class="formula accent">
+$$\vec{a} \cdot \vec{b} = a_x b_x + a_y b_y + a_z b_z = \|\vec{a}\|\,\|\vec{b}\|\,\cos\theta$$
+$$\vec{a} \cdot \vec{a} = \|\vec{a}\|^2 \qquad \vec{a} \cdot \vec{b} = \vec{b} \cdot \vec{a} \qquad \vec{a} \cdot (\vec{b}+\vec{c}) = \vec{a}\cdot\vec{b} + \vec{a}\cdot\vec{c}$$
+$$\cos\theta = \frac{\vec{a}\cdot\vec{b}}{\|\vec{a}\|\|\vec{b}\|} \qquad \vec{a} \perp \vec{b} \;\Leftrightarrow\; \vec{a} \cdot \vec{b} = 0$$
+</div>
+
+<h3>2.1 投影</h3>
+<div class="formula">
+$$\text{Pri}_{\vec{b}}\vec{a} = \|\vec{a}\|\cos\theta = \frac{\vec{a}\cdot\vec{b}}{\|\vec{b}\|} \quad \text{（}\vec{a} \text{ 在 } \vec{b} \text{ 方向上的投影）}$$
+</div>
+
+<h2 id="sec3"><span class="num">3</span>向量积（叉积、外积）</h2>
+
+<div class="formula accent">
+$$\vec{a} \times \vec{b} = \begin{vmatrix} \vec{i} & \vec{j} & \vec{k} \\ a_x & a_y & a_z \\ b_x & b_y & b_z \end{vmatrix} = (a_y b_z - a_z b_y,\, a_z b_x - a_x b_z,\, a_x b_y - a_y b_x)$$
+$$\|\vec{a} \times \vec{b}\| = \|\vec{a}\|\,\|\vec{b}\|\,\sin\theta$$
+$$\text{方向：垂直于 } \vec{a}, \vec{b} \text{ 所在平面，由右手法则确定}$$
+$$\vec{a} \times \vec{b} = -(\vec{b} \times \vec{a}) \qquad \vec{a} \times \vec{a} = \vec{0} \qquad \vec{a} \parallel \vec{b} \;\Leftrightarrow\; \vec{a} \times \vec{b} = \vec{0}$$
+</div>
+
+<h3>3.1 几何意义</h3>
+<div class="formula accent">
+$$\vec{a} \times \vec{b} \text{ 的模等于以 } \vec{a}, \vec{b} \text{ 为邻边的平行四边形的面积：}$$
+$$S_{\text{平行四边形}} = \|\vec{a} \times \vec{b}\| \qquad S_\triangle = \frac{1}{2}\|\vec{a} \times \vec{b}\|$$
+</div>
+
+<h3>3.2 向量积的坐标公式</h3>
+<div class="formula">
+$$\vec{a} \times \vec{b} = (a_y b_z - a_z b_y)\vec{i} + (a_z b_x - a_x b_z)\vec{j} + (a_x b_y - a_y b_x)\vec{k}$$
+</div>
+
+<h2 id="sec4"><span class="num">4</span>混合积</h2>
+
+<div class="formula accent">
+$$[\vec{a}\,\vec{b}\,\vec{c}] = (\vec{a} \times \vec{b}) \cdot \vec{c} = \begin{vmatrix} a_x & a_y & a_z \\ b_x & b_y & b_z \\ c_x & c_y & c_z \end{vmatrix}$$
+$$[\vec{a}\,\vec{b}\,\vec{c}] = [\vec{b}\,\vec{c}\,\vec{a}] = [\vec{c}\,\vec{a}\,\vec{b}] \quad \text{（轮换不变）}$$
+$$[\vec{a}\,\vec{b}\,\vec{c}] = -[\vec{b}\,\vec{a}\,\vec{c}] \quad \text{（交换变号）}$$
+</div>
+
+<h3>4.1 几何意义与判据</h3>
+<div class="formula accent">
+$$|[\vec{a}\,\vec{b}\,\vec{c}]| = \text{以 } \vec{a},\vec{b},\vec{c} \text{ 为棱的平行六面体的体积}$$
+$$\text{三向量共面} \;\Leftrightarrow\; [\vec{a}\,\vec{b}\,\vec{c}] = 0$$
+</div>
+
+<h2 id="sec5"><span class="num">5</span>平面方程</h2>
+
+<h3>5.1 平面的法向量</h3>
+<p>与平面垂直的非零向量 $\vec{n} = (A, B, C)$ 称为平面的<strong>法向量</strong>。</p>
+
+<h3>5.2 点法式方程</h3>
+<div class="formula accent">
+$$A(x - x_0) + B(y - y_0) + C(z - z_0) = 0$$
+</div>
+<p>其中 $\vec{n} = (A, B, C)$ 为法向量，$M_0(x_0, y_0, z_0)$ 为平面上一点。</p>
+
+<h3>5.3 一般式方程</h3>
+<div class="formula">
+$$Ax + By + Cz + D = 0$$
+</div>
+<ul>
+  <li>$D=0$：平面过原点</li>
+  <li>$A=0$：平面与 $x$ 轴平行</li>
+  <li>$A=B=0$：平面与 $xOy$ 面平行（即水平面 $z = -\frac{D}{C}$）</li>
+</ul>
+
+<h3>5.4 截距式方程</h3>
+<div class="formula accent">
+$$\frac{x}{a} + \frac{y}{b} + \frac{z}{c} = 1$$
+</div>
+<p>其中 $a,b,c$ 分别为平面在 $x,y,z$ 轴上的截距（均不为零）。</p>
+
+<h3>5.5 三点确定平面</h3>
+<p>已知不共线三点 $M_1, M_2, M_3$，法向量取 $\vec{n} = \overrightarrow{M_1M_2} \times \overrightarrow{M_1M_3}$，再代入点法式。</p>
+
+<h3>5.6 两平面的夹角</h3>
+<div class="formula accent">
+$$\cos\theta = \frac{|A_1A_2 + B_1B_2 + C_1C_2|}{\sqrt{A_1^2 + B_1^2 + C_1^2}\sqrt{A_2^2 + B_2^2 + C_2^2}}$$
+$$\pi_1 \perp \pi_2 \;\Leftrightarrow\; A_1A_2 + B_1B_2 + C_1C_2 = 0$$
+$$\pi_1 \parallel \pi_2 \;\Leftrightarrow\; \frac{A_1}{A_2} = \frac{B_1}{B_2} = \frac{C_1}{C_2}$$
+</div>
+
+<h3>5.7 点到平面的距离</h3>
+<div class="formula accent">
+$$d = \frac{|Ax_0 + By_0 + Cz_0 + D|}{\sqrt{A^2 + B^2 + C^2}}$$
+</div>
+
+<h2 id="sec6"><span class="num">6</span>空间直线方程</h2>
+
+<h3>6.1 直线的方向向量</h3>
+<p>与直线平行的非零向量 $\vec{s} = (m, n, p)$ 称为直线的<strong>方向向量</strong>。</p>
+
+<h3>6.2 点向式（对称式）方程</h3>
+<div class="formula accent">
+$$\frac{x - x_0}{m} = \frac{y - y_0}{n} = \frac{z - z_0}{p} \quad (\text{分母为 }0\text{ 表示分子 }=0)$$
+</div>
+
+<h3>6.3 参数式方程</h3>
+<div class="formula accent">
+$$\begin{cases} x = x_0 + mt \\ y = y_0 + nt \\ z = z_0 + pt \end{cases} \quad (t \in \mathbb{R})$$
+</div>
+
+<h3>6.4 一般式方程（两平面的交线）</h3>
+<div class="formula">
+$$\begin{cases} A_1 x + B_1 y + C_1 z + D_1 = 0 \\ A_2 x + B_2 y + C_2 z + D_2 = 0 \end{cases}$$
+$$\text{方向向量：} \;\; \vec{s} = \vec{n_1} \times \vec{n_2} \quad (\text{两平面法向量的叉积})$$
+</div>
+
+<h3>6.5 两点确定直线</h3>
+<p>方向向量 $\vec{s} = \overrightarrow{M_1M_2} = (x_2-x_1,\, y_2-y_1,\, z_2-z_1)$，代入点向式。</p>
+
+<h3>6.6 两直线的夹角</h3>
+<div class="formula accent">
+$$\cos\theta = \frac{|m_1 m_2 + n_1 n_2 + p_1 p_2|}{\sqrt{m_1^2+n_1^2+p_1^2}\sqrt{m_2^2+n_2^2+p_2^2}}$$
+$$L_1 \perp L_2 \;\Leftrightarrow\; m_1m_2 + n_1n_2 + p_1p_2 = 0$$
+$$L_1 \parallel L_2 \;\Leftrightarrow\; \frac{m_1}{m_2} = \frac{n_1}{n_2} = \frac{p_1}{p_2}$$
+</div>
+
+<h3>6.7 直线与平面的夹角</h3>
+<div class="formula accent">
+$$\sin\varphi = \frac{|Am + Bn + Cp|}{\sqrt{A^2+B^2+C^2}\sqrt{m^2+n^2+p^2}} \quad (0 \leq \varphi \leq \frac{\pi}{2})$$
+$$L \perp \pi \;\Leftrightarrow\; \vec{s} \parallel \vec{n} \;\Leftrightarrow\; \frac{A}{m} = \frac{B}{n} = \frac{C}{p}$$
+$$L \parallel \pi \;\Leftrightarrow\; \vec{s} \perp \vec{n} \;\Leftrightarrow\; Am + Bn + Cp = 0$$
+</div>
+<div class="tip warning"><span class="label">注意区别：</span>直线与平面的夹角用 $\sin$（因为是直线方向与法向量的夹角"余角"）；两平面、两直线的夹角都用 $\cos$。</div>
+
+<h3>6.8 点到直线的距离</h3>
+<div class="formula accent">
+$$d = \frac{\|\overrightarrow{M_0M_1} \times \vec{s}\|}{\|\vec{s}\|}$$
+</div>
+<p>其中 $M_0$ 为直线外一点，$M_1$ 为直线上任一点，$\vec{s}$ 为方向向量。</p>
+
+<h3>6.9 直线与平面的交点</h3>
+<p>将直线的参数式代入平面方程，解出参数 $t$，回代得交点坐标。</p>
+
+<h2 id="sec7"><span class="num">7</span>曲面方程</h2>
+
+<h3>7.1 一般概念</h3>
+<ul>
+  <li>曲面方程一般形式：$F(x,y,z) = 0$</li>
+  <li><strong>旋转曲面</strong>：一条曲线绕坐标轴旋转一周所得</li>
+  <li><strong>柱面</strong>：平行于某坐标轴的直线沿曲线运动所得</li>
+</ul>
+
+<h3>7.2 常见二次曲面</h3>
+<table>
+<tr><th>类型</th><th>标准方程</th><th>特点</th></tr>
+<tr><td>球面</td><td>$(x-a)^2+(y-b)^2+(z-c)^2=R^2$</td><td>球心 $(a,b,c)$，半径 $R$</td></tr>
+<tr><td>椭球面</td><td>$\frac{x^2}{a^2}+\frac{y^2}{b^2}+\frac{z^2}{c^2}=1$</td><td>三轴半轴长 $a,b,c$</td></tr>
+<tr><td>单叶双曲面</td><td>$\frac{x^2}{a^2}+\frac{y^2}{b^2}-\frac{z^2}{c^2}=1$</td><td>"沙漏"型，一负号</td></tr>
+<tr><td>双叶双曲面</td><td>$\frac{x^2}{a^2}+\frac{y^2}{b^2}-\frac{z^2}{c^2}=-1$</td><td>"两片"型</td></tr>
+<tr><td>椭圆抛物面</td><td>$z=\frac{x^2}{a^2}+\frac{y^2}{b^2}$</td><td>"碗"型，开口向上</td></tr>
+<tr><td>双曲抛物面（马鞍面）</td><td>$z=\frac{x^2}{a^2}-\frac{y^2}{b^2}$</td><td>"马鞍"型</td></tr>
+<tr><td>椭圆锥面</td><td>$\frac{x^2}{a^2}+\frac{y^2}{b^2}-\frac{z^2}{c^2}=0$</td><td>锥形</td></tr>
+<tr><td>椭圆柱面</td><td>$\frac{x^2}{a^2}+\frac{y^2}{b^2}=1$</td><td>母线平行于 $z$ 轴</td></tr>
+</table>
+
+<h3>7.3 旋转曲面</h3>
+<p><strong>$xOy$ 面上的曲线</strong> $f(x,y)=0$（$z=0$ 平面内）绕 $x$ 轴旋转所得：</p>
+<div class="formula accent">
+$$f(x,\, \pm\sqrt{y^2+z^2}) = 0$$
+</div>
+<p>绕 $y$ 轴旋转：$f(\pm\sqrt{x^2+z^2},\, y)=0$。</p>
+<div class="tip"><span class="label">实用写法：</span>将曲线方程中<strong>旋转轴变量不变，另一个变量替换为 $\pm\sqrt{\text{另两变量平方和}}$</strong>。</div>
+
+<h3>7.4 柱面（母线平行于坐标轴）</h3>
+<p>$F(x,y)=0$ 表示母线平行于 $z$ 轴的柱面（在所有平行于 $z$ 轴的直线上，$x,y$ 满足同一方程）。</p>
+
+<h3>7.5 已知点与已知曲面的关系</h3>
+<p>点在曲面上 $\Leftrightarrow$ 点坐标代入曲面方程，等式成立。</p>
+
+<h2 id="sec8"><span class="num">8</span>空间曲线</h2>
+
+<h3>8.1 一般方程（两曲面交线）</h3>
+<div class="formula">
+$$\begin{cases} F(x,y,z) = 0 \\ G(x,y,z) = 0 \end{cases}$$
+</div>
+
+<h3>8.2 参数方程</h3>
+<div class="formula accent">
+$$\begin{cases} x = x(t) \\ y = y(t) \\ z = z(t) \end{cases} \quad t \in I$$
+</div>
+
+<h3>8.3 空间曲线在坐标面上的投影</h3>
+<p>从一般方程消去 $z$，得 $\varphi(x,y)=0$，结合 $z=0$，即为曲线在 $xOy$ 面上的投影曲线。</p>
+<div class="formula">
+$$\text{消去 } z: \;\; \varphi(x,y)=0 \;\Rightarrow\; \text{投影到 } xOy: \; \begin{cases} \varphi(x,y)=0 \\ z=0 \end{cases}$$
+</div>
+
+<h3>8.4 螺旋线</h3>
+<div class="formula">
+$$\begin{cases} x = R\cos t \\ y = R\sin t \\ z = ht \end{cases} \quad \text{（圆柱螺旋线）}$$
+</div>
+
+</div>
+</main>
+
+<button class="back-top" aria-label="返回顶部" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<footer>
+  <p>第八章 · 向量代数与空间解析几何 | <a href="01_极限与连续.html">第一章</a> · <a href="../index.html">返回首页 →</a></p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>旋转体体积可视化 - 第61题</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<style>
+:root {
+  --bg: #fafafa;
+  --text: #1a1a2e;
+  --card-bg: #fff;
+  --border: #e0e0e0;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1a1a2e;
+    --text: #e0e0e0;
+    --card-bg: #16213e;
+    --border: #2a2a4a;
+  }
+}
+body {
+  font-family: -apple-system, "Noto Sans SC", "PingFang SC", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  margin: 0;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.8;
+}
+h1 { font-size: 22px; margin-bottom: 4px; color: #2c3e6b; }
+.subtitle { color: #888; font-size: 14px; margin-bottom: 28px; }
+.chart-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  max-width: 1100px;
+  width: 100%;
+}
+.chart-box {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+  flex: 1 1 480px;
+  max-width: 560px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+.chart-box h3 { margin: 0 0 12px; font-size: 15px; color: #2c3e6b; }
+canvas { max-height: 400px; }
+.info {
+  max-width: 860px;
+  margin-top: 28px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px 24px;
+  font-size: 14px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+.info h3 { margin: 0 0 10px; font-size: 16px; }
+.info .steps { display: flex; gap: 16px; flex-wrap: wrap; }
+.info .step {
+  flex: 1 1 180px;
+  background: #e8edf5;
+  border-radius: 8px;
+  padding: 12px;
+  min-width: 160px;
+}
+.info .step .num {
+  display: inline-block;
+  width: 22px; height: 22px;
+  line-height: 22px; text-align: center;
+  background: #2c3e6b; color: #fff;
+  border-radius: 50%; font-size: 12px; font-weight: 700;
+  margin-right: 6px;
+}
+@media (prefers-color-scheme: dark) {
+  .info .step { background: #1e2845; }
+}
+.highlight { color: #c0392b; font-weight: 700; }
+.result {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+  color: #2c3e6b;
+  margin-top: 16px;
+  padding: 12px;
+  background: #e8edf5;
+  border-radius: 8px;
+}
+</style>
+</head>
+<body>
+
+<h1>第61题 · 旋转体体积可视化</h1>
+<div class="subtitle">$y=x^2$ 与切线 $y=2x-1$ 围成区域 $D$ 绕 $x$ 轴旋转</div>
+
+<div class="chart-row">
+  <div class="chart-box">
+    <h3>📐 平面区域 $D$（旋转前）</h3>
+    <canvas id="chart2d"></canvas>
+  </div>
+  <div class="chart-box">
+    <h3>🔄 绕 $x$ 轴旋转所得立体</h3>
+    <canvas id="chart3d"></canvas>
+  </div>
+</div>
+
+<div class="info">
+  <h3>计算步骤</h3>
+  <div class="steps">
+    <div class="step">
+      <span class="num">1</span> <strong>求切线</strong><br>
+      $y'=2x$，在 $(1,1)$ 处斜率 $=2$<br>
+      切线：$y=2x-1$<br>
+      与 $x$ 轴交于 $x=\frac{1}{2}$
+    </div>
+    <div class="step">
+      <span class="num">2</span> <strong>分两段积分</strong><br>
+      $x\in[0,\frac{1}{2}]$：上 $x^2$，下 $0$<br>
+      $x\in[\frac{1}{2},1]$：上 $x^2$，下 $2x-1$
+    </div>
+    <div class="step">
+      <span class="num">3</span> <strong>圆环法求体积</strong><br>
+      $V_1 = \pi\int_0^{1/2} x^4dx = \frac{\pi}{160}$<br>
+      $V_2 = \pi\int_{1/2}^1 [x^4-(2x-1)^2]dx$
+    </div>
+    <div class="step">
+      <span class="num">4</span> <strong>求和</strong><br>
+      $V = \frac{\pi}{160} + \frac{31\pi}{160} - \frac{\pi}{6}$<br>
+      $= \frac{\pi}{5} - \frac{\pi}{6}$
+    </div>
+  </div>
+  <div class="result">$V = \dfrac{\pi}{30}$ &nbsp;（选项 D）</div>
+</div>
+
+<script>
+const N = 200;
+const xs = Array.from({length: N}, (_, i) => i / (N - 1));
+const x_half = Array.from({length: Math.floor(N/2)+1}, (_, i) => 0.5 + 0.5 * i / Math.floor(N/2));
+const xs_half = Array.from({length: Math.floor(N/2)+1}, (_, i) => 0 + 0.5 * i / Math.floor(N/2));
+
+function sq(x) { return x * x; }
+
+// --- 2D plot ---
+const ctx2d = document.getElementById('chart2d').getContext('2d');
+
+// Fill region D
+const regionData = [];
+// Bottom part: tangent from 0.5 to 1
+for (let i = 0; i <= 50; i++) {
+  const x = 0.5 + 0.5 * i / 50;
+  regionData.push({x, y: 2*x - 1});
+}
+// Top part: parabola from 1 to 0.5
+for (let i = 50; i >= 0; i--) {
+  const x = 0.5 + 0.5 * i / 50;
+  regionData.push({x, y: sq(x)});
+}
+// Top part: parabola from 0.5 to 0
+for (let i = 50; i >= 0; i--) {
+  const x = 0 + 0.5 * i / 50;
+  regionData.push({x, y: sq(x)});
+}
+// Bottom: x-axis from 0 to 0.5
+regionData.push({x: 0, y: 0});
+
+new Chart(ctx2d, {
+  type: 'line',
+  data: {
+    datasets: [
+      {
+        label: '区域 D',
+        data: regionData,
+        borderColor: 'transparent',
+        backgroundColor: 'rgba(46, 134, 193, 0.25)',
+        fill: true,
+        pointRadius: 0,
+        order: 1,
+      },
+      {
+        label: 'y = x² (抛物线)',
+        data: xs.map(x => ({x, y: sq(x)})),
+        borderColor: '#2c3e6b',
+        borderWidth: 2,
+        pointRadius: 0,
+        fill: false,
+      },
+      {
+        label: 'y = 2x-1 (切线)',
+        data: xs.map(x => ({x, y: 2*x - 1})),
+        borderColor: '#c0392b',
+        borderWidth: 1.8,
+        borderDash: [6, 3],
+        pointRadius: 0,
+        fill: false,
+      },
+      {
+        label: 'x 轴',
+        data: [{x: 0, y: 0}, {x: 1.05, y: 0}],
+        borderColor: '#555',
+        borderWidth: 1,
+        pointRadius: 0,
+        fill: false,
+      },
+      {
+        label: 'x = 1/2',
+        data: [{x: 0.5, y: -0.05}, {x: 0.5, y: 0.35}],
+        borderColor: '#d68910',
+        borderWidth: 1,
+        borderDash: [3, 3],
+        pointRadius: 0,
+        fill: false,
+      },
+      {
+        label: '切线交点',
+        data: [{x: 0.5, y: 0}],
+        backgroundColor: '#d68910',
+        pointRadius: 5,
+        showLine: false,
+      },
+      {
+        label: '切点 (1,1)',
+        data: [{x: 1, y: 1}],
+        backgroundColor: '#c0392b',
+        pointRadius: 5,
+        showLine: false,
+      },
+      {
+        label: '原点',
+        data: [{x: 0, y: 0}],
+        backgroundColor: '#2c3e6b',
+        pointRadius: 5,
+        showLine: false,
+      },
+    ],
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: true,
+    plugins: {
+      legend: { display: true, position: 'bottom', labels: { boxWidth: 14, padding: 12, font: { size: 11 } } },
+      tooltip: {
+        callbacks: {
+          label: ctx => {
+            const ds = ctx.dataset.label;
+            if (ds.startsWith('y =') || ds.startsWith('x =') || ds.includes('交点') || ds.includes('切点') || ds.includes('原点')) return ds;
+            return null;
+          }
+        }
+      }
+    },
+    scales: {
+      x: {
+        type: 'linear',
+        min: -0.05,
+        max: 1.1,
+        title: { display: true, text: 'x', font: { size: 12 } },
+        grid: { color: '#e0e0e0' },
+      },
+      y: {
+        min: -0.3,
+        max: 1.2,
+        title: { display: true, text: 'y', font: { size: 12 } },
+        grid: { color: '#e0e0e0' },
+      },
+    },
+  },
+});
+
+// --- 3D pseudo plot (cross-section) ---
+const ctx3d = document.getElementById('chart3d').getContext('2d');
+
+// Build the 3D body cross-section data
+const bodyTop = [];
+const bodyBot = [];
+const bodyRight = [];
+
+// For 0 <= x <= 0.5: solid disk from y=0 to y=x^2
+for (let i = 0; i <= 50; i++) {
+  const x = 0 + 0.5 * i / 50;
+  const r = sq(x);
+  bodyTop.push({x, y: r});
+  bodyBot.push({x, y: -r});
+}
+
+// For 0.5 <= x <= 1: washer from y=2x-1 to y=x^2
+for (let i = 0; i <= 50; i++) {
+  const x = 0.5 + 0.5 * i / 50;
+  const r_outer = sq(x);
+  const r_inner = 2*x - 1;
+  bodyTop.push({x, y: r_outer});
+  bodyBot.push({x, y: -r_outer});
+}
+
+// Add the right face (at x=1) from -1 to 1
+bodyRight.push({x: 1, y: 1}, {x: 1, y: -1});
+
+// Inner wall for washer part
+const innerTop = [];
+const innerBot = [];
+for (let i = 0; i <= 50; i++) {
+  const x = 0.5 + 0.5 * i / 50;
+  innerTop.push({x, y: 2*x - 1});
+  innerBot.push({x, y: -(2*x - 1)});
+}
+
+// Build fill datasets
+const topFill = [...bodyTop];
+const bottomFill = [...bodyBot.slice().reverse()];
+topFill.push({x: 1, y: 1});
+bottomFill.unshift({x: 0, y: 0});
+
+// Full filled body (outer contour)
+const outerFill = [...bodyTop, {x: 1, y: 1}, ...bodyBot.slice().reverse(), {x: 0, y: 0}];
+
+// Washer gap fill (the "cut-out")
+const washerGapFill = [];
+for (let i = 0; i <= 50; i++) {
+  const x = 0.5 + 0.5 * i / 50;
+  washerGapFill.push({x, y: 2*x - 1});
+}
+for (let i = 50; i >= 0; i--) {
+  const x = 0.5 + 0.5 * i / 50;
+  washerGapFill.push({x, y: -(2*x - 1)});
+}
+
+new Chart(ctx3d, {
+  type: 'line',
+  data: {
+    datasets: [
+      {
+        label: '旋转体截面',
+        data: outerFill,
+        borderColor: 'rgba(46, 134, 193, 0.6)',
+        backgroundColor: 'rgba(46, 134, 193, 0.18)',
+        fill: true,
+        pointRadius: 0,
+        borderWidth: 1.5,
+      },
+      {
+        label: '空心区域（切线下方）',
+        data: washerGapFill,
+        borderColor: 'transparent',
+        backgroundColor: 'rgba(255, 255, 255, 0.7)',
+        fill: true,
+        pointRadius: 0,
+      },
+      {
+        label: '旋转轴 (x轴)',
+        data: [{x: 0, y: 0}, {x: 1.05, y: 0}],
+        borderColor: '#555',
+        borderWidth: 1,
+        borderDash: [4, 4],
+        pointRadius: 0,
+      },
+      {
+        label: 'x = 1/2',
+        data: [{x: 0.5, y: -1.05}, {x: 0.5, y: 1.05}],
+        borderColor: '#d68910',
+        borderWidth: 0.8,
+        borderDash: [3, 3],
+        pointRadius: 0,
+      },
+    ],
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: true,
+    plugins: {
+      legend: { display: true, position: 'bottom', labels: { boxWidth: 14, padding: 12, font: { size: 11 } } },
+      tooltip: { enabled: false },
+    },
+    scales: {
+      x: {
+        type: 'linear',
+        min: -0.05,
+        max: 1.1,
+        title: { display: true, text: '旋转轴 (x)', font: { size: 12 } },
+        grid: { color: '#e0e0e0' },
+      },
+      y: {
+        min: -1.1,
+        max: 1.1,
+        title: { display: true, text: '半径方向 (y, z)', font: { size: 12 } },
+        grid: { color: '#e0e0e0' },
+      },
+    },
+  },
+});
+</script>
+</body>
+</html>
